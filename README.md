@@ -1,4 +1,4 @@
-# Dama italiana [![CI/CD](https://github.com/softeng2021-inf-uniba/progetto2021bis-gosling/actions/workflows/ingsw2021.yml/badge.svg)](https://github.com/softeng2021-inf-uniba/progetto2021bis-gosling/actions/workflows/ingsw2021.yml)
+# Dama italiana [![CI/CD](https://github.com/softeng2021-inf-uniba/progetto2021bis-gosling/actions/workflows/ingsw2021.yml/badge.svg)](https://github.com/softeng2021-inf-uniba/progetto2021bis-gosling/actions/workflows/ingsw2021.yml) [![Coverage Status](https://coveralls.io/repos/github/softeng2021-inf-uniba/progetto2021bis-gosling/badge.svg?t=Pneolu)](https://coveralls.io/github/softeng2021-inf-uniba/progetto2021bis-gosling)
 
 
 La struttura della repository si presenta nel seguente modo:
