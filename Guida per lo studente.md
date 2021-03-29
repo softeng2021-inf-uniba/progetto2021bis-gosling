@@ -59,7 +59,7 @@ Il nome del gruppo sarà usato per generare su GitHub Classroom il nome del repo
 ### Accettazione assignment e accesso al repository su GitHub
 Sarà necessario aspettare che il docente crei il team e il repository ad esso associato su GitHub.
 Una volta creato il team, riceverete via email un invito a farne parte che dovrete accettare. 
-Questo passo terminerà con successo se tutti i membri del gruppo potranno accedere al repository con URL ``` https://github.com/softeng2021-inf-uniba/<nome del gruppo> ```.
+Questo passo terminerà con successo se tutti i membri del gruppo potranno accedere al repository con URL ``` https://github.com/softeng2021-inf-uniba/progetto2021bis-gosling ```.
 
 
 
@@ -92,10 +92,10 @@ Il membro del team con i diritti di amministratore sul repository deve:
   ![SaveTokenInSecret_1](./res/img/guida-studente/SaveTokenInSecret_1.png)
 
 - entrare nella sezione delle impostazioni per sviluppatori, *"Developer Settings"*, facendo click sul relativo pulsante nella barra laterale;
-  ![SaveTokenInSecret_2](./res/img/guida-studente/SaveTokenInSecret_2.png)
+  ![SaveTokenInSecret_2](./res/img/guida-studente/SaveTokenInSecret_2.jpg)
 
 - selezionare *"Personal Access Token"* nella barra laterale e successivamente fare click su *"Generate new Token"*, in alto a destra; 
-  ![SaveTokenInSecret_3](./res/img/guida-studente/SaveTokenInSecret_3.png)
+  ![SaveTokenInSecret_3](./res/img/guida-studente/SaveTokenInSecret_3.jpg)
 
 - indicare nel campo *"Note"* l'utilizzo che si intende fare del token (ad es.: *"Uploads of Docker images to GitHub Packages"*). Tale appunto tornerà utile in futuro per ricordarsi a quale scopo era stato generato il token;
 
@@ -105,7 +105,7 @@ Il membro del team con i diritti di amministratore sul repository deve:
   - `write:packages`
   - `read:packages`
 
-  ![SaveTokenInSecret_4](./res/img/guida-studente/SaveTokenInSecret_4.png)
+  ![SaveTokenInSecret_4](./res/img/guida-studente/SaveTokenInSecret_4.jpg)
 
 - fare click sul pulsante *"Generate token"*, in basso nella pagina;
 - copiare il token che apparirà alla pagina seguente e memorizzarlo in un luogo sicuro.
@@ -119,9 +119,9 @@ A questo punto, il membro del team che ha generato il token dovrà:
 
 - recarsi sulla pagina principale del repository e fare click sull'icona *"Settings"* (ultima tab in alto a destra);
   **N.B.**: solo l'amministratore visualizza questa tab!
-  ![SaveTokenInSecret_5](./res/img/guida-studente/SaveTokenInSecret_5.png)
+  ![SaveTokenInSecret_5](./res/img/guida-studente/SaveTokenInSecret_5.jpg)
 - selezionare la voce *"Secrets"* dalla barra laterale;
-  ![SaveTokenInSecret_6](./res/img/guida-studente/SaveTokenInSecret_6.png)
+  ![SaveTokenInSecret_6](./res/img/guida-studente/SaveTokenInSecret_6.jpg)
 - fare click sul link *"Add a new secret"*; compariranno una text box con l'etichetta *"Name"* e una text area con l'etichetta *"Value"*:
   - inserire la stringa `GH_ACCESS_TOKEN` nella textbox con l'etichetta *"Name"*;
   - inserire il Personal Access Token precedentemente generato nella textarea con l'etichetta *"Value"*;
@@ -138,16 +138,16 @@ A questo punto, il membro del team che ha generato il token dovrà:
 ## Aggiunta del badge di GitHub Actions nel README
 Per aggiungere il badge che riporta l'ultimo esito dell'esecuzione del workflow (stato del workflow) all'interno del file README del vostro repository, seguire le seguenti istruzioni (vedi anche [Adding a workflow status badge to your repository](https://help.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow#adding-a-workflow-status-badge-to-your-repository)):
 - entrare nella pagina principale del repository e cliccare su `Actions` (subito sotto il titolo, in alto al centro);
-![Update_GitHub_badge_1](./res/img/guida-studente/Update_GitHub_badge_1.png)
+![Update_GitHub_badge_1](./res/img/guida-studente/Update_GitHub_badge_1.jpg)
 - *"All workflows"*, riporta l'elenco delle esecuzioni del workflow  `ingsw2021.yml` (ogni push e ogni pull request sul repository inducono una nuova esecuzione); fare click sul record relativo alla run più recente (quello più in alto) che riporta il tag `master` (**N.B.**: svolgendo questa operazione all'inizio del progetto, in questa lista troverete soltanto un record, quello relativo all'unica esecuzione del workflow indotta dalla creazione del repository);
-  ![Update_GitHub_badge_2](./res/img/guida-studente/Update_GitHub_badge_2.png)
+  ![Update_GitHub_badge_2](./res/img/guida-studente/Update_GitHub_badge_2.jpg)
 - fare click sul pulsante `Create status badge` in alto a destra nella pagina e, lasciando invariate le impostazioni di default (`branch` e `event`), fare click su `Copy status badge Markdown`;
-  ![Update_GitHub_badge_3](./res/img/guida-studente/Update_GitHub_badge_3.png)
+  ![Update_GitHub_badge_3](./res/img/guida-studente/Update_GitHub_badge_3.jpg)
 - La modifica del file Markdown `README.md`sarà fatta come parte dei task dello *Sprint 0* incollando il codice markdown per la costruzione del badge in cima al `README.md`, accanto al titolo del repository.
 
 Il titolo del README.md dovrà apparire come nella seguente figura, con *Dama italiana* al posto di *scacchi*:
 
-![actions-badge](./res/img/guida-studente/actions-badge.png)
+![actions-badge](./res/img/guida-studente/actions-badge.jpg)
 
 Il colore e lo stato del badge potranno cambiare dopo ogni build, riflettendo lo stato del progetto.
 
@@ -157,10 +157,10 @@ Il colore e lo stato del badge potranno cambiare dopo ogni build, riflettendo lo
 Coveralls è un servizio web che aiuta a monitorare nel tempo la copertura del codice di un progetto ([code coverage](https://en.wikipedia.org/wiki/Code_coverage)) e a verificare che, di volta in volta, tutto il codice che si aggiunge sia adeguatamente coperto da casi di test.
 
 Per configurare Coveralls, collegarsi al [sito web del servizio](https://coveralls.io) ed effettuare il login tramite il proprio account GitHub. Nel menu a comparsa sulla sinistra, selezionare la voce **+ ADD REPOS**. 
-Il repository `SOFTENG2021-INF-UNIBA/<nome repository>` dovrebbe essere immediatamente visibile nella pagina. Qualora non lo fosse, digitare le prime lettere del nome nel campo di testo. Se così facendo ancora non fosse visibile, andare in fondo alla pagina e cliccare sul bottone **REFRESH PRIVATE REPOS**. 
+Il repository `SOFTENG2021-INF-UNIBA/progetto2021bis-gosling ` dovrebbe essere immediatamente visibile nella pagina. Qualora non lo fosse, digitare le prime lettere del nome nel campo di testo. Se così facendo ancora non fosse visibile, andare in fondo alla pagina e cliccare sul bottone **REFRESH PRIVATE REPOS**. 
 Quando la riga relativa al progetto compare, fare click sul tasto OFF per trasformarlo in ON, come mostrato in figura.
 
-![](res/img/guida-studente/add_repo_coveralls.png)
+![](res/img/guida-studente/add_repo_coveralls.jpg)
 
 Una volta attivato il progetto, fare click su **DETAILS** per visualizzare il _token privato_ associato al repository. Questo token andrà salvato in un Secret di GitHub denominato `COVERALLS_REPO_TOKEN`, seguendo la procedura riportata al passo precedente per il salvataggio del GitHub Access Token. Più precisamente:
 
