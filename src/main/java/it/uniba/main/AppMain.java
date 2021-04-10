@@ -50,7 +50,8 @@ public final class AppMain {
 			System.out.println("Using default language 'en'");
 			System.out.println("Application started.");
 		}
-
+            Damiera dam = Damiera.getDamiera();
+            dam.stampaNumeri();
 	}
 
 }
