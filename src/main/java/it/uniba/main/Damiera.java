@@ -90,7 +90,7 @@ public class Damiera {
                 System.out.print("|");
             }
             System.out.print("\n");
-            System.out.print("+---+---+---+---+---+---+---+---+");
+            System.out.print("+---+---+---+---+---+---+---+---+\n");
             System.out.print("\n");
         }
     }
@@ -133,7 +133,7 @@ public class Damiera {
     
     public void stampaPedine()
     {
-          System.out.print("+-─-+-─-+-─-+-─-+-─-+-─-+-─-+-─-+\n");
+        System.out.print("+-──-+-──-+-──-+-──-+-──-+-──-+-──-+-──-+\n");
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 if(damieraGioco[i][j]!=null){
@@ -146,7 +146,7 @@ public class Damiera {
                 }
             }
             System.out.print("|\n");
-            System.out.print("+-─-+-─-+-─-+-─-+-─-+-─-+-─-+-─-+\n");
+            System.out.print("+-──-+-──-+-──-+-──-+-──-+-──-+-──-+-──-+\n");
         }
     }
 }
