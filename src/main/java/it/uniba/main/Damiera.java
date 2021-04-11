@@ -69,7 +69,7 @@ public class Damiera {
     /* ------------ Metodi ------------*/
     public void stampaNumeri()
     {
-        System.out.print("+---+---+---+---+---+---+---+---+\n");
+        System.out.println("+---+---+---+---+---+---+---+---+");
         for(int i=0; i<8;i++)
         {
             System.out.print("|");
@@ -89,9 +89,8 @@ public class Damiera {
                 }
                 System.out.print("|");
             }
-            System.out.print("\n");
-            System.out.print("+---+---+---+---+---+---+---+---+");
-            System.out.print("\n");
+            System.out.println(""); // serve per mandare a capo e non usare \n che non funziona su macchine non Windows
+            System.out.println("+---+---+---+---+---+---+---+---+");
         }
     }
     
@@ -145,7 +144,7 @@ public class Damiera {
     
     public void stampaPedine()
     {
-        System.out.print("+-──-+-──-+-──-+-──-+-──-+-──-+-──-+-──-+\n");
+        System.out.println("+-──-+-──-+-──-+-──-+-──-+-──-+-──-+-──-+");
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 if(damieraGioco[i][j]!=null){
@@ -157,8 +156,8 @@ public class Damiera {
                     System.out.print("|   ");
                 }
             }
-            System.out.print("|\n");
-            System.out.print("+-──-+-──-+-──-+-──-+-──-+-──-+-──-+-──-+\n");
+            System.out.println("|");
+            System.out.println("+-──-+-──-+-──-+-──-+-──-+-──-+-──-+-──-+");
         }
     }
 }
