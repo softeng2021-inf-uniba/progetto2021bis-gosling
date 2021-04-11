@@ -90,7 +90,7 @@ public class Damiera {
                 System.out.print("|");
             }
             System.out.print("\n");
-            System.out.print("+---+---+---+---+---+---+---+---+\n");
+            System.out.print("+---+---+---+---+---+---+---+---+");
             System.out.print("\n");
         }
     }
