@@ -7,10 +7,11 @@ package it.uniba.main;
 
 import it.uniba.main.types.Colore;
 import java.time.LocalTime;
+import java.util.Scanner;
 
 /**
  *
- * @author domen
+ * @author domenico francesco e giuseppe
  */
 public class Giocatore {
 
@@ -24,20 +25,41 @@ public class Giocatore {
 
     /* ------------ Costruttori ------------ */
     Giocatore() {
+        this.scegliColore();
         this.tempoInizioMossa = null;
         this.tempoFineMossa = null;
         this.tempoRimanente = null;
         this.mossaCorrente = 0;
+    }
 
+    Giocatore(Colore colore) {
+        this.colore = colore;
+        this.tempoInizioMossa = null;
+        this.tempoFineMossa = null;
+        this.tempoRimanente = null;
+        this.mossaCorrente = 0;
     }
 
     /* ------------ Get & Set ------------ */
     public void setColore(Colore colore) {
         this.colore = colore;
     }
-    
-    public Colore getColore(){
+
+    public Colore getColore() {
         return (this.colore);
+    }
+
+    public Colore getColoreAvversario() {
+
+        Colore coloreAvversario = null;
+
+        if (this.getColore() == Colore.bianco) {
+            coloreAvversario = Colore.nero;
+        } else {
+            coloreAvversario = Colore.bianco;
+        }
+
+        return (coloreAvversario);
     }
 
     public void setTempoInizioMossa(LocalTime tempoInizioMossa) {
@@ -70,6 +92,39 @@ public class Giocatore {
     }
 
     /* ------------ Metodi ------------ */
+    private void scegliColore() {
+
+        boolean errore;
+
+        do {
+            errore = false;
+
+            System.out.println("Scegliere il colore: digiti \"bianco\" o \"nero\"");
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
+
+            /*Elimino gli eventuali spazi*/
+            input = input.replace(" +", "");
+
+            switch (input) {
+
+                case "bianco":
+                    this.colore = Colore.bianco;
+                    break;
+                case "nero":
+                    this.colore = Colore.nero;
+                    break;
+                default:
+                    errore = true;
+            }
+
+            if (errore) {
+                System.out.println("Comando non riconosciuto. Inserisci un comando valido");
+            }
+
+        } while (errore);
+    }
+
     private void incrementaMossaCorrente() {
         this.mossaCorrente++;
     }
@@ -80,4 +135,3 @@ public class Giocatore {
     }
 
 }
-
