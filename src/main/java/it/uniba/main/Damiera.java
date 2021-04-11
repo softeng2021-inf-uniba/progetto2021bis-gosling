@@ -101,11 +101,17 @@ public class Damiera {
                if(i%2==0){
                    if(j%2==0){
                       damieraGioco[i][j]=new Pedina(Colore.nero);
+                   } else 
+                   {
+                       damieraGioco[i][j]=null;
                    }
                }
                else{
                    if(j%2==1){
                        damieraGioco[i][j]=new Pedina(Colore.nero);
+                   }else
+                   {
+                       damieraGioco[i][j]=null;
                    }
                }
            }
@@ -120,11 +126,17 @@ public class Damiera {
               if(i%2==0){
                    if(j%2==0){
                       damieraGioco[i][j]=new Pedina(Colore.bianco);
+                   } else
+                   {
+                       damieraGioco[i][j]=null;
                    }
                }
                else{
                    if(j%2==1){
                        damieraGioco[i][j]=new Pedina(Colore.bianco);
+                   } else
+                   {
+                       damieraGioco[i][j]=null;
                    }
                }
           } 
