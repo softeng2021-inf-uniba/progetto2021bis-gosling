@@ -5,36 +5,51 @@
  */
 package it.uniba.main;
 
+import it.uniba.main.types.TipoPedina;
+import it.uniba.main.types.Colore;
+
 /**
  *
  * @author Pasquale
  */
 public class Pedina {
-     /* ------------ Stato ------------ */
-    private final Tipo_pedina tipo;
-    private final Colore colore;
-     /* ------------  Costruttori ------------ */
-    Pedina(Colore colore){
-        this.colore=colore;
-        this.tipo=Tipo_pedina.pedinaSemplice;
+
+    /* ------------ Stato ------------ */
+    private TipoPedina tipo;
+    private Colore colore;
+
+    /* ------------  Costruttori ------------ */
+    Pedina(Colore colore) {
+        this.colore = colore;
+        this.tipo = TipoPedina.pedinaSemplice;
     }
-     /* ------------ Metodi ------------*/
-    public void Stampa_pedina(){
-        if(this.colore==Colore.bianco){
-            if(this.tipo==Tipo_pedina.pedinaRe){
-                System.out.print("?");
+    /* ------------ Get & Set ------------*/
+    private void setColore(Colore color){
+        this.colore=color;
+    }
+    private void setTipo(TipoPedina tipo){
+        this.tipo=tipo;
+    }
+    public Colore getColore(){
+        return this.colore;
+    }
+    public TipoPedina getTipo(){
+        return this.tipo;
+    }
+    /* ------------ Metodi ------------*/
+    public void stampaPedina() {
+        if (this.colore == Colore.bianco) {
+            if (this.tipo == TipoPedina.pedinaRe) {
+                System.out.print("⛁");
+            } else {
+                System.out.print("⛀");
             }
-            else{
-               System.out.print("?");
+        } else {
+            if (this.tipo == TipoPedina.pedinaRe) {
+                System.out.print("⛃");
+            } else {
+                System.out.print("⛂");
             }
-        }
-        else{
-           if(this.tipo==Tipo_pedina.pedinaRe){
-                System.out.print("?");
-            }
-            else{
-               System.out.print("?");
-            } 
         }
     }
 }
