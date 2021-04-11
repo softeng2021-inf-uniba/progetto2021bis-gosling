@@ -52,6 +52,8 @@ public final class AppMain {
 		}
             Damiera dam = Damiera.getDamiera();
             dam.stampaNumeri();
+            System.out.print("\n\n\n\n");
+            dam.stampaPedine();
 	}
 
 }
