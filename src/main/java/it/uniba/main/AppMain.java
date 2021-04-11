@@ -33,17 +33,13 @@ public final class AppMain {
 		System.out.println("Benvenuto nell'applicazione di Dama!");
                 
 		if (args.length > 0) {
-                    for(String s: args)
-                    {
-                        switch (args[0]) {
-			case "help":
-			case "h":
-				System.out.println("Eseguo comando Help");
-				break;
-
-			default:
-				break;
-			}
+                    switch (args[0]) {
+                    case "--help":
+                    case "-h":
+                        Help.getMenuHelp();
+			break;
+                    default:
+			break;
                     }
 		}
                 System.out.println("Per sapere quali comandi sono validi digitare help");
