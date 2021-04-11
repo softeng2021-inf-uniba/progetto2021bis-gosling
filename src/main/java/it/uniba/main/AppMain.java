@@ -61,13 +61,6 @@ public final class AppMain {
                             case "help":
                                 Help.getMenuHelp();
                                 break;
-                            case "numeri":
-                                Damiera.getDamiera().stampaNumeri();
-                                break;
-                            case "damiera":
-                                System.out.println("Per eseguire questo comando devi essere in una partita!");
-                                System.out.println("Per iniziare una partita esegui il comando gioca");
-                                break;
                             //va inserito gioca
                             // va inserito esci
                             default:
