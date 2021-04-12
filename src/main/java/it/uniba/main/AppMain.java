@@ -57,6 +57,9 @@ public final class AppMain {
                             case "help":
                                 Help.getMenuHelp();
                                 break;
+                            case "numeri":
+                                Damiera.getDamiera().stampaNumeri();
+                                break;
                             //va inserito gioca
                             // va inserito esci
                             default:
