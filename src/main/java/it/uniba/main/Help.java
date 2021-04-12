@@ -41,7 +41,7 @@ public class Help {
         System.out.println("Questa applicazione ti permette di giocare a dama tramite linea di comando.");
         System.out.println("Per interagire con l'applicazione devi digitare il comando che vuoi eseguire");
         
-        System.out.println("Digita 'gioco' se vuoi niziare una partita");
+        System.out.println("Digita 'gioca' se vuoi iniziare una partita");
         System.out.println("Digita 'numeri' per visualizzare la damiera numerata");
         System.out.println("Digita 'esci' per uscire dall'applicazione");
         System.out.println("");
