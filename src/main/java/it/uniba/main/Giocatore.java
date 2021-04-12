@@ -16,15 +16,18 @@ import java.util.Scanner;
 public class Giocatore {
 
     /* ------------ Stato ------------ */
+    private String nome;
     private Colore colore;
     private LocalTime tempoInizioMossa;
     private LocalTime tempoFineMossa;
     private LocalTime tempoRimanente;
     private int mossaCorrente;
-
+    private static final int MIN_LUN_NOME = 3;
+    private static final int MAX_LUN_NOME = 20;
 
     /* ------------ Costruttori ------------ */
-    Giocatore() {
+    Giocatore(int index) {
+        this.scegliNome(index);
         this.scegliColore();
         this.tempoInizioMossa = null;
         this.tempoFineMossa = null;
@@ -32,7 +35,8 @@ public class Giocatore {
         this.mossaCorrente = 0;
     }
 
-    Giocatore(Colore colore) {
+    Giocatore(int index, Colore colore) {
+        this.scegliNome(index);
         this.colore = colore;
         this.tempoInizioMossa = null;
         this.tempoFineMossa = null;
@@ -99,14 +103,18 @@ public class Giocatore {
         do {
             errore = false;
 
-            System.out.println("Scegliere il colore: digiti \"bianco\" o \"nero\"");
+            System.out.println(this.nome + ", scelga il suo colore: digiti \"bianco\" o \"nero\"");
             Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine();
+            String input = null;
+
+            if (scanner.hasNextLine()) {
+                input = scanner.nextLine();
+            }
 
             /*Elimino gli eventuali spazi*/
-            input = input.replace(" +", "");
+            input = input.replaceAll(" +", "");
 
-            switch (input) {
+            switch (input.toLowerCase()) {
 
                 case "bianco":
                     this.colore = Colore.bianco;
@@ -119,8 +127,49 @@ public class Giocatore {
             }
 
             if (errore) {
-                System.out.println("Comando non riconosciuto. Inserisci un comando valido");
+                System.out.println("Comando non riconosciuto. Inserire un comando valido");
             }
+
+        } while (errore);
+    }
+
+    private void scegliNome(int index) {
+
+        boolean errore;
+
+        do {
+            errore = false;
+
+            System.out.println("Scegliere il nome del giocatore " + index);
+            Scanner scanner = new Scanner(System.in);
+            String input = null;
+
+            if (scanner.hasNextLine()) {
+                input = scanner.nextLine();
+            }
+
+            /*Elimino gli eventuali spazi*/
+            input = input.replaceAll(" +", "");
+
+            if (input.length() < MIN_LUN_NOME) {
+                errore = true;
+                System.out.println("Inserire un nome di almeno " + MIN_LUN_NOME + " caratteri");
+            }
+
+            if (input.length() > MAX_LUN_NOME) {
+                errore = true;
+                System.out.println("Inserire un nome di, al massimo, " + MAX_LUN_NOME +  " caratteri");
+            }
+
+            for (char cha : input.toCharArray()) {
+                if (!Character.isLetter(cha) && !Character.isDigit(cha)) {
+                    errore = true;
+                    System.out.println("Puoi inserire solo lettere e numeri");
+                    break;
+                }
+            }
+
+            this.nome = input;
 
         } while (errore);
     }

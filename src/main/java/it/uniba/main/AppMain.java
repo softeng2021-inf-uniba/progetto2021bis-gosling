@@ -57,7 +57,10 @@ public final class AppMain {
                             case "help":
                                 Help.getMenuHelp();
                                 break;
-                            //va inserito gioca
+                            case "gioca":
+                                Partita.nuovaPartita();
+                                isExiting = true;
+                                break;
                             // va inserito esci
                             default:
                                 System.out.println("Comando inserito non valido");
@@ -66,6 +69,11 @@ public final class AppMain {
                         } 
                     }          
                 }while(isExiting==false);
+                
+                Partita partitaCorrente = Partita.getPartita();
+                
+                
+                
                 sc.close();
 	}
 
