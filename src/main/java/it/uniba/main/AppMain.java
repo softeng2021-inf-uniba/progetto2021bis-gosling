@@ -63,7 +63,11 @@ public final class AppMain {
                      break;
                  case "gioca":
                      Partita.nuovaPartita();
+                     
                      isExiting = true;
+                     break;
+                 case "tempo":
+                     System.out.println("Non vi è nessuna partita avviata, se si vuole inziare una partita inserisci il comando gioca");
                      break;
                      // va inserito esci
                  default:
@@ -73,9 +77,8 @@ public final class AppMain {
                         } 
                     }          
                 }while(isExiting==false);
-
-                Partita partitaCorrente = Partita.getPartita();
-
+        
+                
                 sc.close();
 	}
 }

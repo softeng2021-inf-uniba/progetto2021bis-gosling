@@ -21,7 +21,7 @@ public class Giocatore {
     /* ------------ Stato ------------ */
     private String nome;
     private Colore colore;
-    private LocalTime tempoInizioMossa;
+    private LocalTime segnaTempo;
     private LocalTime tempoPassato;
     private int mossaCorrente;
     private static final int MIN_LUN_NOME = 3;
@@ -32,7 +32,7 @@ public class Giocatore {
     Giocatore() {
         this.scegliNome();
         this.scegliColore();
-        this.tempoInizioMossa = null;
+        this.segnaTempo = null;
         this.tempoPassato = LocalTime.of(0, 0, 0);
         this.mossaCorrente = 0;
     }
@@ -40,7 +40,7 @@ public class Giocatore {
     Giocatore(String nomeVietato, Colore colore) {
         this.scegliNome(nomeVietato);
         this.colore = colore;
-        this.tempoInizioMossa = null;
+        this.segnaTempo = null;
         this.tempoPassato = LocalTime.of(0, 0, 0);
         this.mossaCorrente = 0;
     }
@@ -75,8 +75,8 @@ public class Giocatore {
         return (coloreAvversario);
     }
 
-    public void setTempoInizioMossa(LocalTime tempoInizioMossa) {
-        this.tempoInizioMossa = tempoInizioMossa;
+    public void setSegnaTempo(LocalTime tempoInizioMossa) {
+        this.segnaTempo = tempoInizioMossa;
     }
 
     public LocalTime getTempoPassato() {
@@ -92,11 +92,11 @@ public class Giocatore {
     {
         LocalTime now = LocalTime.now();
         
-        Long minutes = MINUTES.between(tempoInizioMossa, now);
-        Long seconds = SECONDS.between(tempoInizioMossa, now) % 60;
-        
-        this.tempoPassato.plusMinutes(minutes);
-        this.tempoPassato.plusSeconds(seconds);
+        Long minutes = MINUTES.between(segnaTempo, now);
+        Long seconds = SECONDS.between(segnaTempo, now) % 60;
+        this.tempoPassato = this.tempoPassato.plusMinutes(minutes);
+        this.tempoPassato = this.tempoPassato.plusSeconds(seconds);
+         this.setSegnaTempo(LocalTime.now());
     }
     
     private void scegliColore() {
@@ -233,6 +233,6 @@ public class Giocatore {
 
     public void iniziaMossa() {
         this.mossaCorrente++;
-        this.setTempoInizioMossa(LocalTime.now());
+        this.setSegnaTempo(LocalTime.now());
     }
 }
