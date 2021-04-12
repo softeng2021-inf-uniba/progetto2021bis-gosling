@@ -42,34 +42,40 @@ public final class AppMain {
                     break;
             }
         }
+
         System.out.println("Per sapere quali comandi sono validi digitare help");
-        boolean isExiting = false;
+        boolean isExiting = false; 
         String answer;
         Scanner sc = new Scanner(System.in);
-        do {
-            System.out.println("Digitare un comando valido...");
-            if (sc.hasNextLine()) {
-                answer = sc.nextLine();
-                switch (answer) {
-                    case "help":
-                        Help.getMenuHelp();
-                        break;
-                    case "gioca":
-                        Partita.nuovaPartita();
-                        isExiting = true;
-                        break;
-                    // va inserito esci
-                    default:
-                        System.out.println("Comando inserito non valido");
-                        System.out.println("Per sapere quali comandi sono validi digitare help");
-                        break;
-                }
-            }
-        } while (isExiting == false);
+        do
+        {
+          System.out.println("Digitare un comando valido...");
+          if(sc.hasNextLine())
+          {
+              answer = sc.nextLine();
+              switch(answer)
+              {
+                 case "help":
+                     Help.getMenuHelp();
+                     break;
+                 case "numeri":
+                     Damiera.getDamiera().stampaNumeri();
+                     break;
+                 case "gioca":
+                     Partita.nuovaPartita();
+                     isExiting = true;
+                     break;
+                     // va inserito esci
+                 default:
+                     System.out.println("Comando inserito non valido");
+                     System.out.println("Per sapere quali comandi sono validi digitare help");
+                     break;
+                        } 
+                    }          
+                }while(isExiting==false);
 
-        Partita partitaCorrente = Partita.getPartita();
-        
-        sc.close();
-    }
+                Partita partitaCorrente = Partita.getPartita();
 
+                sc.close();
+	}
 }
