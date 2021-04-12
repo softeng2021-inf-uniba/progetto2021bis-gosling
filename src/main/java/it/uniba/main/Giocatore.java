@@ -7,7 +7,10 @@ package it.uniba.main;
 
 import it.uniba.main.types.Colore;
 import java.time.LocalTime;
+import static java.time.temporal.ChronoUnit.MINUTES;
+import static java.time.temporal.ChronoUnit.SECONDS;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -16,31 +19,43 @@ import java.util.Scanner;
 public class Giocatore {
 
     /* ------------ Stato ------------ */
+    private String nome;
     private Colore colore;
     private LocalTime tempoInizioMossa;
-    private LocalTime tempoFineMossa;
     private LocalTime tempoRimanente;
     private int mossaCorrente;
-
+    private static final int MIN_LUN_NOME = 3;
+    private static final int MAX_LUN_NOME = 20;
+    private static final LocalTime TEMPO_DISP = LocalTime.of(0, 30, 0);
 
     /* ------------ Costruttori ------------ */
     Giocatore() {
+        this.scegliNome();
         this.scegliColore();
         this.tempoInizioMossa = null;
-        this.tempoFineMossa = null;
-        this.tempoRimanente = null;
+        this.tempoRimanente = TEMPO_DISP;
         this.mossaCorrente = 0;
     }
 
-    Giocatore(Colore colore) {
+    Giocatore(String nomeVietato, Colore colore) {
+        this.scegliNome(nomeVietato);
         this.colore = colore;
         this.tempoInizioMossa = null;
-        this.tempoFineMossa = null;
-        this.tempoRimanente = null;
+        this.tempoRimanente = TEMPO_DISP;
         this.mossaCorrente = 0;
     }
 
     /* ------------ Get & Set ------------ */
+    public void setNome(String nome)
+    {
+        this.nome = nome;
+    }
+    
+    public String getNome()
+    {
+        return this.nome;
+    }
+    
     public void setColore(Colore colore) {
         this.colore = colore;
     }
@@ -70,14 +85,6 @@ public class Giocatore {
         return (this.tempoInizioMossa);
     }
 
-    public void setTempoFineMossa(LocalTime tempoFineMossa) {
-        this.tempoFineMossa = tempoFineMossa;
-    }
-
-    public LocalTime getTempoFineMossa() {
-        return (this.tempoFineMossa);
-    }
-
     public LocalTime getTempoRimanente() {
         return (this.tempoRimanente);
     }
@@ -99,14 +106,18 @@ public class Giocatore {
         do {
             errore = false;
 
-            System.out.println("Scegliere il colore: digiti \"bianco\" o \"nero\"");
+            System.out.println(this.nome + ", scelga il suo colore: digiti \"bianco\" o \"nero\"");
             Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine();
+            String input = null;
+
+            if (scanner.hasNextLine()) {
+                input = scanner.nextLine();
+            }
 
             /*Elimino gli eventuali spazi*/
-            input = input.replace(" +", "");
+            input = input.replaceAll(" +", "");
 
-            switch (input) {
+            switch (input.toLowerCase()) {
 
                 case "bianco":
                     this.colore = Colore.bianco;
@@ -119,8 +130,104 @@ public class Giocatore {
             }
 
             if (errore) {
-                System.out.println("Comando non riconosciuto. Inserisci un comando valido");
+                System.out.println("Comando non riconosciuto. Inserire un comando valido.");
             }
+
+        } while (errore);
+    }
+
+    private void scegliNome() {
+
+        boolean errore;
+
+        System.out.println("Scegliere il nome del giocatore 1.");
+        System.out.println("Il nome deve avere un numero di caratteri compreso "
+                + "tra 3 e 20, estremi inclusi, e può contenere solo numeri e "
+                + "lettere.");
+
+        do {
+            errore = false;
+
+            Scanner scanner = new Scanner(System.in);
+            String input = null;
+
+            if (scanner.hasNextLine()) {
+                input = scanner.nextLine();
+            }
+
+            /*Elimino gli eventuali spazi*/
+            input = input.replaceAll(" +", "");
+
+            if (input.length() < MIN_LUN_NOME) {
+                errore = true;
+                System.out.println("Inserire un nome di almeno " + MIN_LUN_NOME + " caratteri.");
+            }
+
+            if (input.length() > MAX_LUN_NOME) {
+                errore = true;
+                System.out.println("Inserire un nome di, al massimo, " + MAX_LUN_NOME + " caratteri.");
+            }
+
+            for (char cha : input.toCharArray()) {
+                if (!Character.isLetter(cha) && !Character.isDigit(cha)) {
+                    errore = true;
+                    System.out.println("Puoi inserire solo lettere e numeri.");
+                    break;
+                }
+            }
+
+            this.nome = input;
+
+        } while (errore);
+    }
+
+    private void scegliNome(String nomeVietato) {
+
+        boolean errore;
+
+        System.out.println("Scegliere il nome del giocatore 2.");
+        System.out.println("Il nome deve avere un numero di caratteri compreso "
+                + "tra 3 e 20, estremi inclusi, e può contenere solo numeri e "
+                + "lettere.");
+
+        do {
+            errore = false;
+
+            Scanner scanner = new Scanner(System.in);
+            String input = null;
+
+            if (scanner.hasNextLine()) {
+                input = scanner.nextLine();
+            }
+
+            /*Elimino gli eventuali spazi*/
+            input = input.replaceAll(" +", "");
+
+            if (input.length() < MIN_LUN_NOME) {
+                errore = true;
+                System.out.println("Inserire un nome di almeno " + MIN_LUN_NOME + " caratteri.");
+            }
+
+            if (input.length() > MAX_LUN_NOME) {
+                errore = true;
+                System.out.println("Inserire un nome di, al massimo, " + MAX_LUN_NOME + " caratteri.");
+            }
+
+            for (char cha : input.toCharArray()) {
+                if (!Character.isLetter(cha) && !Character.isDigit(cha)) {
+                    errore = true;
+                    System.out.println("Puoi inserire solo lettere e numeri.");
+                    break;
+                }
+            }
+            
+            if(input.compareToIgnoreCase(nomeVietato) == 0)
+            {
+                System.out.println("Il nome " + nomeVietato + " è già stato preso dal giocatore 1.");
+                errore = true;
+            }
+
+            this.nome = input;
 
         } while (errore);
     }
@@ -132,6 +239,14 @@ public class Giocatore {
     public void iniziaMossa() {
         this.incrementaMossaCorrente();
         this.setTempoInizioMossa(LocalTime.now());
+    }
+
+    public void compiMossa() {
+        //
+    }
+
+    private void calcolaTempoPassato() {
+        //Calcola del tempo rimanente;
     }
 
 }

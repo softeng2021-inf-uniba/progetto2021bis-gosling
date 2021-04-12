@@ -5,7 +5,9 @@
  */
 package it.uniba.main;
 
+import it.uniba.main.types.Colore;
 import java.time.LocalTime;
+import it.uniba.main.types.Turno;
 
 /**
  *
@@ -14,37 +16,76 @@ import java.time.LocalTime;
 
 public class Partita {
    /* ------------ Stato ------------ */
+    private static Partita partitaCorrente;
+    
     private Damiera damiera;
-    private Giocatore giocatore1;
+    public Giocatore giocatore1;
     private Giocatore giocatore2;
-    private LocalTime tempoInizioPartita;
-    private LocalTime tempoPassato;
+    private Turno turno;
     
     /* ------------ Costruttori ------------ */
-    Partita(){
+    private Partita(){
        
         damiera=Damiera.getDamiera();
         giocatore1=new Giocatore();
         /*Solo il primo giocatore, chiaramente, può scegliere il colore,
         al secondo tocca il complemento del primo*/
-        giocatore2=new Giocatore(giocatore1.getColoreAvversario());
-        tempoInizioPartita=LocalTime.now();
+        giocatore2=new Giocatore(giocatore1.getNome(), giocatore1.getColoreAvversario());
+        
+        if(giocatore1.getColore() == Colore.bianco)
+        {
+            turno = Turno.turnoGiocatore1;
+        }
+        else
+        {
+            turno = Turno.turnoGiocatore2;
+        }
+        
+        System.out.println("La partita inizia ora.");
+        
+        this.nuovoTurno();
     }
     
     /* ------------ Get & Set ------------ */
-    private LocalTime getTempoPassato(){
-       
-        return(this.calcolaTempoPassato());
+    public static Partita getPartita()
+    {
+        return partitaCorrente;
     }
     
     /* ------------ Metodi ------------ */
-    private LocalTime calcolaTempoPassato(){
-        /*Se ne occuperà Giuseppe, per ora ritorna solo il tempo attuale*/
-        return(LocalTime.now());
+    public static void nuovaPartita(){
+        
+        if(partitaCorrente == null)
+        {
+            System.out.println("Non ci sono partite attive; hai creato creato una nuova partita.");
+            partitaCorrente = new Partita();
+        }
+        else
+        {
+            System.out.println("Una partita è già in corso; cosa vuoi fare?");
+            //Poi si pensa
+        }
+    }
+    
+    public void nuovoTurno()
+    {
+        Giocatore corrente;
+        
+        if(turno == Turno.turnoGiocatore1)
+        {
+            corrente = giocatore1;
+        }
+        else
+        {
+            corrente = giocatore2;
+        }
+        
+        System.out.println("È il turno di " + corrente.getNome() + ".");
+        corrente.iniziaMossa();
     }
     
     public void stampaTempoPassato(){
-        System.out.println("Il tempo passato dall'inizio della partita è: "+ getTempoPassato().toString());
+        System.out.println("Il tempo passato dall'inizio della partita è: ");
     }
 }
 
