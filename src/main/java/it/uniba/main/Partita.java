@@ -8,6 +8,7 @@ package it.uniba.main;
 import it.uniba.main.types.Colore;
 import java.time.LocalTime;
 import it.uniba.main.types.Turno;
+import java.util.Scanner;
 
 /**
  *
@@ -81,11 +82,63 @@ public class Partita {
         }
         
         System.out.println("È il turno di " + corrente.getNome() + ".");
-        corrente.iniziaMossa();
+        
+        menu();
+        
     }
     
     public void stampaTempoPassato(){
-        System.out.println("Il tempo passato dall'inizio della partita è: ");
+        if (turno == Turno.turnoGiocatore1)
+        {
+            giocatore1.aggiornaTempoPassato();
+            System.out.println("Il tempo di gioco di "+giocatore1.getNome()+" è: "+giocatore1.getTempoPassato());
+            System.out.println("Il tempo di gioco di "+giocatore2.getNome()+" è: "+giocatore2.getTempoPassato());
+        }
+        else
+        {
+            giocatore2.aggiornaTempoPassato();
+            System.out.println("Il tempo di gioco di "+giocatore2.getNome()+" è: "+giocatore2.getTempoPassato());
+            System.out.println("Il tempo di gioco di "+giocatore1.getNome()+" è: "+giocatore1.getTempoPassato());
+        }
+    }
+    
+    public void menu(){
+         boolean isExiting = false; 
+        String answer;
+        if (turno == Turno.turnoGiocatore1)
+        {
+            giocatore1.iniziaMossa();
+        }
+        else
+        {
+           giocatore2.iniziaMossa();
+        }
+        Scanner sc = new Scanner(System.in);
+        do
+        {
+          System.out.println("Digitare un comando valido...");
+          if(sc.hasNextLine())
+          {
+              answer = sc.nextLine();
+              switch(answer)
+              {
+                 case "help":
+                     Help.getMenuHelp();
+                     break;
+                 case "numeri":
+                     Damiera.getDamiera().stampaNumeri();
+                     break;
+                  //Qui va il comando damiera
+                 case "tempo":
+                     stampaTempoPassato();
+                     break;
+                 default:
+                     System.out.println("Comando inserito non valido");
+                     System.out.println("Per sapere quali comandi sono validi digitare help");
+                     break;
+                        } 
+                    }          
+                }while(isExiting == false);
     }
 }
 

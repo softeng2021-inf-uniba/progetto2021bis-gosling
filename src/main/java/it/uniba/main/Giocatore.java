@@ -21,8 +21,8 @@ public class Giocatore {
     /* ------------ Stato ------------ */
     private String nome;
     private Colore colore;
-    private LocalTime tempoInizioMossa;
-    private LocalTime tempoRimanente;
+    private LocalTime segnaTempo;
+    private LocalTime tempoPassato;
     private int mossaCorrente;
     private static final int MIN_LUN_NOME = 3;
     private static final int MAX_LUN_NOME = 20;
@@ -32,30 +32,28 @@ public class Giocatore {
     Giocatore() {
         this.scegliNome();
         this.scegliColore();
-        this.tempoInizioMossa = null;
-        this.tempoRimanente = TEMPO_DISP;
+        this.segnaTempo = null;
+        this.tempoPassato = LocalTime.of(0, 0, 0);
         this.mossaCorrente = 0;
     }
 
     Giocatore(String nomeVietato, Colore colore) {
         this.scegliNome(nomeVietato);
         this.colore = colore;
-        this.tempoInizioMossa = null;
-        this.tempoRimanente = TEMPO_DISP;
+        this.segnaTempo = null;
+        this.tempoPassato = LocalTime.of(0, 0, 0);
         this.mossaCorrente = 0;
     }
 
     /* ------------ Get & Set ------------ */
-    public void setNome(String nome)
-    {
+    public void setNome(String nome) {
         this.nome = nome;
     }
-    
-    public String getNome()
-    {
+
+    public String getNome() {
         return this.nome;
     }
-    
+
     public void setColore(Colore colore) {
         this.colore = colore;
     }
@@ -77,21 +75,12 @@ public class Giocatore {
         return (coloreAvversario);
     }
 
-    public void setTempoInizioMossa(LocalTime tempoInizioMossa) {
-        this.tempoInizioMossa = tempoInizioMossa;
-    }
-
-    public LocalTime getTempoInizioMossa() {
-        return (this.tempoInizioMossa);
-    }
-
-    public LocalTime getTempoRimanente() {
-        return (this.tempoRimanente);
+    public void setSegnaTempo(LocalTime tempoInizioMossa) {
+        this.segnaTempo = tempoInizioMossa;
     }
 
     public LocalTime getTempoPassato() {
-        LocalTime tempoPassato = LocalTime.now();
-        return (tempoPassato);
+        return this.tempoPassato;
     }
 
     public int getMossaCorrente() {
@@ -99,6 +88,17 @@ public class Giocatore {
     }
 
     /* ------------ Metodi ------------ */
+    public void aggiornaTempoPassato()
+    {
+        LocalTime now = LocalTime.now();
+        
+        Long minutes = MINUTES.between(segnaTempo, now);
+        Long seconds = SECONDS.between(segnaTempo, now) % 60;
+        this.tempoPassato = this.tempoPassato.plusMinutes(minutes);
+        this.tempoPassato = this.tempoPassato.plusSeconds(seconds);
+         this.setSegnaTempo(LocalTime.now());
+    }
+    
     private void scegliColore() {
 
         boolean errore;
@@ -220,9 +220,8 @@ public class Giocatore {
                     break;
                 }
             }
-            
-            if(input.compareToIgnoreCase(nomeVietato) == 0)
-            {
+
+            if (input.compareToIgnoreCase(nomeVietato) == 0) {
                 System.out.println("Il nome " + nomeVietato + " è già stato preso dal giocatore 1.");
                 errore = true;
             }
@@ -232,21 +231,8 @@ public class Giocatore {
         } while (errore);
     }
 
-    private void incrementaMossaCorrente() {
-        this.mossaCorrente++;
-    }
-
     public void iniziaMossa() {
-        this.incrementaMossaCorrente();
-        this.setTempoInizioMossa(LocalTime.now());
+        this.mossaCorrente++;
+        this.setSegnaTempo(LocalTime.now());
     }
-
-    public void compiMossa() {
-        //
-    }
-
-    private void calcolaTempoPassato() {
-        //Calcola del tempo rimanente;
-    }
-
 }
