@@ -128,6 +128,9 @@ public class Partita {
                  case "numeri":
                      Damiera.getDamiera().stampaNumeri();
                      break;
+                 case "damiera":
+                     Damiera.getDamiera().stampaPedine();
+                     break;
                   //Qui va il comando damiera
                  case "tempo":
                      stampaTempoPassato();

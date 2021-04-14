@@ -69,6 +69,7 @@ public class Damiera {
     /* ------------ Metodi ------------*/
     public void stampaNumeri()
     {
+        char space = '\u0020';
         System.out.println("+---+---+---+---+---+---+---+---+");
         for(int i=0; i<8;i++)
         {
@@ -79,13 +80,18 @@ public class Damiera {
                 {
                     if(damieraNumeri[i][j]>9)
                     {
-                        System.out.print("" + damieraNumeri[i][j]+ " ");
+                        System.out.print(damieraNumeri[i][j]);
+                        System.out.print(space);
                     } else {
-                        System.out.print(" " + damieraNumeri[i][j]+ " ");
+                        System.out.print(space);
+                        System.out.print(damieraNumeri[i][j]);
+                        System.out.print(space);
                     }
                 } else
                 {
-                    System.out.print("   ");
+                    System.out.print(space);
+                    System.out.print(space);
+                    System.out.print(space);
                 }
                 System.out.print("|");
             }
@@ -144,20 +150,23 @@ public class Damiera {
     
     public void stampaPedine()
     {
-        System.out.println("+-──-+-──-+-──-+-──-+-──-+-──-+-──-+-──-+");
+        // System.out.println("+-──-+-──-+-──-+-──-+-──-+-──-+-──-+-──-+");
+
+        char space = '\u0020';
+        System.out.println("+---+---+---+---+---+---+---+---+");
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 if(damieraGioco[i][j]!=null){
-                    System.out.print("| ");
+                    System.out.print("|" + space);
                     damieraGioco[i][j].stampaPedina();
-                    System.out.print(" ");
+                    System.out.print("" + space);
                 }
                 else{
-                    System.out.print("|   ");
-                }
+                    System.out.print("|" + space + '\u2003' + space);
+                }                       
             }
             System.out.println("|");
-            System.out.println("+-──-+-──-+-──-+-──-+-──-+-──-+-──-+-──-+");
+            System.out.println("+---+---+---+---+---+---+---+---+");
         }
     }
 }

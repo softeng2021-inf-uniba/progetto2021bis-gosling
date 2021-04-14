@@ -66,6 +66,9 @@ public final class AppMain {
                      
                      isExiting = true;
                      break;
+                 case "damiera":
+                     System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
+                     break;
                  case "tempo":
                      System.out.println("Non vi è nessuna partita avviata, se si vuole inziare una partita inserisci il comando gioca");
                      break;
