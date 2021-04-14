@@ -39,15 +39,15 @@ public class Pedina {
     public void stampaPedina() {
         if (this.colore == Colore.bianco) {
             if (this.tipo == TipoPedina.pedinaRe) {
-                System.out.print('\u26C1');
+                System.out.print('\u26C1'); // White King
             } else {
-                System.out.print('\u26C0');
+                System.out.print('\u26C0'); // White Man
             }
         } else {
             if (this.tipo == TipoPedina.pedinaRe) {
-                System.out.print('\u26C3');
+                System.out.print('\u26C3'); // Black King
             } else {
-                System.out.print('\u26C2');
+                System.out.print('\u26C2'); // Black man
             }
         }
     }
