@@ -13,7 +13,6 @@ import it.uniba.main.types.Colore;
  * @author Pasquale
  */
 public class Pedina {
-
     /* ------------ Stato ------------ */
     private TipoPedina tipo;
     private Colore colore;
@@ -40,15 +39,15 @@ public class Pedina {
     public void stampaPedina() {
         if (this.colore == Colore.bianco) {
             if (this.tipo == TipoPedina.pedinaRe) {
-                System.out.print("⛁");
+                System.out.print('\u26C1');
             } else {
-                System.out.print("⛀");
+                System.out.print('\u26C0');
             }
         } else {
             if (this.tipo == TipoPedina.pedinaRe) {
-                System.out.print("⛃");
+                System.out.print('\u26C3');
             } else {
-                System.out.print("⛂");
+                System.out.print('\u26C2');
             }
         }
     }
