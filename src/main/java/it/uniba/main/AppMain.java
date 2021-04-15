@@ -43,12 +43,12 @@ public final class AppMain {
             }
         }
 
-        System.out.println("Per sapere quali comandi sono validi digitare help");
         boolean isExiting = false; 
         String answer;
         Scanner sc = new Scanner(System.in);
         do
         {
+          System.out.println("-------------------------------- Menu Principale --------------------------------");
           System.out.println("Digitare un comando valido...");
           if(sc.hasNextLine())
           {
@@ -63,16 +63,18 @@ public final class AppMain {
                      break;
                  case "gioca":
                      Partita.nuovaPartita();
-                     
-                     isExiting = true;
+                     Partita.azzeraPartitaCorrente();
                      break;
                  case "damiera":
                      System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
                      break;
                  case "tempo":
-                     System.out.println("Non vi è nessuna partita avviata, se si vuole inziare una partita inserisci il comando gioca");
+                     System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
+                     break;                 
+                 case "abbandona":
+                     System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
                      break;
-                     // va inserito esci
+                     //Qui va esci
                  default:
                      System.out.println("Comando inserito non valido");
                      System.out.println("Per sapere quali comandi sono validi digitare help");
