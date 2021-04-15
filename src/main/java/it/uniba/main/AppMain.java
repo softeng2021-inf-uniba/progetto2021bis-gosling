@@ -43,47 +43,81 @@ public final class AppMain {
             }
         }
 
-        boolean isExiting = false; 
+        boolean isExiting = false;
         String answer;
         Scanner sc = new Scanner(System.in);
-        do
-        {
-          System.out.println("-------------------------------- Menu Principale --------------------------------");
-          System.out.println("Digitare un comando valido...");
-          if(sc.hasNextLine())
-          {
-              answer = sc.nextLine();
-              switch(answer)
-              {
-                 case "help":
-                     Help.getMenuHelp();
-                     break;
-                 case "numeri":
-                     Damiera.getDamiera().stampaNumeri();
-                     break;
-                 case "gioca":
-                     Partita.nuovaPartita();
-                     Partita.azzeraPartitaCorrente();
-                     break;
-                 case "damiera":
-                     System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
-                     break;
-                 case "tempo":
-                     System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
-                     break;                 
-                 case "abbandona":
-                     System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
-                     break;
-                     //Qui va esci
-                 default:
-                     System.out.println("Comando inserito non valido");
-                     System.out.println("Per sapere quali comandi sono validi digitare help");
-                     break;
-                        } 
-                    }          
-                }while(isExiting==false);
+        do {
+            System.out.println("-------------------------------- Menu Principale --------------------------------");
+            System.out.println("Digitare un comando valido...");
+            if (sc.hasNextLine()) {
+                answer = sc.nextLine();
+                switch (answer) {
+                    case "help":
+                        Help.getMenuHelp();
+                        break;
+                    case "gioca":
+                        Partita.nuovaPartita();
+                        Partita.azzeraPartitaCorrente();
+                        break;
+                    case "numeri":
+                        Damiera.getDamiera().stampaNumeri();
+                        break;
+                    case "esci":
+                        isExiting = vuoleUscire();
+                        break;
+                    case "damiera":
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
+                        break;
+                    case "abbandona":
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
+                        break;
+                    case "tempo":
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
+                        break;
+                    default:
+                        System.out.println("Comando inserito non valido");
+                        System.out.println("Per sapere quali comandi sono validi digitare help");
+                        break;
+                }
+            }
+        } while (isExiting == false);
+
+        sc.close();
         
-                
-                sc.close();
-	}
+        System.exit(0);
+    }
+
+    public static boolean vuoleUscire() {
+
+        boolean vuoleUscire = false;
+
+        System.out.println("Sicuro di voler uscire dal gioco?");
+        boolean error;
+        String answer;
+
+        Scanner sc = new Scanner(System.in);
+        do {
+            error = false;
+            System.out.println("digitare 'si' o 'no'");
+            if (sc.hasNextLine()) {
+                answer = sc.nextLine();
+
+                switch (answer.toLowerCase()) {
+                    case "si":
+                        System.out.println("Alla prossima partita!");
+                        vuoleUscire = true;
+                        break;
+                    case "no":
+                        System.out.println("Non sei uscito dal gioco.");
+                        break;
+                    default:
+                        System.out.println("Digitare un comando valido...");
+                        error = true;
+                        break;
+                }
+            }
+        } while (error == true);
+
+        return vuoleUscire;
+    }
 }
