@@ -96,7 +96,7 @@ public class Giocatore {
         Long seconds = SECONDS.between(segnaTempo, now) % 60;
         this.tempoPassato = this.tempoPassato.plusMinutes(minutes);
         this.tempoPassato = this.tempoPassato.plusSeconds(seconds);
-         this.setSegnaTempo(LocalTime.now());
+        this.setSegnaTempo(LocalTime.now());
     }
     
     private void scegliColore() {

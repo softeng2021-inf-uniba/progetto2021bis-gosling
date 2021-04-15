@@ -61,6 +61,11 @@ public class Partita {
         }
     }
 
+    public static void azzeraPartitaCorrente()
+    {
+        partitaCorrente = null;
+    }
+    
     public void nuovoTurno() {
         Giocatore corrente;
         Giocatore avversario;
@@ -91,19 +96,48 @@ public class Partita {
             corrente = giocatore2;
             avversario = giocatore1;
         }
-        
+
         corrente.aggiornaTempoPassato();
         System.out.println("Il tempo di gioco di " + corrente.getNome() + " (" + corrente.getColore().toString() + ") " + " è: " + corrente.getTempoPassato());
         System.out.println("Il tempo di gioco di " + avversario.getNome() + " (" + avversario.getColore().toString() + ") " + " è: " + avversario.getTempoPassato());
     }
 
-    public void abbandona(Giocatore rinunciatario, Giocatore avversario)
-    {
-        //Tocca a Fra
-        System.out.println(rinunciatario.getNome() + " (" + rinunciatario.getColore().toString() + ") " + " ha abbandonato il gioco.");
-        System.out.println(avversario.getNome() + " (" + avversario.getColore().toString() + ") " + " ha vinto.");
+    public boolean abbandona(Giocatore rinunciatario, Giocatore avversario) {
+
+        boolean haAbbandonato = false;
+
+        boolean error;
+        String answer;
+
+        Scanner sc = new Scanner(System.in);
+
+        do {
+            error = false;
+            System.out.println("Sicuro di voler uscire? L'avversario vincerà in caso affermativo");
+            System.out.println("digitare 'si' o 'no'");
+            if (sc.hasNextLine()) {
+                answer = sc.nextLine();
+
+                switch (answer.toLowerCase()) {
+                    case "si":
+                        System.out.println(rinunciatario.getNome() + " (" + rinunciatario.getColore().toString() + ") " + " ha abbandonato il gioco.");
+                        System.out.println(avversario.getNome() + " (" + avversario.getColore().toString() + ") " + " ha vinto.");
+                        haAbbandonato = true;
+                        break;
+                    case "no":
+                        System.out.println("Non hai abbandonato");
+                        break;
+                    default:
+                        System.out.println("Digitare un comando valido...");
+                        error = true;
+                        break;
+                }
+            }
+        } while (error == true);
+
+        return haAbbandonato;
     }
-    
+
     public void sceltaComando(Giocatore corrente, Giocatore avversario) {
         boolean isExiting = false;
         String answer;
@@ -129,8 +163,9 @@ public class Partita {
                         stampaTempoPassato();
                         break;
                     case "abbandona":
-                        abbandona(corrente, avversario);
-                        isExiting = true;
+                        if (abbandona(corrente, avversario)) {
+                            isExiting = true;
+                        }
                         break;
                     default:
                         System.out.println("Comando inserito non valido");
