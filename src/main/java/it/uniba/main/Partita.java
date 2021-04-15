@@ -121,7 +121,7 @@ public class Partita {
                 switch (answer.toLowerCase()) {
                     case "si":
                         System.out.println(rinunciatario.getNome() + " (" + rinunciatario.getColore().toString() + ") " + " ha abbandonato il gioco.");
-                        System.out.println(avversario.getNome() + " (" + avversario.getColore().toString() + ") " + " ha vinto.");
+                        System.out.println(avversario.getNome() + " (" + avversario.getColore().toString() + ") " + " ha vinto per abbandono.");
                         haAbbandonato = true;
                         break;
                     case "no":
