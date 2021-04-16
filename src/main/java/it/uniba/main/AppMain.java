@@ -7,6 +7,7 @@ import java.security.GeneralSecurityException;
 
 import it.uniba.sotorrent.GoogleDocsUtils;
 import java.util.Scanner;
+import it.uniba.main.Pedina;
 
 /**
  * The main class for the project. It must be customized to meet the project
@@ -48,14 +49,16 @@ public final class AppMain {
         Scanner sc = new Scanner(System.in);
         do {
             System.out.println("-------------------------------- Menu Principale --------------------------------");
-            System.out.println("Digitare un comando valido...");
+            System.out.println("Digitare un comando valido... (digita 'help' per visualizzare i comandi)");
             if (sc.hasNextLine()) {
                 answer = sc.nextLine();
-                switch (answer) {
+                answer = answer.replaceAll(" +", "");
+                switch (answer.toLowerCase()) {
                     case "help":
                         Help.getMenuHelp();
                         break;
                     case "gioca":
+                        Pedina.setInvertiColore(vuoleInvertitireColori());
                         Partita.nuovaPartita();
                         Partita.azzeraPartitaCorrente();
                         break;
@@ -66,17 +69,17 @@ public final class AppMain {
                         isExiting = vuoleUscire();
                         break;
                     case "damiera":
-                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
                         break;
                     case "abbandona":
-                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
                         break;
                     case "tempo":
-                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
                         break;
                     default:
-                        System.out.println("Comando inserito non valido");
-                        System.out.println("Per sapere quali comandi sono validi digitare help");
+                        System.out.println("Comando inserito non valido.");
+                        System.out.println("Per sapere quali comandi sono validi digitare help.");
                         break;
                 }
             }
@@ -98,10 +101,10 @@ public final class AppMain {
         Scanner sc = new Scanner(System.in);
         do {
             error = false;
-            System.out.println("digitare 'si' o 'no'");
+            System.out.println("digitare 'si' o 'no'.");
             if (sc.hasNextLine()) {
                 answer = sc.nextLine();
-
+                answer = answer.replaceAll(" +", "");
                 switch (answer.toLowerCase()) {
                     case "si":
                         System.out.println("Alla prossima partita!");
@@ -119,5 +122,40 @@ public final class AppMain {
         } while (error == true);
 
         return vuoleUscire;
+    }
+    
+    public static boolean vuoleInvertitireColori()
+    {
+        boolean vuoleInvertire = false;
+
+        System.out.println("È consigliato, se si è su sfondo nero, di invertire i colori delle pedine.");
+        System.out.println("Invertire i colori delle pedine?");
+        boolean error;
+        String answer;
+
+        Scanner sc = new Scanner(System.in);
+        do {
+            error = false;
+            System.out.println("digitare 'si' o 'no'.");
+            if (sc.hasNextLine()) {
+                answer = sc.nextLine();
+                answer = answer.replaceAll(" +", "");
+                switch (answer.toLowerCase()) {
+                    case "si":
+                        System.out.println("I colori verranno invertiti.");
+                        vuoleInvertire = true;
+                        break;
+                    case "no":
+                        System.out.println("I colori non verranno invertiti.");
+                        break;
+                    default:
+                        System.out.println("Digitare un comando valido...");
+                        error = true;
+                        break;
+                }
+            }
+        } while (error == true);
+
+        return vuoleInvertire;
     }
 }

@@ -53,10 +53,10 @@ public class Partita {
     public static void nuovaPartita() {
 
         if (partitaCorrente == null) {
-            System.out.println("Non ci sono partite attive; hai creato creato una nuova partita.");
+            System.out.println("Non ci sono partite attive; creata una nuova partita.");
             partitaCorrente = new Partita();
         } else {
-            System.out.println("Una partita è già in corso; cosa vuoi fare?");
+            System.out.println("Una partita è già in corso; cosa fare?");
             //Poi si pensa
         }
     }
@@ -98,11 +98,11 @@ public class Partita {
         }
 
         corrente.aggiornaTempoPassato();
-        System.out.println("Il tempo di gioco di " + corrente.getNome() + " (" + corrente.getColore().toString() + ") " + " è: " + corrente.getTempoPassato());
-        System.out.println("Il tempo di gioco di " + avversario.getNome() + " (" + avversario.getColore().toString() + ") " + " è: " + avversario.getTempoPassato());
+        System.out.println("Il tempo di gioco di " + corrente.getNome() + " (" + corrente.getColore().toString() + ") " + " è: " + corrente.getTempoPassato()+".");
+        System.out.println("Il tempo di gioco di " + avversario.getNome() + " (" + avversario.getColore().toString() + ") " + " è: " + avversario.getTempoPassato()+".");
     }
 
-    public boolean abbandona(Giocatore rinunciatario, Giocatore avversario) {
+    public boolean vuoleAbbandonare(Giocatore rinunciatario, Giocatore avversario) {
 
         boolean haAbbandonato = false;
 
@@ -113,19 +113,19 @@ public class Partita {
 
         do {
             error = false;
-            System.out.println("Sicuro di voler uscire? L'avversario vincerà in caso affermativo");
-            System.out.println("digitare 'si' o 'no'");
+            System.out.println("Sicuro di voler uscire? L'avversario vincerà in caso affermativo.");
+            System.out.println("Digitare 'si' o 'no'.");
             if (sc.hasNextLine()) {
                 answer = sc.nextLine();
-
+                answer = answer.replaceAll(" +", "");
                 switch (answer.toLowerCase()) {
                     case "si":
-                        System.out.println(rinunciatario.getNome() + " (" + rinunciatario.getColore().toString() + ") " + " ha abbandonato il gioco.");
-                        System.out.println(avversario.getNome() + " (" + avversario.getColore().toString() + ") " + " ha vinto per abbandono.");
+                        System.out.println(rinunciatario.getNome() + " (" + rinunciatario.getColore().toString() + ")" + " ha abbandonato il gioco.");
+                        System.out.println(avversario.getNome() + " (" + avversario.getColore().toString() + ")" + " ha vinto per abbandono.");
                         haAbbandonato = true;
                         break;
                     case "no":
-                        System.out.println("Non hai abbandonato");
+                        System.out.println("Partita non abbandonata.");
                         break;
                     default:
                         System.out.println("Digitare un comando valido...");
@@ -149,7 +149,8 @@ public class Partita {
             System.out.println("Digitare un comando valido...");
             if (sc.hasNextLine()) {
                 answer = sc.nextLine();
-                switch (answer) {
+                answer = answer.replaceAll(" +", "");
+                switch (answer.toLowerCase()) {
                     case "help":
                         Help.getMenuHelp();
                         break;
@@ -163,13 +164,11 @@ public class Partita {
                         stampaTempoPassato();
                         break;
                     case "abbandona":
-                        if (abbandona(corrente, avversario)) {
-                            isExiting = true;
-                        }
+                       isExiting=vuoleAbbandonare(corrente,avversario);
                         break;
                     default:
-                        System.out.println("Comando inserito non valido");
-                        System.out.println("Per sapere quali comandi sono validi digitare help");
+                        System.out.println("Comando inserito non valido.");
+                        System.out.println("Per sapere quali comandi sono validi digitare help.");
                         break;
                 }
             }
