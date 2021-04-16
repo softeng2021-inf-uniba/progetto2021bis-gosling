@@ -48,10 +48,11 @@ public final class AppMain {
         Scanner sc = new Scanner(System.in);
         do {
             System.out.println("-------------------------------- Menu Principale --------------------------------");
-            System.out.println("Digitare un comando valido...");
+            System.out.println("Digitare un comando valido... (digita 'help' per visualizzare i comandi)");
             if (sc.hasNextLine()) {
                 answer = sc.nextLine();
-                switch (answer) {
+                answer = answer.replaceAll(" +", "");
+                switch (answer.toLowerCase()) {
                     case "help":
                         Help.getMenuHelp();
                         break;
@@ -101,7 +102,7 @@ public final class AppMain {
             System.out.println("digitare 'si' o 'no'");
             if (sc.hasNextLine()) {
                 answer = sc.nextLine();
-
+                answer = answer.replaceAll(" +", "");
                 switch (answer.toLowerCase()) {
                     case "si":
                         System.out.println("Alla prossima partita!");

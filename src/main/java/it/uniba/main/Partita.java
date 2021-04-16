@@ -117,7 +117,7 @@ public class Partita {
             System.out.println("digitare 'si' o 'no'");
             if (sc.hasNextLine()) {
                 answer = sc.nextLine();
-
+                answer = answer.replaceAll(" +", "");
                 switch (answer.toLowerCase()) {
                     case "si":
                         System.out.println(rinunciatario.getNome() + " (" + rinunciatario.getColore().toString() + ") " + " ha abbandonato il gioco.");
@@ -149,7 +149,8 @@ public class Partita {
             System.out.println("Digitare un comando valido...");
             if (sc.hasNextLine()) {
                 answer = sc.nextLine();
-                switch (answer) {
+                answer = answer.replaceAll(" +", "");
+                switch (answer.toLowerCase()) {
                     case "help":
                         Help.getMenuHelp();
                         break;
