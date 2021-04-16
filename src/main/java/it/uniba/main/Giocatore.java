@@ -106,7 +106,7 @@ public class Giocatore {
         do {
             errore = false;
 
-            System.out.println(this.nome + ", scelga il suo colore: digiti \"bianco\" o \"nero\"");
+            System.out.println("Scegliere il colore di "+this.nome +": digitare \'bianco\' o \'nero\'.");
             Scanner scanner = new Scanner(System.in);
             String input = null;
 
@@ -171,7 +171,7 @@ public class Giocatore {
             for (char cha : input.toCharArray()) {
                 if (!Character.isLetter(cha) && !Character.isDigit(cha)) {
                     errore = true;
-                    System.out.println("Puoi inserire solo lettere e numeri.");
+                    System.out.println("Si possono inserire solo lettere e numeri.");
                     break;
                 }
             }
@@ -216,7 +216,7 @@ public class Giocatore {
             for (char cha : input.toCharArray()) {
                 if (!Character.isLetter(cha) && !Character.isDigit(cha)) {
                     errore = true;
-                    System.out.println("Puoi inserire solo lettere e numeri.");
+                    System.out.println("Si possono inserire solo lettere e numeri.");
                     break;
                 }
             }

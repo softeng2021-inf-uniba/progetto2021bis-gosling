@@ -67,17 +67,17 @@ public final class AppMain {
                         isExiting = vuoleUscire();
                         break;
                     case "damiera":
-                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
                         break;
                     case "abbandona":
-                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
                         break;
                     case "tempo":
-                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita");
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
                         break;
                     default:
-                        System.out.println("Comando inserito non valido");
-                        System.out.println("Per sapere quali comandi sono validi digitare help");
+                        System.out.println("Comando inserito non valido.");
+                        System.out.println("Per sapere quali comandi sono validi digitare help.");
                         break;
                 }
             }
@@ -99,7 +99,7 @@ public final class AppMain {
         Scanner sc = new Scanner(System.in);
         do {
             error = false;
-            System.out.println("digitare 'si' o 'no'");
+            System.out.println("digitare 'si' o 'no'.");
             if (sc.hasNextLine()) {
                 answer = sc.nextLine();
                 answer = answer.replaceAll(" +", "");
