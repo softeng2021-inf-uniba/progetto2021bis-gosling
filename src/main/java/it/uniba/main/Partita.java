@@ -28,10 +28,10 @@ public class Partita {
     private Partita() {
 
         damiera = Damiera.getDamiera();
-        giocatore1 = new Giocatore();
+        giocatore1 = new Giocatore(1);
         /*Solo il primo giocatore, chiaramente, può scegliere il colore,
         al secondo tocca il complemento del primo*/
-        giocatore2 = new Giocatore(giocatore1.getNome(), giocatore1.getColoreAvversario());
+        giocatore2 = new Giocatore(2);
 
         if (giocatore1.getColore() == Colore.bianco) {
             turno = Turno.turnoGiocatore1;
@@ -78,7 +78,7 @@ public class Partita {
             avversario = giocatore1;
         }
 
-        System.out.println("È il turno di " + corrente.getNome() + ".");
+        System.out.println("È il turno di: " + corrente.getNome() + " (" + corrente.getColore().toString() + ").");
 
         sceltaComando(corrente, avversario);
 
@@ -98,8 +98,8 @@ public class Partita {
         }
 
         corrente.aggiornaTempoPassato();
-        System.out.println("Il tempo di gioco di " + corrente.getNome() + " (" + corrente.getColore().toString() + ") " + " è: " + corrente.getTempoPassato()+".");
-        System.out.println("Il tempo di gioco di " + avversario.getNome() + " (" + avversario.getColore().toString() + ") " + " è: " + avversario.getTempoPassato()+".");
+        System.out.println("Il tempo di gioco di " + corrente.getNome() + " (" + corrente.getColore().toString() + ") " + " è: " + corrente.getTempoPassato() + ".");
+        System.out.println("Il tempo di gioco di " + avversario.getNome() + " (" + avversario.getColore().toString() + ") " + " è: " + avversario.getTempoPassato() + ".");
     }
 
     public boolean vuoleAbbandonare(Giocatore rinunciatario, Giocatore avversario) {

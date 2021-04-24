@@ -16,7 +16,7 @@ public class Pedina {
     /* ------------ Stato ------------ */
     private TipoPedina tipo;
     private Colore colore;
-    private static boolean invertiColore = false;
+    private static boolean invertiColore = true;
 
     /* ------------  Costruttori ------------ */
     Pedina(Colore colore) {
