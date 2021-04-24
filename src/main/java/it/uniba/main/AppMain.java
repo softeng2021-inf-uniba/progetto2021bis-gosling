@@ -58,7 +58,6 @@ public final class AppMain {
                         Help.getMenuHelp();
                         break;
                     case "gioca":
-                        Pedina.setInvertiColore(vuoleInvertitireColori());
                         Partita.nuovaPartita();
                         Partita.azzeraPartitaCorrente();
                         break;
@@ -122,40 +121,5 @@ public final class AppMain {
         } while (error == true);
 
         return vuoleUscire;
-    }
-    
-    public static boolean vuoleInvertitireColori()
-    {
-        boolean vuoleInvertire = false;
-
-        System.out.println("È consigliato, se si è su sfondo nero, di invertire i colori delle pedine.");
-        System.out.println("Invertire i colori delle pedine?");
-        boolean error;
-        String answer;
-
-        Scanner sc = new Scanner(System.in);
-        do {
-            error = false;
-            System.out.println("digitare 'si' o 'no'.");
-            if (sc.hasNextLine()) {
-                answer = sc.nextLine();
-                answer = answer.replaceAll(" +", "");
-                switch (answer.toLowerCase()) {
-                    case "si":
-                        System.out.println("I colori verranno invertiti.");
-                        vuoleInvertire = true;
-                        break;
-                    case "no":
-                        System.out.println("I colori non verranno invertiti.");
-                        break;
-                    default:
-                        System.out.println("Digitare un comando valido...");
-                        error = true;
-                        break;
-                }
-            }
-        } while (error == true);
-
-        return vuoleInvertire;
     }
 }

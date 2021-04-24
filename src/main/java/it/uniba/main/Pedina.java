@@ -30,10 +30,6 @@ public class Pedina {
     private void setTipo(TipoPedina tipo){
         this.tipo=tipo;
     }
-    public static void setInvertiColore(boolean inverti)
-    {
-        invertiColore = inverti;
-    }
     public Colore getColore(){
         return this.colore;
     }
