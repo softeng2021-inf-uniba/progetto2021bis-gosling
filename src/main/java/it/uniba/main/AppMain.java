@@ -106,6 +106,7 @@ public final class AppMain {
                 answer = answer.replaceAll(" +", "");
                 switch (answer.toLowerCase()) {
                     case "si":
+                    case "sì":
                         System.out.println("Alla prossima partita!");
                         vuoleUscire = true;
                         break;
@@ -113,7 +114,7 @@ public final class AppMain {
                         System.out.println("Non sei uscito dal gioco.");
                         break;
                     default:
-                        System.out.println("Digitare un comando valido...");
+                        System.out.println("Digitare una risposta valido...");
                         error = true;
                         break;
                 }

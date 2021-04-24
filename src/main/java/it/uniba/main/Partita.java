@@ -113,13 +113,14 @@ public class Partita {
 
         do {
             error = false;
-            System.out.println("Sicuro di voler uscire? L'avversario vincerà in caso affermativo.");
+            System.out.println("Sicuro di voler abbandonare? L'avversario vincerà in caso affermativo.");
             System.out.println("Digitare 'si' o 'no'.");
             if (sc.hasNextLine()) {
                 answer = sc.nextLine();
                 answer = answer.replaceAll(" +", "");
                 switch (answer.toLowerCase()) {
                     case "si":
+                    case "sì":
                         System.out.println(rinunciatario.getNome() + " (" + rinunciatario.getColore().toString() + ")" + " ha abbandonato il gioco.");
                         System.out.println(avversario.getNome() + " (" + avversario.getColore().toString() + ")" + " ha vinto per abbandono.");
                         haAbbandonato = true;
@@ -128,7 +129,7 @@ public class Partita {
                         System.out.println("Partita non abbandonata.");
                         break;
                     default:
-                        System.out.println("Digitare un comando valido...");
+                        System.out.println("Digitare una risposta valida...");
                         error = true;
                         break;
                 }
@@ -164,7 +165,7 @@ public class Partita {
                         stampaTempoPassato();
                         break;
                     case "abbandona":
-                       isExiting=vuoleAbbandonare(corrente,avversario);
+                        isExiting=vuoleAbbandonare(corrente,avversario);
                         break;
                     default:
                         System.out.println("Comando inserito non valido.");

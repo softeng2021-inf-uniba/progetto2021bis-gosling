@@ -9,8 +9,6 @@ import it.uniba.main.types.Colore;
 import java.time.LocalTime;
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.time.temporal.ChronoUnit.SECONDS;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -24,8 +22,6 @@ public class Giocatore {
     private LocalTime segnaTempo;
     private LocalTime tempoPassato;
     private int mossaCorrente;
-    private static final int MIN_LUN_NOME = 3;
-    private static final int MAX_LUN_NOME = 20;
     private static final LocalTime TEMPO_DISP = LocalTime.of(0, 30, 0);
 
     /* ------------ Costruttori ------------ */
@@ -33,15 +29,15 @@ public class Giocatore {
 
         switch (index) {
             case 1:
-                this.nome = "Giocatore 1";
+                this.setNome("Giocatore 1");
                 this.setColore(Colore.bianco);
                 break;
             case 2:
-                this.nome = "Giocatore 2";
+                this.setNome("Giocatore 2");
                 this.setColore(Colore.nero);
                 break;
             default:
-                this.nome = "Giocatore 2";
+                this.setNome("Giocatore 2");
                 this.setColore(Colore.nero);
                 break;
         }
@@ -52,7 +48,7 @@ public class Giocatore {
     }
 
     /* ------------ Get & Set ------------ */
-    public void setNome(String nome) {
+    private void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -60,7 +56,7 @@ public class Giocatore {
         return this.nome;
     }
 
-    public void setColore(Colore colore) {
+    private void setColore(Colore colore) {
         this.colore = colore;
     }
 
