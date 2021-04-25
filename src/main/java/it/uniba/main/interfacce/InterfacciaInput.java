@@ -134,9 +134,7 @@ public class InterfacciaInput {
                         break;
                     default:
                         if(sintassiMossaCorretta(answer)){
-                           if(Damiera.getDamiera().spostaPedina(answer)){
-                               System.out.println("Mossa eseguita");
-                           }
+                           isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
                         }
                         else{
                         System.out.println("Comando inserito non valido.");
