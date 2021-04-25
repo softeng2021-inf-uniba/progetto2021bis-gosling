@@ -34,13 +34,14 @@ public class Partita {
         /*Solo il primo giocatore, chiaramente, può scegliere il colore,
         al secondo tocca il complemento del primo*/
         giocatore2 = new Giocatore(2);
-        finita=false;
 
         if (giocatore1.getColore() == Colore.bianco) {
             turno = Turno.turnoGiocatore1;
         } else {
             turno = Turno.turnoGiocatore2;
         }
+
+        finita = false;
 
         System.out.println("La partita inizia ora.");
     }
@@ -49,17 +50,12 @@ public class Partita {
     public static Partita getPartita() {
         return partitaCorrente;
     }
-    
-    public boolean isFinita(){
+
+    public boolean isFinita() {
         return finita;
     }
 
     /* ------------ Metodi ------------ */
-    
-    public void finisciPartita(){
-        finita=true;
-    }
-    
     public static void nuovaPartita() {
 
         if (partitaCorrente == null) {
@@ -71,8 +67,10 @@ public class Partita {
         }
     }
 
-    public static void azzeraPartitaCorrente() {
-        partitaCorrente = null;
+    public void giocaPartita() {
+        while (!isFinita()) {
+            nuovoTurno();
+        }
     }
 
     public void nuovoTurno() {
@@ -90,12 +88,20 @@ public class Partita {
         System.out.println("È il turno di: " + corrente.getNome() + " (" + corrente.getColore().toString() + ").");
 
         InterfacciaInput.menuDiGico(corrente, avversario);
-       if(turno==Turno.turnoGiocatore1){
-           turno=Turno.turnoGiocatore2;
-       }
-       else{
-           turno=Turno.turnoGiocatore1;
-       }
+
+        if (turno == Turno.turnoGiocatore1) {
+            turno = Turno.turnoGiocatore2;
+        } else {
+            turno = Turno.turnoGiocatore1;
+        }
+    }
+
+    public void finisciPartita() {
+        finita = true;
+    }
+
+    public static void azzeraPartitaCorrente() {
+        partitaCorrente = null;
     }
 
     public void stampaTempoPassato() {
@@ -114,11 +120,5 @@ public class Partita {
         corrente.aggiornaTempoPassato();
         System.out.println("Il tempo di gioco di " + corrente.getNome() + " (" + corrente.getColore().toString() + ") " + " è: " + corrente.getTempoPassato() + ".");
         System.out.println("Il tempo di gioco di " + avversario.getNome() + " (" + avversario.getColore().toString() + ") " + " è: " + avversario.getTempoPassato() + ".");
-    }
-    
-    public void giocaPartita(){
-        while(!isFinita()){
-            nuovoTurno();
-        }
     }
 }

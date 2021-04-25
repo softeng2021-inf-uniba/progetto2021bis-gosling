@@ -6,8 +6,6 @@ import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
 
 import it.uniba.sotorrent.GoogleDocsUtils;
-import java.util.Scanner;
-import it.uniba.main.Pedina;
 import it.uniba.main.interfacce.InterfacciaInput;
 
 /**
