@@ -9,6 +9,7 @@ import it.uniba.main.types.Colore;
 import java.time.LocalTime;
 import it.uniba.main.types.Turno;
 import java.util.Scanner;
+import it.uniba.main.interfacce.InterfacciaInput;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Partita {
     public Giocatore giocatore1;
     private Giocatore giocatore2;
     private Turno turno;
+    private boolean finita;
 
     /* ------------ Costruttori ------------ */
     private Partita() {
@@ -39,14 +41,18 @@ public class Partita {
             turno = Turno.turnoGiocatore2;
         }
 
-        System.out.println("La partita inizia ora.");
+        finita = false;
 
-        this.nuovoTurno();
+        System.out.println("La partita inizia ora.");
     }
 
     /* ------------ Get & Set ------------ */
     public static Partita getPartita() {
         return partitaCorrente;
+    }
+
+    public boolean isFinita() {
+        return finita;
     }
 
     /* ------------ Metodi ------------ */
@@ -61,11 +67,12 @@ public class Partita {
         }
     }
 
-    public static void azzeraPartitaCorrente()
-    {
-        partitaCorrente = null;
+    public void giocaPartita() {
+        while (!isFinita()) {
+            nuovoTurno();
+        }
     }
-    
+
     public void nuovoTurno() {
         Giocatore corrente;
         Giocatore avversario;
@@ -80,8 +87,21 @@ public class Partita {
 
         System.out.println("È il turno di: " + corrente.getNome() + " (" + corrente.getColore().toString() + ").");
 
-        sceltaComando(corrente, avversario);
+        InterfacciaInput.menuDiGico(corrente, avversario);
 
+        if (turno == Turno.turnoGiocatore1) {
+            turno = Turno.turnoGiocatore2;
+        } else {
+            turno = Turno.turnoGiocatore1;
+        }
+    }
+
+    public void finisciPartita() {
+        finita = true;
+    }
+
+    public static void azzeraPartitaCorrente() {
+        partitaCorrente = null;
     }
 
     public void stampaTempoPassato() {
@@ -100,79 +120,5 @@ public class Partita {
         corrente.aggiornaTempoPassato();
         System.out.println("Il tempo di gioco di " + corrente.getNome() + " (" + corrente.getColore().toString() + ") " + " è: " + corrente.getTempoPassato() + ".");
         System.out.println("Il tempo di gioco di " + avversario.getNome() + " (" + avversario.getColore().toString() + ") " + " è: " + avversario.getTempoPassato() + ".");
-    }
-
-    public boolean vuoleAbbandonare(Giocatore rinunciatario, Giocatore avversario) {
-
-        boolean haAbbandonato = false;
-
-        boolean error;
-        String answer;
-
-        Scanner sc = new Scanner(System.in);
-
-        do {
-            error = false;
-            System.out.println("Sicuro di voler abbandonare? L'avversario vincerà in caso affermativo.");
-            System.out.println("Digitare 'si' o 'no'.");
-            if (sc.hasNextLine()) {
-                answer = sc.nextLine();
-                answer = answer.replaceAll(" +", "");
-                switch (answer.toLowerCase()) {
-                    case "si":
-                    case "sì":
-                        System.out.println(rinunciatario.getNome() + " (" + rinunciatario.getColore().toString() + ")" + " ha abbandonato il gioco.");
-                        System.out.println(avversario.getNome() + " (" + avversario.getColore().toString() + ")" + " ha vinto per abbandono.");
-                        haAbbandonato = true;
-                        break;
-                    case "no":
-                        System.out.println("Partita non abbandonata.");
-                        break;
-                    default:
-                        System.out.println("Digitare una risposta valida...");
-                        error = true;
-                        break;
-                }
-            }
-        } while (error == true);
-
-        return haAbbandonato;
-    }
-
-    public void sceltaComando(Giocatore corrente, Giocatore avversario) {
-        boolean isExiting = false;
-        String answer;
-
-        corrente.iniziaMossa();
-
-        Scanner sc = new Scanner(System.in);
-        do {
-            System.out.println("Digitare un comando valido...");
-            if (sc.hasNextLine()) {
-                answer = sc.nextLine();
-                answer = answer.replaceAll(" +", "");
-                switch (answer.toLowerCase()) {
-                    case "help":
-                        Help.getMenuHelp();
-                        break;
-                    case "numeri":
-                        Damiera.getDamiera().stampaNumeri();
-                        break;
-                    case "damiera":
-                        Damiera.getDamiera().stampaPedine();
-                        break;
-                    case "tempo":
-                        stampaTempoPassato();
-                        break;
-                    case "abbandona":
-                        isExiting=vuoleAbbandonare(corrente,avversario);
-                        break;
-                    default:
-                        System.out.println("Comando inserito non valido.");
-                        System.out.println("Per sapere quali comandi sono validi digitare help.");
-                        break;
-                }
-            }
-        } while (isExiting == false);
     }
 }

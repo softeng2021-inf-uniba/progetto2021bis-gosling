@@ -6,8 +6,7 @@ import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
 
 import it.uniba.sotorrent.GoogleDocsUtils;
-import java.util.Scanner;
-import it.uniba.main.Pedina;
+import it.uniba.main.interfacce.InterfacciaInput;
 
 /**
  * The main class for the project. It must be customized to meet the project
@@ -44,83 +43,8 @@ public final class AppMain {
             }
         }
 
-        boolean isExiting = false;
-        String answer;
-        Scanner sc = new Scanner(System.in);
-        do {
-            System.out.println("-------------------------------- Menu Principale --------------------------------");
-            System.out.println("Digitare un comando valido... (digita 'help' per visualizzare i comandi)");
-            if (sc.hasNextLine()) {
-                answer = sc.nextLine();
-                answer = answer.replaceAll(" +", "");
-                switch (answer.toLowerCase()) {
-                    case "help":
-                        Help.getMenuHelp();
-                        break;
-                    case "gioca":
-                        Partita.nuovaPartita();
-                        Partita.azzeraPartitaCorrente();
-                        break;
-                    case "numeri":
-                        Damiera.getDamiera().stampaNumeri();
-                        break;
-                    case "esci":
-                        isExiting = vuoleUscire();
-                        break;
-                    case "damiera":
-                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
-                        break;
-                    case "abbandona":
-                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
-                        break;
-                    case "tempo":
-                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
-                        break;
-                    default:
-                        System.out.println("Comando inserito non valido.");
-                        System.out.println("Per sapere quali comandi sono validi digitare help.");
-                        break;
-                }
-            }
-        } while (isExiting == false);
-
-        sc.close();
+        InterfacciaInput.menuDiInizio();
         
         System.exit(0);
-    }
-
-    public static boolean vuoleUscire() {
-
-        boolean vuoleUscire = false;
-
-        System.out.println("Sicuro di voler uscire dal gioco?");
-        boolean error;
-        String answer;
-
-        Scanner sc = new Scanner(System.in);
-        do {
-            error = false;
-            System.out.println("digitare 'si' o 'no'.");
-            if (sc.hasNextLine()) {
-                answer = sc.nextLine();
-                answer = answer.replaceAll(" +", "");
-                switch (answer.toLowerCase()) {
-                    case "si":
-                    case "sì":
-                        System.out.println("Alla prossima partita!");
-                        vuoleUscire = true;
-                        break;
-                    case "no":
-                        System.out.println("Non sei uscito dal gioco.");
-                        break;
-                    default:
-                        System.out.println("Digitare una risposta valido...");
-                        error = true;
-                        break;
-                }
-            }
-        } while (error == true);
-
-        return vuoleUscire;
     }
 }
