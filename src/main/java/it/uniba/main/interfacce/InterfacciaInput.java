@@ -7,6 +7,7 @@ package it.uniba.main.interfacce;
 
 import java.util.Scanner;
 import it.uniba.main.Damiera;
+import it.uniba.main.Giocatore;
 import it.uniba.main.Help;
 import it.uniba.main.Partita;
 
@@ -67,6 +68,7 @@ public class InterfacciaInput {
                         break;
                     case "gioca":
                         Partita.nuovaPartita();
+                        Partita.getPartita().giocaPartita();
                         Partita.azzeraPartitaCorrente();
                         break;
                     case "numeri":
@@ -94,4 +96,50 @@ public class InterfacciaInput {
 
         sc.close();
     }
+    
+     public static void menuDiGico(Giocatore corrente, Giocatore avversario) {
+        boolean isExiting = false;
+        String answer;
+
+        corrente.iniziaMossa();
+
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println("Digitare un comando valido...");
+            if (sc.hasNextLine()) {
+                answer = sc.nextLine();
+                answer = answer.replaceAll(" +", "");
+                switch (answer.toLowerCase()) {
+                    case "help":
+                        Help.getMenuHelp();
+                        break;
+                    case "numeri":
+                        Damiera.getDamiera().stampaNumeri();
+                        break;
+                    case "damiera":
+                        Damiera.getDamiera().stampaPedine();
+                        break;
+                    case "tempo":
+                        Partita.getPartita().stampaTempoPassato();
+                        break;
+                    case "abbandona":
+                        isExiting = InterfacciaInput.chiediConferma("Sicuro di voler abbandonare? L'avversario vincerà in caso affermativo.", "Partita abbandonata.", "Partita non abbandonata.");
+
+                        if (isExiting) {
+                            System.out.println(corrente.getNome() + " (" + corrente.getColore().toString() + ")" + " ha abbandonato il gioco.");
+                            System.out.println(avversario.getNome() + " (" + avversario.getColore().toString() + ")" + " ha vinto per abbandono.");
+                            Partita.getPartita().finisciPartita();
+                        }
+                        
+                        break;
+                    default:
+                        System.out.println("Comando inserito non valido.");
+                        System.out.println("Per sapere quali comandi sono validi digitare help.");
+                        break;
+                }
+            }
+        } while (isExiting == false);
+    }
 }
+
+
