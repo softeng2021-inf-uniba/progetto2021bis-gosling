@@ -8,6 +8,7 @@ import java.security.GeneralSecurityException;
 import it.uniba.sotorrent.GoogleDocsUtils;
 import java.util.Scanner;
 import it.uniba.main.Pedina;
+import it.uniba.main.interfacce.InterfacciaInput;
 
 /**
  * The main class for the project. It must be customized to meet the project
@@ -65,7 +66,7 @@ public final class AppMain {
                         Damiera.getDamiera().stampaNumeri();
                         break;
                     case "esci":
-                        isExiting = vuoleUscire();
+                        isExiting = InterfacciaInput.chiediConferma("Si vuole davvero uscire?", "Alla prossima partita!", "Non si è usciti dal gioco.");
                         break;
                     case "damiera":
                         System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
@@ -87,40 +88,5 @@ public final class AppMain {
         sc.close();
         
         System.exit(0);
-    }
-
-    public static boolean vuoleUscire() {
-
-        boolean vuoleUscire = false;
-
-        System.out.println("Sicuro di voler uscire dal gioco?");
-        boolean error;
-        String answer;
-
-        Scanner sc = new Scanner(System.in);
-        do {
-            error = false;
-            System.out.println("digitare 'si' o 'no'.");
-            if (sc.hasNextLine()) {
-                answer = sc.nextLine();
-                answer = answer.replaceAll(" +", "");
-                switch (answer.toLowerCase()) {
-                    case "si":
-                    case "sì":
-                        System.out.println("Alla prossima partita!");
-                        vuoleUscire = true;
-                        break;
-                    case "no":
-                        System.out.println("Non sei uscito dal gioco.");
-                        break;
-                    default:
-                        System.out.println("Digitare una risposta valido...");
-                        error = true;
-                        break;
-                }
-            }
-        } while (error == true);
-
-        return vuoleUscire;
     }
 }
