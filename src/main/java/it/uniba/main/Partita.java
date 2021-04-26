@@ -30,6 +30,8 @@ public class Partita {
     private Partita() {
 
         damiera = Damiera.getDamiera();
+        damiera.preparaDamiera();
+        
         giocatore1 = new Giocatore(1);
         /*Solo il primo giocatore, chiaramente, può scegliere il colore,
         al secondo tocca il complemento del primo*/
