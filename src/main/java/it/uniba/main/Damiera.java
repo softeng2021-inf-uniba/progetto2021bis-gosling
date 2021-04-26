@@ -197,6 +197,7 @@ public class Damiera {
         }
 
         int versoAvanzamento = (coloreGiocatore == Colore.bianco) ? -1 : 1;
+        int rigaBaseNemica = (coloreGiocatore == Colore.bianco) ? 0 : 7;
 
         if (contenutoPosPar != null && contenutoPosArr == null) {
 
@@ -220,6 +221,13 @@ public class Damiera {
         if (spostamentoLecito) {
             this.damieraGioco[posArrivo.riga][posArrivo.colonna] = this.damieraGioco[posPartenza.riga][posPartenza.colonna];
             this.damieraGioco[posPartenza.riga][posPartenza.colonna] = null;
+            
+            if(posArrivo.riga == rigaBaseNemica)
+            {
+                System.out.println("Hai effettuato la damatura!");
+                this.damieraGioco[posArrivo.riga][posArrivo.colonna].promuoviADama();
+            }
+            
             this.stampaPedine();
         } else {
             if (coloreSbagliato) {
@@ -230,5 +238,14 @@ public class Damiera {
         }
 
         return spostamentoLecito;
+    }
+    
+    public boolean effettuaPresa(String mossa, Colore coloreGiocatore)
+    {
+        boolean presaLecita = false;
+        
+        //Qui tocca a chi gestisce la presa
+        
+        return presaLecita;
     }
 }

@@ -80,4 +80,9 @@ public class Pedina {
             }
         }
     }
+    
+    public void promuoviADama()
+    {
+        //tocca a Massimo
+    }
 }
