@@ -55,7 +55,7 @@ public class InterfacciaInput {
         boolean isExiting = false;
         String answer;
         Scanner sc = new Scanner(System.in);
-        
+
         do {
             System.out.println("-------------------------------- Menu Principale --------------------------------");
             System.out.println("Digitare un comando valido... (digita 'help' per visualizzare i comandi)");
@@ -96,8 +96,8 @@ public class InterfacciaInput {
 
         sc.close();
     }
-    
-     public static void menuDiGico(Giocatore corrente, Giocatore avversario) {
+
+    public static void menuDiGico(Giocatore corrente, Giocatore avversario) {
         boolean isExiting = false;
         String answer;
 
@@ -130,36 +130,43 @@ public class InterfacciaInput {
                             System.out.println(avversario.getNome() + " (" + avversario.getColore().toString() + ")" + " ha vinto per abbandono.");
                             Partita.getPartita().finisciPartita();
                         }
-                        
+
                         break;
                     default:
-                        if(sintassiMossaCorretta(answer)){
-                           isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
-                        }
-                        else{
-                        System.out.println("Comando inserito non valido.");
-                        System.out.println("Per sapere quali comandi sono validi digitare help.");
+                        if (sintassiSpostamentoCorretta(answer)) {
+                            isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
+                        } else if (sintassiPresaCorretta(answer)) {
+                            //Qui tocca a chi gestisce la presa
+                        } else {
+                            System.out.println("Comando inserito non valido.");
+                            System.out.println("Per sapere quali comandi sono validi digitare help.");
                         }
                         break;
                 }
             }
         } while (isExiting == false);
     }
-     
-     public static boolean sintassiMossaCorretta(String answer){
-         boolean corretto=false;
-         if(answer.matches("[1-9][0-9]?-[0-9][0-9]?")){
-             String[] numeri = answer.split("-");
-             int num1 = Integer.valueOf(numeri[0]);
-             int num2 = Integer.valueOf(numeri[1]);
-             boolean primoCorretto = (num1 >= 1)&&(num1 <= 32);
-             boolean secondoCorretto = (num2 >= 1)&&(num2 <= 32) && (num1 != num2);
-             if(primoCorretto && secondoCorretto){
-                 corretto = true;
-             }
-         }
-         return corretto;
-     }
+
+    public static boolean sintassiSpostamentoCorretta(String answer) {
+        boolean sintassiCorretta = false;
+        if (answer.matches("[1-9][0-9]?-[0-9][0-9]?")) {
+            String[] numeri = answer.split("-");
+            int num1 = Integer.valueOf(numeri[0]);
+            int num2 = Integer.valueOf(numeri[1]);
+            boolean primoCorretto = (num1 >= 1) && (num1 <= 32);
+            boolean secondoCorretto = (num2 >= 1) && (num2 <= 32) && (num1 != num2);
+            if (primoCorretto && secondoCorretto) {
+                sintassiCorretta = true;
+            }
+        }
+        return sintassiCorretta;
+    }
+
+    public static boolean sintassiPresaCorretta(String answer) {
+        boolean sintassiCorretta = false;
+
+        //Qui tocca a chi gestisce la presa
+        
+        return sintassiCorretta;
+    }
 }
-
-

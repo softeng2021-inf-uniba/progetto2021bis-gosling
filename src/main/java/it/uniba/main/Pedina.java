@@ -80,4 +80,9 @@ public class Pedina {
             }
         }
     }
+    
+    public void promuoviADama()
+    {
+        this.tipo=TipoPedina.pedinaRe;
+    }
 }
