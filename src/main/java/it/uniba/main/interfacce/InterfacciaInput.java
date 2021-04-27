@@ -136,6 +136,7 @@ public class InterfacciaInput {
                         if (sintassiSpostamentoCorretta(answer)) {
                             isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
                         } else if (sintassiPresaSempliceCorretta(answer)) {
+                            isExiting = Damiera.getDamiera().effettuaPresaSemplice(answer, corrente.getColore());
                             //Qui tocca a chi gestisce la presa
                         } else {
                             System.out.println("Comando inserito non valido.");
