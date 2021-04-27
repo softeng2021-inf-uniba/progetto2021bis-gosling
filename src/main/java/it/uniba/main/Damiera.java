@@ -227,8 +227,7 @@ public class Damiera {
                 System.out.println("Hai effettuato la damatura!");
                 this.damieraGioco[posArrivo.riga][posArrivo.colonna].promuoviADama();
             }
-
-            this.stampaPedine();
+            
         } else {
             if (coloreSbagliato) {
                 System.out.println("Non puoi spostare una pedina del tuo avversario");
