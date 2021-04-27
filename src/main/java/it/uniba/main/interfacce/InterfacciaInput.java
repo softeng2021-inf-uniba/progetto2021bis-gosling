@@ -165,7 +165,16 @@ public class InterfacciaInput {
     public static boolean sintassiPresaCorretta(String answer) {
         boolean sintassiCorretta = false;
 
-        //Qui tocca a chi gestisce la presa
+        if(answer.matches("[1-9][0-9]?x[0-9][0-9]?")){
+             String[] numeri = answer.split("x");
+             int num1 = Integer.valueOf(numeri[0]);
+             int num2 = Integer.valueOf(numeri[1]);
+             boolean primoCorretto = (num1 >= 1)&&(num1 <= 32);
+             boolean secondoCorretto = (num2 >= 1)&&(num2 <= 32) && (num1 != num2);
+             if(primoCorretto && secondoCorretto) {
+                 sintassiCorretta = true;
+           }    
+         }
         
         return sintassiCorretta;
     }
