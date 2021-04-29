@@ -359,7 +359,7 @@ public class Damiera {
 
         }
 
-        // Verifichiamo le mosse su una damiera d'appoggio e se tutto va bene facciamo le mosse anche sulla damiera vera
+        // Backup damiera nel caso le mosse non siano legali
         Pedina[][] damieraBackup = new Pedina[8][8];
 
         for (int i = 0; i < 8; i++) {
@@ -370,11 +370,11 @@ public class Damiera {
 
         int contaTestPrese = 0;
 
-        while (contaTestPrese < prese.length) {
+        while (contaTestPrese < prese.length) { // Per ogni mossa, verifica se è lecita
             boolean correct = effettuaPresaSemplice(prese[contaTestPrese], coloreGiocatore);
 
             if (!correct) {
-                presaMultiplaLecita = false;
+                presaMultiplaLecita = false; // se anche solo 1 mossa non è lecita, esce
                 break;
             } else {
                 presaMultiplaLecita = true;
@@ -382,10 +382,14 @@ public class Damiera {
             contaTestPrese++;
         }
 
-        if (!presaMultiplaLecita) {
+        if (!presaMultiplaLecita) { 
 
-            this.setDamieraGioco(damieraBackup);
+            this.setDamieraGioco(damieraBackup); //Se una delle mosse non era lecita, resetta la damiera com'era prima
+        } else {
+            // Aggiungi pedine tolte alla lista delle pedine
+            // Aggiungi mossa alla lista delle mosse
         }
+        
         return presaMultiplaLecita;
     }
 }
