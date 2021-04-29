@@ -14,7 +14,7 @@ public class Damiera {
     private static Damiera singleIstance; // Per rendere la classe singleton
     private static final Posizione[] vettorePosizioni = new Posizione[32];
     private final int[][] damieraNumeri;
-    private final Pedina[][] damieraGioco;
+    private Pedina[][] damieraGioco;
 
     /* ------------  Costruttori ------------ */
     private Damiera() {
@@ -55,6 +55,10 @@ public class Damiera {
         }
 
         return singleIstance;
+    }
+
+    public void setDamieraGioco(Pedina[][] damieraGioco) {
+        this.damieraGioco = damieraGioco;
     }
 
     /* ------------ Metodi ------------*/
@@ -227,7 +231,7 @@ public class Damiera {
                 System.out.println("Hai effettuato la damatura!");
                 this.damieraGioco[posArrivo.riga][posArrivo.colonna].promuoviADama();
             }
-            
+
         } else {
             if (coloreSbagliato) {
                 System.out.println("Non puoi spostare una pedina del tuo avversario");
@@ -241,6 +245,7 @@ public class Damiera {
 
     public boolean effettuaPresaSemplice(String mossa, Colore coloreGiocatore) {
         boolean presaLecita = false;
+        boolean posParValida = false;
         boolean posArrValida = false; // Spazio di arrivo occupato
         boolean coloreGiusto = false;
         boolean rigaCorretta = false;
@@ -254,54 +259,58 @@ public class Damiera {
         Posizione posArrivo = Damiera.convertiNumeroInPosizione(Integer.valueOf(numeri[1]));
 
         Pedina contenutoPosPar = this.damieraGioco[posPartenza.riga][posPartenza.colonna];
+
         Pedina contenutoPosArr = this.damieraGioco[posArrivo.riga][posArrivo.colonna];
 
         // ci serve che sia fuori dagli if perché nello spostamento è importante
         Pedina daMangiare;
         Posizione posDaMangiare = new Posizione();
 
-        if (contenutoPosPar.getColore() == coloreGiocatore) {  // se il colore è il giusto
-            coloreGiusto = true;
-            if (contenutoPosArr == null) { // se lo spostamento non va in una casella già piena
-                posArrValida = true;
-                int versoAvanzamento = (coloreGiocatore == Colore.bianco) ? -1 : 1;
-                int rigaBaseNemica = (coloreGiocatore == Colore.bianco) ? 0 : 7;
+        if (contenutoPosPar != null) {
+            posParValida = true;
+            if (contenutoPosPar.getColore() == coloreGiocatore) {  // se il colore è il giusto
+                coloreGiusto = true;
+                if (contenutoPosArr == null) { // se lo spostamento non va in una casella già piena
+                    posArrValida = true;
+                    int versoAvanzamento = (coloreGiocatore == Colore.bianco) ? -1 : 1;
+                    int rigaBaseNemica = (coloreGiocatore == Colore.bianco) ? 0 : 7;
 
-                if (contenutoPosPar.getTipo() == TipoPedina.pedinaSemplice) {
-                    rigaCorretta = (posArrivo.riga == (posPartenza.riga + versoAvanzamento * 2));
-                } else {
-                    rigaCorretta = (posArrivo.riga == (posPartenza.riga + versoAvanzamento * 2) || posArrivo.riga == (posPartenza.riga - versoAvanzamento * 2));
-                }
-
-                colonnaCorretta = (posArrivo.colonna == (posPartenza.colonna - 2) || posArrivo.colonna == (posPartenza.colonna + 2));
-                if (rigaCorretta && colonnaCorretta) // se la mossa è valida
-                {
-
-                    posDaMangiare.riga = (posPartenza.riga + 1 * versoAvanzamento);
-                    /*
-                        Quando implementeremo gli spostamenti della dama, il controllo sulla riga andrà svolto.
-                     */
-
-                    if (posArrivo.colonna > posPartenza.colonna) {
-                        posDaMangiare.colonna = posPartenza.colonna + 1;
+                    if (contenutoPosPar.getTipo() == TipoPedina.pedinaSemplice) {
+                        rigaCorretta = (posArrivo.riga == (posPartenza.riga + versoAvanzamento * 2));
                     } else {
-                        posDaMangiare.colonna = posPartenza.colonna - 1;
+                        rigaCorretta = (posArrivo.riga == (posPartenza.riga + versoAvanzamento * 2) || posArrivo.riga == (posPartenza.riga - versoAvanzamento * 2));
                     }
 
-                    daMangiare = this.damieraGioco[posDaMangiare.riga][posDaMangiare.colonna];
-
-                    if (daMangiare != null && daMangiare.getColore() != coloreGiocatore) // Se c'è qualcosa di effettivo da mangiare
+                    colonnaCorretta = (posArrivo.colonna == (posPartenza.colonna - 2) || posArrivo.colonna == (posPartenza.colonna + 2));
+                    if (rigaCorretta && colonnaCorretta) // se la mossa è valida
                     {
-                        presaPossibile = true;
-                        if (contenutoPosPar.getTipo() == TipoPedina.pedinaRe) // se è una dama può mangiare tutto
-                        {
-                            presaPossibileDamatura = true;
-                            presaLecita = true;
+
+                        posDaMangiare.riga = (posPartenza.riga + 1 * versoAvanzamento);
+                        /*
+                        Quando implementeremo gli spostamenti della dama, il controllo sulla riga andrà svolto.
+                         */
+
+                        if (posArrivo.colonna > posPartenza.colonna) {
+                            posDaMangiare.colonna = posPartenza.colonna + 1;
                         } else {
-                            if (daMangiare.getTipo() != TipoPedina.pedinaRe) // altrimenti non può mangiare la dama
+                            posDaMangiare.colonna = posPartenza.colonna - 1;
+                        }
+
+                        daMangiare = this.damieraGioco[posDaMangiare.riga][posDaMangiare.colonna];
+
+                        if (daMangiare != null && daMangiare.getColore() != coloreGiocatore) // Se c'è qualcosa di effettivo da mangiare
+                        {
+                            presaPossibile = true;
+                            if (contenutoPosPar.getTipo() == TipoPedina.pedinaRe) // se è una dama può mangiare tutto
                             {
                                 presaPossibileDamatura = true;
                                 presaLecita = true;
+                            } else {
+                                if (daMangiare.getTipo() != TipoPedina.pedinaRe) // altrimenti non può mangiare la dama
+                                {
+                                    presaPossibileDamatura = true;
+                                    presaLecita = true;
+                                }
                             }
                         }
                     }
@@ -310,7 +319,9 @@ public class Damiera {
         }
 
         // Perfetto per il terzo sprint, perché è orribile
-        if (posArrValida == false) {
+        if (posParValida == false) {
+            System.out.println("Presa non valida. La casella di partenza è vuota");
+        } else if (posArrValida == false) {
             System.out.println("Presa non valida. La casella di arrivo non è vuota");
         } else if (coloreGiusto == false) {
             System.out.println("Non puoi spostare una pedina del tuo avversario");
@@ -331,5 +342,50 @@ public class Damiera {
         }
 
         return presaLecita;
+    }
+
+    public boolean effettuaPresaMultipla(String mossa, Colore coloreGiocatore) {
+        boolean presaMultiplaLecita = false;
+
+        int contatoreMosse = 0;
+        String[] numeri = mossa.split("x");
+
+        String[] prese = new String[numeri.length - 1];
+
+        for (int i = 0; i < numeri.length - 1; i++) // Tokenizzazine mosse
+        {
+            prese[contatoreMosse] = String.join("x", numeri[i], numeri[i + 1]);
+            contatoreMosse++;
+
+        }
+
+        // Verifichiamo le mosse su una damiera d'appoggio e se tutto va bene facciamo le mosse anche sulla damiera vera
+        Pedina[][] damieraBackup = new Pedina[8][8];
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                damieraBackup[i][j] = damieraGioco[i][j];
+            }
+        }
+
+        int contaTestPrese = 0;
+
+        while (contaTestPrese < prese.length) {
+            boolean correct = effettuaPresaSemplice(prese[contaTestPrese], coloreGiocatore);
+
+            if (!correct) {
+                presaMultiplaLecita = false;
+                break;
+            } else {
+                presaMultiplaLecita = true;
+            }
+            contaTestPrese++;
+        }
+
+        if (!presaMultiplaLecita) {
+
+            this.setDamieraGioco(damieraBackup);
+        }
+        return presaMultiplaLecita;
     }
 }
