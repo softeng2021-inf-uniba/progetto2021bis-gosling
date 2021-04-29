@@ -135,7 +135,8 @@ public class InterfacciaInput {
                     default:
                         if (sintassiSpostamentoCorretta(answer)) {
                             isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
-                        } else if (sintassiPresaCorretta(answer)) {
+                        } else if (sintassiPresaSempliceCorretta(answer)) {
+                            isExiting = Damiera.getDamiera().effettuaPresaSemplice(answer, corrente.getColore());
                             //Qui tocca a chi gestisce la presa
                         } else {
                             System.out.println("Comando inserito non valido.");
@@ -162,10 +163,19 @@ public class InterfacciaInput {
         return sintassiCorretta;
     }
 
-    public static boolean sintassiPresaCorretta(String answer) {
+    public static boolean sintassiPresaSempliceCorretta(String answer) {
         boolean sintassiCorretta = false;
 
-        //Qui tocca a chi gestisce la presa
+        if(answer.matches("[1-9][0-9]?x[0-9][0-9]?")){
+             String[] numeri = answer.split("x");
+             int num1 = Integer.valueOf(numeri[0]);
+             int num2 = Integer.valueOf(numeri[1]);
+             boolean primoCorretto = (num1 >= 1)&&(num1 <= 32);
+             boolean secondoCorretto = (num2 >= 1)&&(num2 <= 32) && (num1 != num2);
+             if(primoCorretto && secondoCorretto) {
+                 sintassiCorretta = true;
+           }    
+         }
         
         return sintassiCorretta;
     }

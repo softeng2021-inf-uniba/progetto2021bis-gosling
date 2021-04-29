@@ -13,6 +13,10 @@ public class Posizione {
     public int riga;
     public int colonna;
 
+    public Posizione()
+    {
+        
+    }
     public Posizione(int riga, int colonna) {
         this.riga = riga;
         this.colonna = colonna;
