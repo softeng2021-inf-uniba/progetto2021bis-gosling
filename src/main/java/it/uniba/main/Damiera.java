@@ -15,6 +15,8 @@ public class Damiera {
     private static final Posizione[] vettorePosizioni = new Posizione[32];
     private final int[][] damieraNumeri;
     private Pedina[][] damieraGioco;
+    private int pedineNereMangiate;
+    private int pedineBiancheMangiate;
 
     /* ------------  Costruttori ------------ */
     private Damiera() {
@@ -337,6 +339,11 @@ public class Damiera {
             this.damieraGioco[posDaMangiare.riga][posDaMangiare.colonna] = null;
             this.damieraGioco[posArrivo.riga][posArrivo.colonna] = this.damieraGioco[posPartenza.riga][posPartenza.colonna];
             this.damieraGioco[posPartenza.riga][posPartenza.colonna] = null;
+            if (coloreGiocatore == Colore.bianco) {
+                incrementaPreseNere();
+            } else {
+                incrementaPreseBianche();
+            }
             // Aggiungi la pedina mangiata alla lista delle pedine mangiate
             // aggiungi la mossa alle liste di mosse effettuate nella partita
         }
@@ -382,14 +389,27 @@ public class Damiera {
             contaTestPrese++;
         }
 
-        if (!presaMultiplaLecita) { 
+        if (!presaMultiplaLecita) {
 
             this.setDamieraGioco(damieraBackup); //Se una delle mosse non era lecita, resetta la damiera com'era prima
         } else {
             // Aggiungi pedine tolte alla lista delle pedine
             // Aggiungi mossa alla lista delle mosse
+            if (coloreGiocatore == Colore.bianco) {
+                incrementaPreseNere();
+            } else {
+                incrementaPreseBianche();
+            }
         }
-        
+
         return presaMultiplaLecita;
+    }
+
+    public void incrementaPreseBianche() {
+        this.pedineBiancheMangiate++;
+    }
+
+    public void incrementaPreseNere() {
+        this.pedineNereMangiate++;
     }
 }

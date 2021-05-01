@@ -23,6 +23,7 @@ public class Giocatore {
     private LocalTime tempoPassato;
     private int mossaCorrente;
     private static final LocalTime TEMPO_DISP = LocalTime.of(0, 30, 0);
+    private int contaPrese;
 
     /* ------------ Costruttori ------------ */
     Giocatore(int index) {
@@ -48,6 +49,7 @@ public class Giocatore {
     }
 
     /* ------------ Get & Set ------------ */
+    
     private void setNome(String nome) {
         this.nome = nome;
     }
@@ -104,4 +106,5 @@ public class Giocatore {
         this.mossaCorrente++;
         this.setSegnaTempo(LocalTime.now());
     }
+    
 }
