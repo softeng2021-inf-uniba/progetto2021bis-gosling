@@ -10,6 +10,9 @@ import it.uniba.main.Damiera;
 import it.uniba.main.Giocatore;
 import it.uniba.main.Help;
 import it.uniba.main.Partita;
+import it.uniba.main.types.Colore;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -138,6 +141,8 @@ public class InterfacciaInput {
                         } else if (sintassiPresaSempliceCorretta(answer)) {
                             isExiting = Damiera.getDamiera().effettuaPresaSemplice(answer, corrente.getColore());
                             //Qui tocca a chi gestisce la presa
+                        } else if(sintassiPresaMultiplaCorretta(answer)){
+                            isExiting = Damiera.getDamiera().effettuaPresaMultipla(answer, corrente.getColore());
                         } else {
                             System.out.println("Comando inserito non valido.");
                             System.out.println("Per sapere quali comandi sono validi digitare help.");
@@ -177,6 +182,39 @@ public class InterfacciaInput {
            }    
          }
         
+        return sintassiCorretta;
+    }
+    
+    public static boolean sintassiPresaMultiplaCorretta(String answer){
+        boolean sintassiCorretta = false;
+        boolean sameNumber= false;
+        boolean nonNumber = false;
+        if(answer.matches("[1-9][0-9]?(x[0-9][0-9]?)+")){
+            String[] numeri = answer.split("x");
+            Set<Integer> values = new HashSet<>();
+            for(String s:numeri){
+                int value = Integer.valueOf(s);
+                if(value>=1 && value<=32){
+                    if(values.contains(value)){
+                        sameNumber = true;
+                        
+                    } else {
+                        values.add(value);
+                    }
+                } else {
+                    nonNumber = true;
+                }
+            }
+            if(sameNumber || nonNumber)
+            {
+                System.out.println("Numeri inseriti non validi");
+                sintassiCorretta = false;
+            } else {
+                sintassiCorretta = true; 
+            }
+
+        }
+
         return sintassiCorretta;
     }
 }
