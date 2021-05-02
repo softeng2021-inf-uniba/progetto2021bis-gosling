@@ -25,6 +25,7 @@ public class Partita {
     private Giocatore giocatore2;
     private Turno turno;
     private boolean finita;
+    
 
     /* ------------ Costruttori ------------ */
     private Partita() {
@@ -44,7 +45,6 @@ public class Partita {
         }
 
         finita = false;
-
         System.out.println("La partita inizia ora.");
     }
 
@@ -123,4 +123,6 @@ public class Partita {
         System.out.println("Il tempo di gioco di " + corrente.getNome() + " (" + corrente.getColore().toString() + ") " + " è: " + corrente.getTempoPassato() + ".");
         System.out.println("Il tempo di gioco di " + avversario.getNome() + " (" + avversario.getColore().toString() + ") " + " è: " + avversario.getTempoPassato() + ".");
     }
+    
+    
 }
