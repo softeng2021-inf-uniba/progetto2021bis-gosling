@@ -366,8 +366,10 @@ public class Damiera {
 
         }
 
-        // Backup damiera nel caso le mosse non siano legali
+        // Backup damiera e dei contatori nel caso le mosse non siano legali
         Pedina[][] damieraBackup = new Pedina[8][8];
+        int backupMangiateBianco = pedineBiancheMangiate;
+        int backupMangiateNero = pedineNereMangiate;
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -392,6 +394,9 @@ public class Damiera {
         if (!presaMultiplaLecita) {
 
             this.setDamieraGioco(damieraBackup); //Se una delle mosse non era lecita, resetta la damiera com'era prima
+            this.pedineBiancheMangiate = backupMangiateBianco;
+            this.pedineNereMangiate = backupMangiateNero;
+            
         } else {
             // Aggiungi pedine tolte alla lista delle pedine
             // Aggiungi mossa alla lista delle mosse
