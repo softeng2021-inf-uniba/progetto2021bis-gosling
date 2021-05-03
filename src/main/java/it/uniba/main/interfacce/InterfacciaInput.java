@@ -89,6 +89,9 @@ public class InterfacciaInput {
                     case "tempo":
                         System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
                         break;
+                    case "prese":
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
+
                     default:
                         System.out.println("Comando inserito non valido.");
                         System.out.println("Per sapere quali comandi sono validi digitare help.");
@@ -135,13 +138,16 @@ public class InterfacciaInput {
                         }
 
                         break;
+                    case "prese":
+                        Damiera.getDamiera().stampaPedineMangiate();
+                        break;
                     default:
                         if (sintassiSpostamentoCorretta(answer)) {
                             isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
                         } else if (sintassiPresaSempliceCorretta(answer)) {
                             isExiting = Damiera.getDamiera().effettuaPresaSemplice(answer, corrente.getColore());
                             //Qui tocca a chi gestisce la presa
-                        } else if(sintassiPresaMultiplaCorretta(answer)){
+                        } else if (sintassiPresaMultiplaCorretta(answer)) {
                             isExiting = Damiera.getDamiera().effettuaPresaMultipla(answer, corrente.getColore());
                         } else {
                             System.out.println("Comando inserito non valido.");
@@ -171,33 +177,33 @@ public class InterfacciaInput {
     public static boolean sintassiPresaSempliceCorretta(String answer) {
         boolean sintassiCorretta = false;
 
-        if(answer.matches("[1-9][0-9]?x[0-9][0-9]?")){
-             String[] numeri = answer.split("x");
-             int num1 = Integer.valueOf(numeri[0]);
-             int num2 = Integer.valueOf(numeri[1]);
-             boolean primoCorretto = (num1 >= 1)&&(num1 <= 32);
-             boolean secondoCorretto = (num2 >= 1)&&(num2 <= 32) && (num1 != num2);
-             if(primoCorretto && secondoCorretto) {
-                 sintassiCorretta = true;
-           }    
-         }
-        
+        if (answer.matches("[1-9][0-9]?x[0-9][0-9]?")) {
+            String[] numeri = answer.split("x");
+            int num1 = Integer.valueOf(numeri[0]);
+            int num2 = Integer.valueOf(numeri[1]);
+            boolean primoCorretto = (num1 >= 1) && (num1 <= 32);
+            boolean secondoCorretto = (num2 >= 1) && (num2 <= 32) && (num1 != num2);
+            if (primoCorretto && secondoCorretto) {
+                sintassiCorretta = true;
+            }
+        }
+
         return sintassiCorretta;
     }
-    
-    public static boolean sintassiPresaMultiplaCorretta(String answer){
+
+    public static boolean sintassiPresaMultiplaCorretta(String answer) {
         boolean sintassiCorretta = false;
-        boolean sameNumber= false;
+        boolean sameNumber = false;
         boolean nonNumber = false;
-        if(answer.matches("[1-9][0-9]?(x[0-9][0-9]?)+")){
+        if (answer.matches("[1-9][0-9]?(x[0-9][0-9]?)+")) {
             String[] numeri = answer.split("x");
             Set<Integer> values = new HashSet<>();
-            for(String s:numeri){
+            for (String s : numeri) {
                 int value = Integer.valueOf(s);
-                if(value>=1 && value<=32){
-                    if(values.contains(value)){
+                if (value >= 1 && value <= 32) {
+                    if (values.contains(value)) {
                         sameNumber = true;
-                        
+
                     } else {
                         values.add(value);
                     }
@@ -205,12 +211,11 @@ public class InterfacciaInput {
                     nonNumber = true;
                 }
             }
-            if(sameNumber || nonNumber)
-            {
+            if (sameNumber || nonNumber) {
                 System.out.println("Numeri inseriti non validi");
                 sintassiCorretta = false;
             } else {
-                sintassiCorretta = true; 
+                sintassiCorretta = true;
             }
 
         }

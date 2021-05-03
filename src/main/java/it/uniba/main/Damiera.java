@@ -15,6 +15,8 @@ public class Damiera {
     private static final Posizione[] vettorePosizioni = new Posizione[32];
     private final int[][] damieraNumeri;
     private Pedina[][] damieraGioco;
+    private int pedineNereMangiate;
+    private int pedineBiancheMangiate;
 
     /* ------------  Costruttori ------------ */
     private Damiera() {
@@ -337,6 +339,11 @@ public class Damiera {
             this.damieraGioco[posDaMangiare.riga][posDaMangiare.colonna] = null;
             this.damieraGioco[posArrivo.riga][posArrivo.colonna] = this.damieraGioco[posPartenza.riga][posPartenza.colonna];
             this.damieraGioco[posPartenza.riga][posPartenza.colonna] = null;
+            if (coloreGiocatore == Colore.bianco) {
+                incrementaPreseNere();
+            } else {
+                incrementaPreseBianche();
+            }
             // Aggiungi la pedina mangiata alla lista delle pedine mangiate
             // aggiungi la mossa alle liste di mosse effettuate nella partita
         }
@@ -382,14 +389,41 @@ public class Damiera {
             contaTestPrese++;
         }
 
-        if (!presaMultiplaLecita) { 
+        if (!presaMultiplaLecita) {
 
             this.setDamieraGioco(damieraBackup); //Se una delle mosse non era lecita, resetta la damiera com'era prima
         } else {
             // Aggiungi pedine tolte alla lista delle pedine
             // Aggiungi mossa alla lista delle mosse
+            if (coloreGiocatore == Colore.bianco) {
+                incrementaPreseNere();
+            } else {
+                incrementaPreseBianche();
+            }
         }
-        
+
         return presaMultiplaLecita;
+    }
+
+    public void incrementaPreseBianche() {
+        this.pedineBiancheMangiate++;
+    }
+
+    public void incrementaPreseNere() {
+        this.pedineNereMangiate++;
+    }
+
+    public void stampaPedineMangiate() {
+        System.out.print("Nero: ");
+        for (int i = 0; i < pedineBiancheMangiate; i++) {
+            System.out.print('\u26C0' + " ");
+        }
+        System.out.print("\nBianco: ");
+        for (int i = 0; i < pedineNereMangiate; i++) {
+            System.out.print('\u26C2' + " ");
+
+        }
+
+        System.out.println("");
     }
 }
