@@ -447,7 +447,7 @@ public class Damiera {
         return this.listaMosse;
     }
     
-    public void stampaMosse(){//francesco riscrivi questo
+    public void stampaMosse(){
         ArrayList lista = this.listaMosse;
       int i=0;
       while(i<lista.size()){
