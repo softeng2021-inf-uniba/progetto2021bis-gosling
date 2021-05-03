@@ -267,15 +267,14 @@ public class Damiera {
         // ci serve che sia fuori dagli if perché nello spostamento è importante
         Pedina daMangiare;
         Posizione posDaMangiare = new Posizione();
-
+        int versoAvanzamento = (coloreGiocatore == Colore.bianco) ? -1 : 1;
+        int rigaBaseNemica = (coloreGiocatore == Colore.bianco) ? 0 : 7;
         if (contenutoPosPar != null) {
             posParValida = true;
             if (contenutoPosPar.getColore() == coloreGiocatore) {  // se il colore è il giusto
                 coloreGiusto = true;
                 if (contenutoPosArr == null) { // se lo spostamento non va in una casella già piena
                     posArrValida = true;
-                    int versoAvanzamento = (coloreGiocatore == Colore.bianco) ? -1 : 1;
-                    int rigaBaseNemica = (coloreGiocatore == Colore.bianco) ? 0 : 7;
 
                     if (contenutoPosPar.getTipo() == TipoPedina.pedinaSemplice) {
                         rigaCorretta = (posArrivo.riga == (posPartenza.riga + versoAvanzamento * 2));
@@ -339,6 +338,10 @@ public class Damiera {
             this.damieraGioco[posDaMangiare.riga][posDaMangiare.colonna] = null;
             this.damieraGioco[posArrivo.riga][posArrivo.colonna] = this.damieraGioco[posPartenza.riga][posPartenza.colonna];
             this.damieraGioco[posPartenza.riga][posPartenza.colonna] = null;
+            if (posArrivo.riga == rigaBaseNemica) {
+                System.out.println("Hai effettuato la damatura!");
+                this.damieraGioco[posArrivo.riga][posArrivo.colonna].promuoviADama();
+            }
             if (coloreGiocatore == Colore.bianco) {
                 incrementaPreseNere();
             } else {
