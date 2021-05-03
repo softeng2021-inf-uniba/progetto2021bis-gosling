@@ -153,18 +153,18 @@ public class InterfacciaInput {
                         if (sintassiSpostamentoCorretta(answer)) {
                             isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
                             if(isExiting==true){
-                                Damiera.getDamiera().registraMosse(answer);
+                                Damiera.getDamiera().registraMosse(answer,corrente.getColore());
                             }
                         } else if (sintassiPresaSempliceCorretta(answer)) {
                             isExiting = Damiera.getDamiera().effettuaPresaSemplice(answer, corrente.getColore());
                             if(isExiting==true){
-                                Damiera.getDamiera().registraMosse(answer);
+                                Damiera.getDamiera().registraMosse(answer,corrente.getColore());
                             }
                             //Qui tocca a chi gestisce la presa
                         } else if (sintassiPresaMultiplaCorretta(answer)) {
                             isExiting = Damiera.getDamiera().effettuaPresaMultipla(answer, corrente.getColore());
                             if(isExiting==true){
-                                Damiera.getDamiera().registraMosse(answer);
+                                Damiera.getDamiera().registraMosse(answer,corrente.getColore());
                             }
                         } else {
                             System.out.println("Comando inserito non valido.");

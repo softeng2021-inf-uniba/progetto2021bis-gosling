@@ -436,19 +436,27 @@ public class Damiera {
     }
 
     
-    public ArrayList registraMosse(String mossa){
+    public ArrayList registraMosse(String mossa,Colore coloreGiocatore){
+        if(coloreGiocatore == Colore.bianco){
+            listaMosse.add("B.");
+        }
+        else{
+            listaMosse.add("N.");
+        }
         listaMosse.add(mossa);
         return this.listaMosse;
     }
     
     public void stampaMosse(){//francesco riscrivi questo
         ArrayList lista = this.listaMosse;
-        for(int i = 0; i < lista.size(); i++) {
-            if(i % 2 == 0){
-            System.out.println("B."+lista.get(i));
-            }else{
-                System.out.println("N."+lista.get(i));
-            }
-        }
-    }
+      int i=0;
+      while(i<lista.size()){
+          System.out.println(lista.get(i) + " " + lista.get(i+1));
+          i+=2;
+      }
+          
+      }
+          
+        
+    
 }
