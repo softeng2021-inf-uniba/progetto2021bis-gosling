@@ -91,6 +91,13 @@ public class InterfacciaInput {
                         break;
                     case "prese":
                         System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
+<<<<<<< HEAD
+=======
+                        break;
+                    case "mosse":
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
+                        break;
+>>>>>>> ef5780eed98aacb5b87a7cf301b72c1288382d03
 
                     default:
                         System.out.println("Comando inserito non valido.");
@@ -141,14 +148,29 @@ public class InterfacciaInput {
                     case "prese":
                         Damiera.getDamiera().stampaPedineMangiate();
                         break;
+<<<<<<< HEAD
+=======
+                    case "mosse":
+                        Damiera.getDamiera().stampaMosse();
+                        break;
+>>>>>>> ef5780eed98aacb5b87a7cf301b72c1288382d03
                     default:
                         if (sintassiSpostamentoCorretta(answer)) {
                             isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
+                            if(isExiting==true){
+                                Damiera.getDamiera().registraMosse(answer);
+                            }
                         } else if (sintassiPresaSempliceCorretta(answer)) {
                             isExiting = Damiera.getDamiera().effettuaPresaSemplice(answer, corrente.getColore());
+                            if(isExiting==true){
+                                Damiera.getDamiera().registraMosse(answer);
+                            }
                             //Qui tocca a chi gestisce la presa
                         } else if (sintassiPresaMultiplaCorretta(answer)) {
                             isExiting = Damiera.getDamiera().effettuaPresaMultipla(answer, corrente.getColore());
+                            if(isExiting==true){
+                                Damiera.getDamiera().registraMosse(answer);
+                            }
                         } else {
                             System.out.println("Comando inserito non valido.");
                             System.out.println("Per sapere quali comandi sono validi digitare help.");

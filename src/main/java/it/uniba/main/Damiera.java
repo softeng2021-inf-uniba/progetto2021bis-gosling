@@ -3,6 +3,7 @@ package it.uniba.main;
 import it.uniba.main.types.Colore;
 import it.uniba.main.types.Posizione;
 import it.uniba.main.types.TipoPedina;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,7 +18,12 @@ public class Damiera {
     private Pedina[][] damieraGioco;
     private int pedineNereMangiate;
     private int pedineBiancheMangiate;
+<<<<<<< HEAD
 
+=======
+    public ArrayList listaMosse;
+    
+>>>>>>> ef5780eed98aacb5b87a7cf301b72c1288382d03
     /* ------------  Costruttori ------------ */
     private Damiera() {
         damieraGioco = new Pedina[8][8];
@@ -47,6 +53,7 @@ public class Damiera {
         }
 
         Damiera.inizializzaVettorePosizioni();
+        listaMosse = new ArrayList<>();
     }
 
     /* ------------ Get & Set ------------*/
@@ -227,7 +234,7 @@ public class Damiera {
         if (spostamentoLecito) {
             this.damieraGioco[posArrivo.riga][posArrivo.colonna] = this.damieraGioco[posPartenza.riga][posPartenza.colonna];
             this.damieraGioco[posPartenza.riga][posPartenza.colonna] = null;
-
+            
             // Aggiungi la mossa all'elenco di mosse
             if (posArrivo.riga == rigaBaseNemica) {
                 System.out.println("Hai effettuato la damatura!");
@@ -344,6 +351,10 @@ public class Damiera {
             } else {
                 incrementaPreseBianche();
             }
+<<<<<<< HEAD
+=======
+            
+>>>>>>> ef5780eed98aacb5b87a7cf301b72c1288382d03
             // Aggiungi la pedina mangiata alla lista delle pedine mangiate
             // aggiungi la mossa alle liste di mosse effettuate nella partita
         }
@@ -358,7 +369,7 @@ public class Damiera {
         String[] numeri = mossa.split("x");
 
         String[] prese = new String[numeri.length - 1];
-
+      
         for (int i = 0; i < numeri.length - 1; i++) // Tokenizzazine mosse
         {
             prese[contatoreMosse] = String.join("x", numeri[i], numeri[i + 1]);
@@ -393,6 +404,7 @@ public class Damiera {
 
             this.setDamieraGioco(damieraBackup); //Se una delle mosse non era lecita, resetta la damiera com'era prima
         } else {
+            
             // Aggiungi pedine tolte alla lista delle pedine
             // Aggiungi mossa alla lista delle mosse
             if (coloreGiocatore == Colore.bianco) {
@@ -426,4 +438,23 @@ public class Damiera {
 
         System.out.println("");
     }
+<<<<<<< HEAD
+=======
+    
+    public ArrayList registraMosse(String mossa){
+        listaMosse.add(mossa);
+        return this.listaMosse;
+    }
+    
+    public void stampaMosse(){
+        ArrayList lista = this.listaMosse;
+        for(int i = 0; i < lista.size(); i++) {
+            if(i % 2 == 0){
+            System.out.println("B."+lista.get(i));
+            }else{
+                System.out.println("N."+lista.get(i));
+            }
+        }
+    }
+>>>>>>> ef5780eed98aacb5b87a7cf301b72c1288382d03
 }
