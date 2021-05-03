@@ -91,13 +91,11 @@ public class InterfacciaInput {
                         break;
                     case "prese":
                         System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
-<<<<<<< HEAD
-=======
+
                         break;
                     case "mosse":
                         System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
                         break;
->>>>>>> ef5780eed98aacb5b87a7cf301b72c1288382d03
 
                     default:
                         System.out.println("Comando inserito non valido.");
@@ -148,12 +146,9 @@ public class InterfacciaInput {
                     case "prese":
                         Damiera.getDamiera().stampaPedineMangiate();
                         break;
-<<<<<<< HEAD
-=======
                     case "mosse":
                         Damiera.getDamiera().stampaMosse();
                         break;
->>>>>>> ef5780eed98aacb5b87a7cf301b72c1288382d03
                     default:
                         if (sintassiSpostamentoCorretta(answer)) {
                             isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());

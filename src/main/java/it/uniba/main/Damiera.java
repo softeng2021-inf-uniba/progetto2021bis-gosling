@@ -18,12 +18,10 @@ public class Damiera {
     private Pedina[][] damieraGioco;
     private int pedineNereMangiate;
     private int pedineBiancheMangiate;
-<<<<<<< HEAD
 
-=======
+
     public ArrayList listaMosse;
     
->>>>>>> ef5780eed98aacb5b87a7cf301b72c1288382d03
     /* ------------  Costruttori ------------ */
     private Damiera() {
         damieraGioco = new Pedina[8][8];
@@ -351,10 +349,8 @@ public class Damiera {
             } else {
                 incrementaPreseBianche();
             }
-<<<<<<< HEAD
-=======
+
             
->>>>>>> ef5780eed98aacb5b87a7cf301b72c1288382d03
             // Aggiungi la pedina mangiata alla lista delle pedine mangiate
             // aggiungi la mossa alle liste di mosse effettuate nella partita
         }
@@ -438,8 +434,7 @@ public class Damiera {
 
         System.out.println("");
     }
-<<<<<<< HEAD
-=======
+
     
     public ArrayList registraMosse(String mossa){
         listaMosse.add(mossa);
@@ -456,5 +451,4 @@ public class Damiera {
             }
         }
     }
->>>>>>> ef5780eed98aacb5b87a7cf301b72c1288382d03
 }
