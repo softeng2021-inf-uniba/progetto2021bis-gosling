@@ -407,15 +407,7 @@ public class Damiera {
             this.pedineBiancheMangiate = backupMangiateBianco;
             this.pedineNereMangiate = backupMangiateNero;
             
-        } else {
-            
-            // Aggiungi pedine tolte alla lista delle pedine
-            // Aggiungi mossa alla lista delle mosse
-            if (coloreGiocatore == Colore.bianco) {
-                incrementaPreseNere();
-            } else {
-                incrementaPreseBianche();
-            }
+
         }
 
         return presaMultiplaLecita;
