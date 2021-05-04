@@ -91,6 +91,8 @@ public class Partita {
 
         InterfacciaInput.menuDiGico(corrente, avversario);
 
+        corrente.aggiornaTempoPassato();
+        
         if (turno == Turno.turnoGiocatore1) {
             turno = Turno.turnoGiocatore2;
         } else {
