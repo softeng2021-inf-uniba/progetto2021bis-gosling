@@ -6,8 +6,10 @@
 package it.uniba.main.types;
 
 /**
- *
- * @author User
+ * Tipo Classe: <<Entity>>
+ * 
+ * Registra le informazioni di una posizione
+ * 
  */
 public class Posizione {
     public int riga;

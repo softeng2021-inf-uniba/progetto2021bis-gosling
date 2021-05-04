@@ -6,8 +6,9 @@
 package it.uniba.main.types;
 
 /**
- *
- * @author giuse
+ * <<noECB>>
+ * 
+ * Rappresenta i due turni dei giocatori
  */
 public enum Turno {
     turnoGiocatore1,

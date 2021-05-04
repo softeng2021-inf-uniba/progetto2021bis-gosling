@@ -12,8 +12,10 @@ import java.util.Scanner;
 import it.uniba.main.interfacce.InterfacciaInput;
 
 /**
- *
- * @author domenico francesco e giuseppe
+ * Tipo Classe: <<Control>>
+ * 
+ *  Gestisce il flusso di un partita, i turni e i giocatori.
+ * 
  */
 public class Partita {
 
@@ -91,6 +93,8 @@ public class Partita {
 
         InterfacciaInput.menuDiGico(corrente, avversario);
 
+        corrente.aggiornaTempoPassato();
+        
         if (turno == Turno.turnoGiocatore1) {
             turno = Turno.turnoGiocatore2;
         } else {

@@ -11,8 +11,10 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.time.temporal.ChronoUnit.SECONDS;
 
 /**
- *
- * @author domenico francesco e giuseppe
+ * Tipo Classe: <<Entity>>
+ * 
+ * Contiene le informazioni relative al gicoatore come il colore e il tempo passato
+ * 
  */
 public class Giocatore {
 

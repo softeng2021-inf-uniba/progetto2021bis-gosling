@@ -9,8 +9,10 @@ import it.uniba.main.types.TipoPedina;
 import it.uniba.main.types.Colore;
 
 /**
- *
- * @author Pasquale
+ * Tipo Classe: <<Entity>>
+ * 
+ * Registra le informazioni riguardo una pedina della dama come il colore e il tipo (se semplice o dama).
+ * 
  */
 public class Pedina {
     /* ------------ Stato ------------ */

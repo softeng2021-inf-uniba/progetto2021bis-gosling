@@ -6,8 +6,12 @@ import it.uniba.main.types.TipoPedina;
 import java.util.ArrayList;
 
 /**
+ * Tipo classe: <<Entity>>
  *
- * @author Pasquale & Massimo
+ * Gestisce la Damiera di una partita e effettua le operazioni sulla damiera
+ * stessa. Tiene ulteriormente conto dello stato della partita registrando le
+ * pedine e le loro posizioni, pedine mangiate e la lista delle mosse
+ *
  */
 public class Damiera {
 
@@ -18,10 +22,8 @@ public class Damiera {
     private Pedina[][] damieraGioco;
     private int pedineNereMangiate;
     private int pedineBiancheMangiate;
-
-
     public ArrayList listaMosse;
-    
+
     /* ------------  Costruttori ------------ */
     private Damiera() {
         damieraGioco = new Pedina[8][8];
@@ -232,7 +234,7 @@ public class Damiera {
         if (spostamentoLecito) {
             this.damieraGioco[posArrivo.riga][posArrivo.colonna] = this.damieraGioco[posPartenza.riga][posPartenza.colonna];
             this.damieraGioco[posPartenza.riga][posPartenza.colonna] = null;
-            
+
             // Aggiungi la mossa all'elenco di mosse
             if (posArrivo.riga == rigaBaseNemica) {
                 System.out.println("Hai effettuato la damatura!");
@@ -353,7 +355,6 @@ public class Damiera {
                 incrementaPreseBianche();
             }
 
-            
             // Aggiungi la pedina mangiata alla lista delle pedine mangiate
             // aggiungi la mossa alle liste di mosse effettuate nella partita
         }
@@ -368,7 +369,7 @@ public class Damiera {
         String[] numeri = mossa.split("x");
 
         String[] prese = new String[numeri.length - 1];
-      
+
         for (int i = 0; i < numeri.length - 1; i++) // Tokenizzazine mosse
         {
             prese[contatoreMosse] = String.join("x", numeri[i], numeri[i + 1]);
@@ -406,7 +407,6 @@ public class Damiera {
             this.setDamieraGioco(damieraBackup); //Se una delle mosse non era lecita, resetta la damiera com'era prima
             this.pedineBiancheMangiate = backupMangiateBianco;
             this.pedineNereMangiate = backupMangiateNero;
-            
 
         }
 
@@ -435,28 +435,23 @@ public class Damiera {
         System.out.println("");
     }
 
-    
-    public ArrayList registraMosse(String mossa,Colore coloreGiocatore){
-        if(coloreGiocatore == Colore.bianco){
-            listaMosse.add("B.");
+    public void registraMosse(String mossa, Colore coloreGiocatore) {
+        if (coloreGiocatore == Colore.bianco) {
+            this.listaMosse.add("B.");
+        } else {
+            this.listaMosse.add("N.");
         }
-        else{
-            listaMosse.add("N.");
-        }
-        listaMosse.add(mossa);
-        return this.listaMosse;
-    }
-    
-    public void stampaMosse(){
-        ArrayList lista = this.listaMosse;
-      int i=0;
-      while(i<lista.size()){
-          System.out.println(lista.get(i) + " " + lista.get(i+1));
-          i+=2;
-      }
-          
-      }
-          
+        this.listaMosse.add(mossa);
         
-    
+    }
+
+    public void stampaMosse() {
+        int i = 0;
+        while (i < this.listaMosse.size()) {
+            System.out.println(listaMosse.get(i) + " " + listaMosse.get(i + 1));
+            i += 2;
+        }
+
+    }
+
 }

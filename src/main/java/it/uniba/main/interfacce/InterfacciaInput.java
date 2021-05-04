@@ -15,8 +15,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
- * @author giuse
+ * Tipo Classe: <<Boundary>>
+ * 
+ * Gestisce la comunicazione tra l'applicazione e l'input utente. 
+ * Contiene il "parser" che controlla se i comandi inseriti sono corretti e chiama le funzionalità collegate.
+ * 
  */
 public class InterfacciaInput {
 
@@ -160,7 +163,6 @@ public class InterfacciaInput {
                             if(isExiting==true){
                                 Damiera.getDamiera().registraMosse(answer,corrente.getColore());
                             }
-                            //Qui tocca a chi gestisce la presa
                         } else if (sintassiPresaMultiplaCorretta(answer)) {
                             isExiting = Damiera.getDamiera().effettuaPresaMultipla(answer, corrente.getColore());
                             if(isExiting==true){

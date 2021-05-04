@@ -9,10 +9,10 @@ import it.uniba.sotorrent.GoogleDocsUtils;
 import it.uniba.main.interfacce.InterfacciaInput;
 
 /**
- * The main class for the project. It must be customized to meet the project
- * assignment specifications.
+ * Tipo classe: <<Control>>
  *
- * <b>DO NOT RENAME</b>
+ * Accetta parametri di avvio e avvia l'applicazione. Chiama l'oggetto di interfaccia.
+ * 
  */
 public final class AppMain {
 
