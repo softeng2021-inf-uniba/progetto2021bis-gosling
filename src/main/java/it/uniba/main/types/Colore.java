@@ -6,8 +6,10 @@
 package it.uniba.main.types;
 
 /**
- *
- * @author User
+ * <<noECB>>
+ * 
+ * Rappresenta i colori delle pedine e dei giocatori
+ * 
  */
 public enum Colore{
     bianco,

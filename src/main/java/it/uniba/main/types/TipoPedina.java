@@ -6,8 +6,10 @@
 package it.uniba.main.types;
 
 /**
- *
- * @author User
+ * <<noECB>>
+ * 
+ * Rappresenta il tipo di pedina, se semplice o Dama (re)
+ * 
  */
 public enum TipoPedina {
     pedinaSemplice,
