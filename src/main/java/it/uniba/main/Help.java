@@ -44,6 +44,7 @@ public class Help {
         System.out.println("Se sei in partita, digita 'abbandona' per abbandonare la partita, dando la vittoria al tuo avversario");
         System.out.println("Se sei in partita, digita 'tempo' per visualizzare il tmepo trascorso dall'inizio del gioco");
         System.out.println("Se sei in partita,digitare 'prese' per visualizzare le prese del bianco e del nero:");
+        System.out.println("Se sei in partita,digitare 'mosse' per visualizzare le mosse effettuate dai giocatori");
         System.out.println("Se sei in partita, per muovere le pedine digitare le coordinate in notazione algebrica:");
 
         System.out.println("Movimento Semplice: 21-18");

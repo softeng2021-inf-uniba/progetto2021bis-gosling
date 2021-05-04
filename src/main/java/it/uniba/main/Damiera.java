@@ -3,6 +3,7 @@ package it.uniba.main;
 import it.uniba.main.types.Colore;
 import it.uniba.main.types.Posizione;
 import it.uniba.main.types.TipoPedina;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,6 +19,9 @@ public class Damiera {
     private int pedineNereMangiate;
     private int pedineBiancheMangiate;
 
+
+    public ArrayList listaMosse;
+    
     /* ------------  Costruttori ------------ */
     private Damiera() {
         damieraGioco = new Pedina[8][8];
@@ -47,6 +51,7 @@ public class Damiera {
         }
 
         Damiera.inizializzaVettorePosizioni();
+        listaMosse = new ArrayList<>();
     }
 
     /* ------------ Get & Set ------------*/
@@ -227,7 +232,7 @@ public class Damiera {
         if (spostamentoLecito) {
             this.damieraGioco[posArrivo.riga][posArrivo.colonna] = this.damieraGioco[posPartenza.riga][posPartenza.colonna];
             this.damieraGioco[posPartenza.riga][posPartenza.colonna] = null;
-
+            
             // Aggiungi la mossa all'elenco di mosse
             if (posArrivo.riga == rigaBaseNemica) {
                 System.out.println("Hai effettuato la damatura!");
@@ -347,6 +352,8 @@ public class Damiera {
             } else {
                 incrementaPreseBianche();
             }
+
+            
             // Aggiungi la pedina mangiata alla lista delle pedine mangiate
             // aggiungi la mossa alle liste di mosse effettuate nella partita
         }
@@ -361,7 +368,7 @@ public class Damiera {
         String[] numeri = mossa.split("x");
 
         String[] prese = new String[numeri.length - 1];
-
+      
         for (int i = 0; i < numeri.length - 1; i++) // Tokenizzazine mosse
         {
             prese[contatoreMosse] = String.join("x", numeri[i], numeri[i + 1]);
@@ -401,6 +408,7 @@ public class Damiera {
             this.pedineNereMangiate = backupMangiateNero;
             
         } else {
+            
             // Aggiungi pedine tolte alla lista delle pedine
             // Aggiungi mossa alla lista delle mosse
             if (coloreGiocatore == Colore.bianco) {
@@ -434,4 +442,29 @@ public class Damiera {
 
         System.out.println("");
     }
+
+    
+    public ArrayList registraMosse(String mossa,Colore coloreGiocatore){
+        if(coloreGiocatore == Colore.bianco){
+            listaMosse.add("B.");
+        }
+        else{
+            listaMosse.add("N.");
+        }
+        listaMosse.add(mossa);
+        return this.listaMosse;
+    }
+    
+    public void stampaMosse(){
+        ArrayList lista = this.listaMosse;
+      int i=0;
+      while(i<lista.size()){
+          System.out.println(lista.get(i) + " " + lista.get(i+1));
+          i+=2;
+      }
+          
+      }
+          
+        
+    
 }
