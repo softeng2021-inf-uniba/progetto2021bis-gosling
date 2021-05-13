@@ -6,35 +6,33 @@
 package it.uniba.main;
 
 import it.uniba.main.types.Colore;
-import java.time.LocalTime;
 import it.uniba.main.types.Turno;
-import java.util.Scanner;
 import it.uniba.main.interfacce.InterfacciaInput;
 
 /**
  * Tipo Classe: <<Control>>
- * 
- *  Gestisce il flusso di un partita, i turni e i giocatori.
- * 
+ *
+ * Gestisce il flusso di un partita, i turni e i giocatori.
+ *
  */
-public class Partita {
+public final class Partita {
 
     /* ------------ Stato ------------ */
     private static Partita partitaCorrente;
 
     private Damiera damiera;
-    public Giocatore giocatore1;
+    private Giocatore giocatore1;
     private Giocatore giocatore2;
     private Turno turno;
     private boolean finita;
-    
+
 
     /* ------------ Costruttori ------------ */
     private Partita() {
 
         damiera = Damiera.getDamiera();
         damiera.preparaDamiera();
-        
+
         giocatore1 = new Giocatore(1);
         /*Solo il primo giocatore, chiaramente, può scegliere il colore,
         al secondo tocca il complemento del primo*/
@@ -94,7 +92,7 @@ public class Partita {
         InterfacciaInput.menuDiGico(corrente, avversario);
 
         corrente.aggiornaTempoPassato();
-        
+
         if (turno == Turno.turnoGiocatore1) {
             turno = Turno.turnoGiocatore2;
         } else {
@@ -124,9 +122,9 @@ public class Partita {
         }
 
         corrente.aggiornaTempoPassato();
-        System.out.println("Il tempo di gioco di " + corrente.getNome() + " (" + corrente.getColore().toString() + ") " + " è: " + corrente.getTempoPassato() + ".");
-        System.out.println("Il tempo di gioco di " + avversario.getNome() + " (" + avversario.getColore().toString() + ") " + " è: " + avversario.getTempoPassato() + ".");
+        System.out.println("Il tempo di gioco di " + corrente.getNome()
+                + " (" + corrente.getColore().toString() + ") " + " è: " + corrente.getTempoPassato() + ".");
+        System.out.println("Il tempo di gioco di " + avversario.getNome()
+                + " (" + avversario.getColore().toString() + ") " + " è: " + avversario.getTempoPassato() + ".");
     }
-    
-    
 }

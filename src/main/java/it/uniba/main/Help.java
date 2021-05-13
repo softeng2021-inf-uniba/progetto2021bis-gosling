@@ -11,7 +11,7 @@ package it.uniba.main;
  * Si occupa della gestione e stampa dell'elenco dei comandi
  * 
  */
-public class Help {
+public final class Help {
 
     /* ------------ Stato ------------ */
     private static Help singleIstance = null;
@@ -31,7 +31,7 @@ public class Help {
 
     /* ------------ Get & Set ------------*/
  /* ------------ Metodi ------------*/
-    static public void getMenuHelp() {
+    public static void getMenuHelp() {
         System.out.println("");
         System.out.println("+------------------ HELP ------------------+");
         System.out.println("Benvenuto nell'applicazione di Dama sviluppata dal Team gosling!");
@@ -43,8 +43,10 @@ public class Help {
         System.out.println("Digita 'esci' per uscire dall'applicazione");
         System.out.println("");
         System.out.println("Se sei in partita, digita 'damiera' per visualizzare lo stato attuale della damiera");
-        System.out.println("Se sei in partita, digita 'abbandona' per abbandonare la partita, dando la vittoria al tuo avversario");
-        System.out.println("Se sei in partita, digita 'tempo' per visualizzare il tmepo trascorso dall'inizio del gioco");
+        System.out.println("Se sei in partita, digita 'abbandona' per abbandonare l"
+                + "a partita, dando la vittoria al tuo avversario");
+        System.out.println("Se sei in partita, digita 'tempo' per visualizzare il "
+                + "tempo trascorso dall'inizio del gioco");
         System.out.println("Se sei in partita, digitare 'prese' per visualizzare le prese del bianco e del nero:");
         System.out.println("Se sei in partita, digitare 'mosse' per visualizzare le mosse effettuate dai giocatori");
         System.out.println("Se sei in partita, per muovere le pedine digitare le coordinate in notazione algebrica:");

@@ -4,6 +4,8 @@ import it.uniba.main.types.Colore;
 import it.uniba.main.types.Posizione;
 import it.uniba.main.types.TipoPedina;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Tipo classe: <<Entity>>
@@ -13,75 +15,91 @@ import java.util.ArrayList;
  * pedine e le loro posizioni, pedine mangiate e la lista delle mosse
  *
  */
-public class Damiera {
+public final class Damiera {
 
     /* ------------ Stato ------------ */
-    private static Damiera singleIstance; // Per rendere la classe singleton
-    private static final Posizione[] vettorePosizioni = new Posizione[32];
+    private static final int GRANDEZZA_POSIZIONI = 32;
+    private static final int DAMIERA_SIZE = 8;
+    private static Damiera singleIstance = null;  // Per rendere la classe singleton
+    private static final Posizione[] VETTORE_POSIZIONI = new Posizione[GRANDEZZA_POSIZIONI];
     private final int[][] damieraNumeri;
     private Pedina[][] damieraGioco;
     private int pedineNereMangiate;
     private int pedineBiancheMangiate;
-    public ArrayList listaMosse;
+    private List<String> listaMosse;
 
     /* ------------  Costruttori ------------ */
     private Damiera() {
-        damieraGioco = new Pedina[8][8];
-        damieraNumeri = new int[8][8];
+        this.damieraGioco = new Pedina[DAMIERA_SIZE][DAMIERA_SIZE];
+        this.damieraNumeri = new int[DAMIERA_SIZE][DAMIERA_SIZE];
         int counter = 1;
         preparaDamiera();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < DAMIERA_SIZE; i++) {
             if (i % 2 == 0) {
-                for (int j = 0; j < 8; j++) {
+                for (int j = 0; j < DAMIERA_SIZE; j++) {
                     if (j % 2 == 0) {
-                        damieraNumeri[i][j] = counter;
+                        this.damieraNumeri[i][j] = counter;
                         counter++;
                     } else {
-                        damieraNumeri[i][j] = 0;
+                        this.damieraNumeri[i][j] = 0;
                     }
                 }
             } else {
-                for (int j = 0; j < 8; j++) {
-                    if (j % 2 == 1) {
-                        damieraNumeri[i][j] = counter;
+                for (int j = 0; j < DAMIERA_SIZE; j++) {
+                    if (j % 2 != 0) {
+                        this.damieraNumeri[i][j] = counter;
                         counter++;
                     } else {
-                        damieraNumeri[i][j] = 0;
+                        this.damieraNumeri[i][j] = 0;
                     }
                 }
             }
         }
-
+        this.pedineNereMangiate = 0;
+        this.pedineBiancheMangiate = 0;
         Damiera.inizializzaVettorePosizioni();
-        listaMosse = new ArrayList<>();
+        this.listaMosse = new ArrayList<>();
     }
 
     /* ------------ Get & Set ------------*/
-    public static Damiera getDamiera() // Serve ad ottenere damiera
-    {
+    public static Damiera getDamiera() { // Serve ad ottenere damiera
         if (singleIstance == null) {
             singleIstance = new Damiera();
         }
-
         return singleIstance;
     }
 
-    public void setDamieraGioco(Pedina[][] damieraGioco) {
-        this.damieraGioco = damieraGioco;
+    public List<String> getListaMosse() {
+        return listaMosse;
+    }
+
+    public void setListaMosse(final List<String> listaMosseIn) {
+        this.listaMosse = listaMosseIn;
+    }
+
+    public void addListaMose(final String... mosse) {
+        listaMosse.addAll(Arrays.asList(mosse));
+    }
+
+    public static int getGrandezzaPosizioni() {
+        return GRANDEZZA_POSIZIONI;
+    }
+
+    public static int getDamieraSize() {
+        return DAMIERA_SIZE;
     }
 
     /* ------------ Metodi ------------*/
     private static void inizializzaVettorePosizioni() {
-
         int rigaCorrente = 0;
         int colonnaCorrente = 0;
         int posizioniRigaCorrente = 0;
-
-        for (int i = 0; i < 32; i++) {
-            vettorePosizioni[i] = new Posizione(rigaCorrente, colonnaCorrente);
+        final int cambioPosizione = 4;
+        for (int i = 0; i < GRANDEZZA_POSIZIONI; i++) {
+            VETTORE_POSIZIONI[i] = new Posizione(rigaCorrente, colonnaCorrente);
             posizioniRigaCorrente++;
 
-            if (posizioniRigaCorrente == 4) {
+            if (posizioniRigaCorrente == cambioPosizione) {
                 rigaCorrente++;
 
                 if (rigaCorrente % 2 == 0) {
@@ -94,17 +112,21 @@ public class Damiera {
             } else {
                 colonnaCorrente += 2;
             }
-
         }
     }
 
-    private static Posizione convertiNumeroInPosizione(int num) {
-        return vettorePosizioni[num - 1];
+    private static Posizione convertiNumeroInPosizione(final int num) {
+        return VETTORE_POSIZIONI[num - 1];
     }
 
-    public final void preparaDamiera() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 8; j++) {
+    public void preparaDamiera() {
+        final int primaParte = 3;
+        final int secondaParte = 5;
+        this.listaMosse = new ArrayList<>();
+        this.pedineBiancheMangiate = 0;
+        this.pedineNereMangiate = 0;
+        for (int i = 0; i < primaParte; i++) {
+            for (int j = 0; j < DAMIERA_SIZE; j++) {
                 if (i % 2 == 0) {
                     if (j % 2 == 0) {
                         damieraGioco[i][j] = new Pedina(Colore.nero);
@@ -112,7 +134,7 @@ public class Damiera {
                         damieraGioco[i][j] = null;
                     }
                 } else {
-                    if (j % 2 == 1) {
+                    if (j % 2 != 0) {
                         damieraGioco[i][j] = new Pedina(Colore.nero);
                     } else {
                         damieraGioco[i][j] = null;
@@ -120,13 +142,13 @@ public class Damiera {
                 }
             }
         }
-        for (int i = 3; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
+        for (int i = primaParte; i < secondaParte; i++) {
+            for (int j = 0; j < secondaParte; j++) {
                 damieraGioco[i][j] = null;
             }
         }
-        for (int i = 5; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int i = secondaParte; i < DAMIERA_SIZE; i++) {
+            for (int j = 0; j < DAMIERA_SIZE; j++) {
                 if (i % 2 == 0) {
                     if (j % 2 == 0) {
                         damieraGioco[i][j] = new Pedina(Colore.bianco);
@@ -134,7 +156,7 @@ public class Damiera {
                         damieraGioco[i][j] = null;
                     }
                 } else {
-                    if (j % 2 == 1) {
+                    if (j % 2 != 0) {
                         damieraGioco[i][j] = new Pedina(Colore.bianco);
                     } else {
                         damieraGioco[i][j] = null;
@@ -145,13 +167,14 @@ public class Damiera {
     }
 
     public void stampaNumeri() {
-        char space = '\u0020';
+        final int sogliaDoppia = 9;
+        final char space = '\u0020';
         System.out.println("+---+---+---+---+---+---+---+---+");
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < DAMIERA_SIZE; i++) {
             System.out.print("|");
-            for (int j = 0; j < 8; j++) {
+            for (int j = 0; j < DAMIERA_SIZE; j++) {
                 if (damieraNumeri[i][j] != 0) {
-                    if (damieraNumeri[i][j] > 9) {
+                    if (damieraNumeri[i][j] > sogliaDoppia) {
                         System.out.print(damieraNumeri[i][j]);
                         System.out.print(space);
                     } else {
@@ -174,10 +197,10 @@ public class Damiera {
     public void stampaPedine() {
         // System.out.println("+-──-+-──-+-──-+-──-+-──-+-──-+-──-+-──-+");
 
-        char space = '\u0020';
+        final char space = '\u0020';
         System.out.println("+---+---+---+---+---+---+---+---+");
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int i = 0; i < DAMIERA_SIZE; i++) {
+            for (int j = 0; j < DAMIERA_SIZE; j++) {
                 if (damieraGioco[i][j] != null) {
                     System.out.print("|" + space);
                     damieraGioco[i][j].stampaPedina();
@@ -191,26 +214,32 @@ public class Damiera {
         }
     }
 
-    public boolean spostamentoPedina(String mossa, Colore coloreGiocatore) {
+    public boolean spostamentoPedina(final String mossa, final Colore coloreGiocatore) {
 
         boolean spostamentoLecito = false;
 
         String[] numeri = mossa.split("-");
 
-        Posizione posPartenza = Damiera.convertiNumeroInPosizione(Integer.valueOf(numeri[0]));
-        Posizione posArrivo = Damiera.convertiNumeroInPosizione(Integer.valueOf(numeri[1]));
+        Posizione posPartenza = Damiera.convertiNumeroInPosizione(Integer.parseInt(numeri[0]));
+        Posizione posArrivo = Damiera.convertiNumeroInPosizione(Integer.parseInt(numeri[1]));
 
-        Pedina contenutoPosPar = this.damieraGioco[posPartenza.riga][posPartenza.colonna];
-        Pedina contenutoPosArr = this.damieraGioco[posArrivo.riga][posArrivo.colonna];
+        Pedina contenutoPosPar = this.damieraGioco[posPartenza.getRiga()][posPartenza.getColonna()];
+        Pedina contenutoPosArr = this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()];
 
         boolean coloreSbagliato = false;
 
         if (contenutoPosPar != null) {
             coloreSbagliato = (contenutoPosPar.getColore() != coloreGiocatore);
         }
-
-        int versoAvanzamento = (coloreGiocatore == Colore.bianco) ? -1 : 1;
-        int rigaBaseNemica = (coloreGiocatore == Colore.bianco) ? 0 : 7;
+        int versoAvanzamento;
+        int rigaBaseNemica;
+        if (coloreGiocatore == Colore.bianco) {
+            versoAvanzamento = -1;
+            rigaBaseNemica = 0;
+        } else {
+            versoAvanzamento = 1;
+            rigaBaseNemica = DAMIERA_SIZE - 1;
+        }
 
         if (contenutoPosPar != null && contenutoPosArr == null) {
 
@@ -220,25 +249,28 @@ public class Damiera {
                 boolean colonnaCorretta;
 
                 if (contenutoPosPar.getTipo() == TipoPedina.pedinaSemplice) {
-                    rigaCorretta = (posArrivo.riga == (posPartenza.riga + versoAvanzamento));
+                    rigaCorretta = (posArrivo.getRiga() == (posPartenza.getRiga() + versoAvanzamento));
                 } else {
-                    rigaCorretta = (posArrivo.riga == (posPartenza.riga + versoAvanzamento) || posArrivo.riga == (posPartenza.riga - versoAvanzamento));
+                    rigaCorretta = (posArrivo.getRiga() == (posPartenza.getRiga() + versoAvanzamento)
+                            || posArrivo.getRiga() == (posPartenza.getRiga() - versoAvanzamento));
                 }
 
-                colonnaCorretta = (posArrivo.colonna == (posPartenza.colonna - 1) || posArrivo.colonna == (posPartenza.colonna + 1));
+                colonnaCorretta = (posArrivo.getColonna() == (posPartenza.getColonna() - 1)
+                        || posArrivo.getColonna() == (posPartenza.getColonna() + 1));
 
                 spostamentoLecito = rigaCorretta && colonnaCorretta;
             }
         }
 
         if (spostamentoLecito) {
-            this.damieraGioco[posArrivo.riga][posArrivo.colonna] = this.damieraGioco[posPartenza.riga][posPartenza.colonna];
-            this.damieraGioco[posPartenza.riga][posPartenza.colonna] = null;
+            this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()]
+                    = this.damieraGioco[posPartenza.getRiga()][posPartenza.getColonna()];
+            this.damieraGioco[posPartenza.getRiga()][posPartenza.getColonna()] = null;
 
             // Aggiungi la mossa all'elenco di mosse
-            if (posArrivo.riga == rigaBaseNemica) {
+            if (posArrivo.getRiga() == rigaBaseNemica) {
                 System.out.println("Hai effettuato la damatura!");
-                this.damieraGioco[posArrivo.riga][posArrivo.colonna].promuoviADama();
+                this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()].promuoviADama();
             }
 
         } else {
@@ -252,7 +284,7 @@ public class Damiera {
         return spostamentoLecito;
     }
 
-    public boolean effettuaPresaSemplice(String mossa, Colore coloreGiocatore) {
+    public boolean effettuaPresaSemplice(final String mossa, final Colore coloreGiocatore) {
         boolean presaLecita = false;
         boolean posParValida = false;
         boolean posArrValida = false; // Spazio di arrivo occupato
@@ -264,18 +296,27 @@ public class Damiera {
 
         String[] numeri = mossa.split("x");
 
-        Posizione posPartenza = Damiera.convertiNumeroInPosizione(Integer.valueOf(numeri[0]));
-        Posizione posArrivo = Damiera.convertiNumeroInPosizione(Integer.valueOf(numeri[1]));
+        Posizione posPartenza = Damiera.convertiNumeroInPosizione(Integer.parseInt(numeri[0]));
+        Posizione posArrivo = Damiera.convertiNumeroInPosizione(Integer.parseInt(numeri[1]));
 
-        Pedina contenutoPosPar = this.damieraGioco[posPartenza.riga][posPartenza.colonna];
+        Pedina contenutoPosPar = this.damieraGioco[posPartenza.getRiga()][posPartenza.getColonna()];
 
-        Pedina contenutoPosArr = this.damieraGioco[posArrivo.riga][posArrivo.colonna];
+        Pedina contenutoPosArr = this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()];
 
         // ci serve che sia fuori dagli if perché nello spostamento è importante
         Pedina daMangiare;
         Posizione posDaMangiare = new Posizione();
-        int versoAvanzamento = (coloreGiocatore == Colore.bianco) ? -1 : 1;
-        int rigaBaseNemica = (coloreGiocatore == Colore.bianco) ? 0 : 7;
+
+        int versoAvanzamento;
+        int rigaBaseNemica;
+        if (coloreGiocatore == Colore.bianco) {
+            versoAvanzamento = -1;
+            rigaBaseNemica = 0;
+        } else {
+            versoAvanzamento = 1;
+            rigaBaseNemica = DAMIERA_SIZE - 1;
+        }
+
         if (contenutoPosPar != null) {
             posParValida = true;
             if (contenutoPosPar.getColore() == coloreGiocatore) {  // se il colore è il giusto
@@ -284,38 +325,35 @@ public class Damiera {
                     posArrValida = true;
 
                     if (contenutoPosPar.getTipo() == TipoPedina.pedinaSemplice) {
-                        rigaCorretta = (posArrivo.riga == (posPartenza.riga + versoAvanzamento * 2));
+                        rigaCorretta = (posArrivo.getRiga() == (posPartenza.getRiga() + versoAvanzamento * 2));
                     } else {
-                        rigaCorretta = (posArrivo.riga == (posPartenza.riga + versoAvanzamento * 2) || posArrivo.riga == (posPartenza.riga - versoAvanzamento * 2));
+                        rigaCorretta = (posArrivo.getRiga() == (posPartenza.getRiga() + versoAvanzamento * 2)
+                                || posArrivo.getRiga() == (posPartenza.getRiga() - versoAvanzamento * 2));
                     }
 
-                    colonnaCorretta = (posArrivo.colonna == (posPartenza.colonna - 2) || posArrivo.colonna == (posPartenza.colonna + 2));
-                    if (rigaCorretta && colonnaCorretta) // se la mossa è valida
-                    {
-
-                        posDaMangiare.riga = (posPartenza.riga + 1 * versoAvanzamento);
+                    colonnaCorretta = (posArrivo.getColonna() == (posPartenza.getColonna() - 2)
+                            || posArrivo.getColonna() == (posPartenza.getColonna() + 2));
+                    if (rigaCorretta && colonnaCorretta) { // se la mossa è valida
+                        posDaMangiare.setRiga((posPartenza.getRiga() + 1 * versoAvanzamento));
                         /*
                         Quando implementeremo gli spostamenti della dama, il controllo sulla riga andrà svolto.
                          */
-
-                        if (posArrivo.colonna > posPartenza.colonna) {
-                            posDaMangiare.colonna = posPartenza.colonna + 1;
+                        if (posArrivo.getColonna() > posPartenza.getColonna()) {
+                            posDaMangiare.setColonna((posPartenza.getColonna() + 1));
                         } else {
-                            posDaMangiare.colonna = posPartenza.colonna - 1;
+                            posDaMangiare.setColonna((posPartenza.getColonna() - 1));
                         }
-
-                        daMangiare = this.damieraGioco[posDaMangiare.riga][posDaMangiare.colonna];
-
-                        if (daMangiare != null && daMangiare.getColore() != coloreGiocatore) // Se c'è qualcosa di effettivo da mangiare
-                        {
+                        daMangiare = this.damieraGioco[posDaMangiare.getRiga()][posDaMangiare.getColonna()];
+                        // Se c'è qualcosa di effettivo da mangiare
+                        if (daMangiare != null && daMangiare.getColore() != coloreGiocatore) {
                             presaPossibile = true;
-                            if (contenutoPosPar.getTipo() == TipoPedina.pedinaRe) // se è una dama può mangiare tutto
-                            {
+                            // se è una dama può mangiare tutto
+                            if (contenutoPosPar.getTipo() == TipoPedina.pedinaRe) {
                                 presaPossibileDamatura = true;
                                 presaLecita = true;
                             } else {
-                                if (daMangiare.getTipo() != TipoPedina.pedinaRe) // altrimenti non può mangiare la dama
-                                {
+                                // altrimenti non può mangiare la dama
+                                if (daMangiare.getTipo() != TipoPedina.pedinaRe) {
                                     presaPossibileDamatura = true;
                                     presaLecita = true;
                                 }
@@ -327,27 +365,28 @@ public class Damiera {
         }
 
         // Perfetto per il terzo sprint, perché è orribile
-        if (posParValida == false) {
+        if (!posParValida) {
             System.out.println("Presa non valida. La casella di partenza è vuota");
-        } else if (posArrValida == false) {
+        } else if (!posArrValida) {
             System.out.println("Presa non valida. La casella di arrivo non è vuota");
-        } else if (coloreGiusto == false) {
+        } else if (!coloreGiusto) {
             System.out.println("Non puoi spostare una pedina del tuo avversario");
         } else if (!(rigaCorretta && colonnaCorretta)) {
             System.out.println("Movimento non lecito.");
-        } else if (presaPossibile == false) {
+        } else if (!presaPossibile) {
             System.out.println("Presa non possibile");
-        } else if (presaPossibileDamatura == false) {
+        } else if (!presaPossibileDamatura) {
             System.out.println("Non puoi mangiare una dama con una pedina semplice");
         }
 
-        if (presaLecita == true) {
-            this.damieraGioco[posDaMangiare.riga][posDaMangiare.colonna] = null;
-            this.damieraGioco[posArrivo.riga][posArrivo.colonna] = this.damieraGioco[posPartenza.riga][posPartenza.colonna];
-            this.damieraGioco[posPartenza.riga][posPartenza.colonna] = null;
-            if (posArrivo.riga == rigaBaseNemica) {
+        if (presaLecita) {
+            this.damieraGioco[posDaMangiare.getRiga()][posDaMangiare.getColonna()] = null;
+            this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()]
+                    = this.damieraGioco[posPartenza.getRiga()][posPartenza.getColonna()];
+            this.damieraGioco[posPartenza.getRiga()][posPartenza.getColonna()] = null;
+            if (posArrivo.getRiga() == rigaBaseNemica) {
                 System.out.println("Hai effettuato la damatura!");
-                this.damieraGioco[posArrivo.riga][posArrivo.colonna].promuoviADama();
+                this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()].promuoviADama();
             }
             if (coloreGiocatore == Colore.bianco) {
                 incrementaPreseNere();
@@ -362,7 +401,7 @@ public class Damiera {
         return presaLecita;
     }
 
-    public boolean effettuaPresaMultipla(String mossa, Colore coloreGiocatore) {
+    public boolean effettuaPresaMultipla(final String mossa, final Colore coloreGiocatore) {
         boolean presaMultiplaLecita = false;
 
         int contatoreMosse = 0;
@@ -370,20 +409,18 @@ public class Damiera {
 
         String[] prese = new String[numeri.length - 1];
 
-        for (int i = 0; i < numeri.length - 1; i++) // Tokenizzazine mosse
-        {
+        for (int i = 0; i < numeri.length - 1; i++) { // Tokenizzazine mosse
             prese[contatoreMosse] = String.join("x", numeri[i], numeri[i + 1]);
             contatoreMosse++;
-
         }
 
         // Backup damiera e dei contatori nel caso le mosse non siano legali
-        Pedina[][] damieraBackup = new Pedina[8][8];
+        Pedina[][] damieraBackup = new Pedina[DAMIERA_SIZE][DAMIERA_SIZE];
         int backupMangiateBianco = pedineBiancheMangiate;
         int backupMangiateNero = pedineNereMangiate;
 
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int i = 0; i < DAMIERA_SIZE; i++) {
+            for (int j = 0; j < DAMIERA_SIZE; j++) {
                 damieraBackup[i][j] = damieraGioco[i][j];
             }
         }
@@ -403,11 +440,14 @@ public class Damiera {
         }
 
         if (!presaMultiplaLecita) {
-
-            this.setDamieraGioco(damieraBackup); //Se una delle mosse non era lecita, resetta la damiera com'era prima
+            //Se una delle mosse non era lecita, resetta la damiera com'era prima
+            for (int i = 0; i < DAMIERA_SIZE; i++) {
+                for (int j = 0; j < DAMIERA_SIZE; j++) {
+                damieraGioco[i][j] = damieraBackup[i][j];
+                }
+            }
             this.pedineBiancheMangiate = backupMangiateBianco;
             this.pedineNereMangiate = backupMangiateNero;
-
         }
 
         return presaMultiplaLecita;
@@ -429,29 +469,25 @@ public class Damiera {
         System.out.print("\nBianco: ");
         for (int i = 0; i < pedineNereMangiate; i++) {
             System.out.print('\u26C2' + " ");
-
         }
 
         System.out.println("");
     }
 
-    public void registraMosse(String mossa, Colore coloreGiocatore) {
+    public void registraMosse(final String mossa, final Colore coloreGiocatore) {
+        String mossaTotale;
         if (coloreGiocatore == Colore.bianco) {
-            this.listaMosse.add("B.");
+            mossaTotale = "B. " + mossa;
         } else {
-            this.listaMosse.add("N.");
+            mossaTotale = "N. " + mossa;
         }
-        this.listaMosse.add(mossa);
-        
+        this.listaMosse.add(mossaTotale);
     }
 
     public void stampaMosse() {
-        int i = 0;
-        while (i < this.listaMosse.size()) {
-            System.out.println(listaMosse.get(i) + " " + listaMosse.get(i + 1));
-            i += 2;
+
+        for (int i = 0; i < this.listaMosse.size(); i++) {
+            System.out.println(listaMosse.get(i));
         }
-
     }
-
 }

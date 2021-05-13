@@ -11,16 +11,31 @@ package it.uniba.main.types;
  * Registra le informazioni di una posizione
  * 
  */
-public class Posizione {
-    public int riga;
-    public int colonna;
-
-    public Posizione()
-    {
-        
+public final class Posizione {
+    /* ------------ Stato ------------ */
+    private int riga;
+    private int colonna;
+    /* ------------ Costruttori ------------ */
+    public Posizione() {
     }
-    public Posizione(int riga, int colonna) {
-        this.riga = riga;
-        this.colonna = colonna;
+    public Posizione(final int rigaIn, final int colonnaIn) {
+        this.riga = rigaIn;
+        this.colonna = colonnaIn;
+    }
+    /* ------------ Get & Set ------------ */
+    public int getRiga() {
+        return riga;
+    }
+
+    public int getColonna() {
+        return colonna;
+    }
+
+    public void setRiga(final int rigaIn) {
+        this.riga = rigaIn;
+    }
+
+    public void setColonna(final int colonnaIn) {
+        this.colonna = colonnaIn;
     }
 }

@@ -11,7 +11,7 @@ package it.uniba.main.types;
  * Rappresenta i colori delle pedine e dei giocatori
  * 
  */
-public enum Colore{
+public enum Colore {
     bianco,
     nero
 }
