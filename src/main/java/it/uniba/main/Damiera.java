@@ -464,11 +464,11 @@ public final class Damiera {
     public void stampaPedineMangiate() {
         System.out.print("Nero: ");
         for (int i = 0; i < pedineBiancheMangiate; i++) {
-            System.out.print('\u26C0' + " ");
+            System.out.print('\u26C2' + " ");
         }
         System.out.print("\nBianco: ");
         for (int i = 0; i < pedineNereMangiate; i++) {
-            System.out.print('\u26C2' + " ");
+            System.out.print('\u26C0' + " ");
         }
 
         System.out.println("");
