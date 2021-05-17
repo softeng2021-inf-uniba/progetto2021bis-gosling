@@ -1,11 +1,5 @@
 package it.uniba.main;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.security.GeneralSecurityException;
-
-import it.uniba.sotorrent.GoogleDocsUtils;
 import it.uniba.main.interfacce.InterfacciaInput;
 
 /**
@@ -29,9 +23,7 @@ public final class AppMain {
      * @param args The command-line arguments.
      */
     public static void main(final String[] args) {
-
         System.out.println("Benvenuto nell'applicazione di Dama!");
-
         if (args.length > 0) {
             switch (args[0]) {
                 case "--help":
@@ -44,7 +36,6 @@ public final class AppMain {
         }
 
         InterfacciaInput.menuDiInizio();
-        
         System.exit(0);
     }
 }

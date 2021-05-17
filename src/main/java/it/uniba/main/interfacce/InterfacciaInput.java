@@ -4,33 +4,34 @@
  * and open the template in the editor.
  */
 package it.uniba.main.interfacce;
-
 import java.util.Scanner;
 import it.uniba.main.Damiera;
 import it.uniba.main.Giocatore;
 import it.uniba.main.Help;
 import it.uniba.main.Partita;
-import it.uniba.main.types.Colore;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Tipo Classe: <<Boundary>>
- * 
- * Gestisce la comunicazione tra l'applicazione e l'input utente. 
- * Contiene il "parser" che controlla se i comandi inseriti sono corretti e chiama le funzionalità collegate.
- * 
+ *
+ * Gestisce la comunicazione tra l'applicazione e l'input utente. Contiene il
+ * "parser" che controlla se i comandi inseriti sono corretti e chiama le
+ * funzionalità collegate.
+ *
  */
-public class InterfacciaInput {
-
-    public static boolean chiediConferma(String richiesta, String casoAffermativo, String casoNegativo) {
+public final class InterfacciaInput {
+    private InterfacciaInput() {
+    }
+    public static boolean chiediConferma(final String richiesta, final String casoAffermativo,
+            final String casoNegativo) {
         boolean vuole = false;
 
         System.out.println(richiesta);
         boolean error;
         String answer;
 
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in, "utf-8");
         do {
             error = false;
             System.out.println("digitare 'si' o 'no'.");
@@ -52,7 +53,7 @@ public class InterfacciaInput {
                         break;
                 }
             }
-        } while (error == true);
+        } while (error);
 
         return vuole;
     }
@@ -60,10 +61,11 @@ public class InterfacciaInput {
     public static void menuDiInizio() {
         boolean isExiting = false;
         String answer;
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in, "utf-8");
 
         do {
-            System.out.println("-------------------------------- Menu Principale --------------------------------");
+            System.out.println("-------------------------------- Menu Principale "
+                    + "--------------------------------");
             System.out.println("Digitare un comando valido... (digita 'help' per visualizzare i comandi)");
             if (sc.hasNextLine()) {
                 answer = sc.nextLine();
@@ -81,23 +83,29 @@ public class InterfacciaInput {
                         Damiera.getDamiera().stampaNumeri();
                         break;
                     case "esci":
-                        isExiting = InterfacciaInput.chiediConferma("Si vuole davvero uscire?", "Alla prossima partita!", "Non si è usciti dal gioco.");
+                        isExiting = InterfacciaInput.chiediConferma("Si vuole davvero uscire?",
+                                "Alla prossima partita!", "Non si è usciti dal gioco.");
                         break;
                     case "damiera":
-                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. "
+                                + "Digitare gioca per avviare una nuova partita.");
                         break;
                     case "abbandona":
-                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. "
+                                + "Digitare gioca per avviare una nuova partita.");
                         break;
                     case "tempo":
-                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. "
+                                + "Digitare gioca per avviare una nuova partita.");
                         break;
                     case "prese":
-                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. "
+                                + "Digitare gioca per avviare una nuova partita.");
 
                         break;
                     case "mosse":
-                        System.out.println("Questo comando è eseguibile solo a partita avviata. Digitare gioca per avviare una nuova partita.");
+                        System.out.println("Questo comando è eseguibile solo a partita avviata. "
+                                + "Digitare gioca per avviare una nuova partita.");
                         break;
 
                     default:
@@ -106,18 +114,18 @@ public class InterfacciaInput {
                         break;
                 }
             }
-        } while (isExiting == false);
+        } while (!isExiting);
 
         sc.close();
     }
 
-    public static void menuDiGico(Giocatore corrente, Giocatore avversario) {
+    public static void menuDiGico(final Giocatore corrente, final Giocatore avversario) {
         boolean isExiting = false;
         String answer;
 
         corrente.iniziaMossa();
 
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in, "utf-8");
         do {
             System.out.println("Digitare un comando valido...");
             if (sc.hasNextLine()) {
@@ -137,11 +145,14 @@ public class InterfacciaInput {
                         Partita.getPartita().stampaTempoPassato();
                         break;
                     case "abbandona":
-                        isExiting = InterfacciaInput.chiediConferma("Sicuro di voler abbandonare? L'avversario vincerà in caso affermativo.", "Partita abbandonata.", "Partita non abbandonata.");
+                        isExiting = InterfacciaInput.chiediConferma("Sicuro di voler abbandonare? L'avversario "
+                                + "vincerà in caso affermativo.", "Partita abbandonata.", "Partita non abbandonata.");
 
                         if (isExiting) {
-                            System.out.println(corrente.getNome() + " (" + corrente.getColore().toString() + ")" + " ha abbandonato il gioco.");
-                            System.out.println(avversario.getNome() + " (" + avversario.getColore().toString() + ")" + " ha vinto per abbandono.");
+                            System.out.println(corrente.getNome() + " (" + corrente.getColore().toString() + ")"
+                                    + " ha abbandonato il gioco.");
+                            System.out.println(avversario.getNome() + " (" + avversario.getColore().toString()
+                                    + ")" + " ha vinto per abbandono.");
                             Partita.getPartita().finisciPartita();
                         }
 
@@ -155,18 +166,18 @@ public class InterfacciaInput {
                     default:
                         if (sintassiSpostamentoCorretta(answer)) {
                             isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
-                            if(isExiting==true){
-                                Damiera.getDamiera().registraMosse(answer,corrente.getColore());
+                            if (isExiting) {
+                                Damiera.getDamiera().registraMosse(answer, corrente.getColore());
                             }
                         } else if (sintassiPresaSempliceCorretta(answer)) {
                             isExiting = Damiera.getDamiera().effettuaPresaSemplice(answer, corrente.getColore());
-                            if(isExiting==true){
-                                Damiera.getDamiera().registraMosse(answer,corrente.getColore());
+                            if (isExiting) {
+                                Damiera.getDamiera().registraMosse(answer, corrente.getColore());
                             }
                         } else if (sintassiPresaMultiplaCorretta(answer)) {
                             isExiting = Damiera.getDamiera().effettuaPresaMultipla(answer, corrente.getColore());
-                            if(isExiting==true){
-                                Damiera.getDamiera().registraMosse(answer,corrente.getColore());
+                            if (isExiting) {
+                                Damiera.getDamiera().registraMosse(answer, corrente.getColore());
                             }
                         } else {
                             System.out.println("Comando inserito non valido.");
@@ -175,17 +186,17 @@ public class InterfacciaInput {
                         break;
                 }
             }
-        } while (isExiting == false);
+        } while (!isExiting);
     }
 
-    public static boolean sintassiSpostamentoCorretta(String answer) {
+    public static boolean sintassiSpostamentoCorretta(final String answer) {
         boolean sintassiCorretta = false;
         if (answer.matches("[1-9][0-9]?-[0-9][0-9]?")) {
             String[] numeri = answer.split("-");
-            int num1 = Integer.valueOf(numeri[0]);
-            int num2 = Integer.valueOf(numeri[1]);
-            boolean primoCorretto = (num1 >= 1) && (num1 <= 32);
-            boolean secondoCorretto = (num2 >= 1) && (num2 <= 32) && (num1 != num2);
+            int num1 = Integer.parseInt(numeri[0]);
+            int num2 = Integer.parseInt(numeri[1]);
+            boolean primoCorretto = (num1 >= 1) && (num1 <= Damiera.getGrandezzaPosizioni());
+            boolean secondoCorretto = (num2 >= 1) && (num2 <= Damiera.getGrandezzaPosizioni()) && (num1 != num2);
             if (primoCorretto && secondoCorretto) {
                 sintassiCorretta = true;
             }
@@ -193,15 +204,15 @@ public class InterfacciaInput {
         return sintassiCorretta;
     }
 
-    public static boolean sintassiPresaSempliceCorretta(String answer) {
+    public static boolean sintassiPresaSempliceCorretta(final String answer) {
         boolean sintassiCorretta = false;
 
         if (answer.matches("[1-9][0-9]?x[0-9][0-9]?")) {
             String[] numeri = answer.split("x");
-            int num1 = Integer.valueOf(numeri[0]);
-            int num2 = Integer.valueOf(numeri[1]);
-            boolean primoCorretto = (num1 >= 1) && (num1 <= 32);
-            boolean secondoCorretto = (num2 >= 1) && (num2 <= 32) && (num1 != num2);
+            int num1 = Integer.parseInt(numeri[0]);
+            int num2 = Integer.parseInt(numeri[1]);
+            boolean primoCorretto = (num1 >= 1) && (num1 <= Damiera.getGrandezzaPosizioni());
+            boolean secondoCorretto = (num2 >= 1) && (num2 <= Damiera.getGrandezzaPosizioni()) && (num1 != num2);
             if (primoCorretto && secondoCorretto) {
                 sintassiCorretta = true;
             }
@@ -210,7 +221,7 @@ public class InterfacciaInput {
         return sintassiCorretta;
     }
 
-    public static boolean sintassiPresaMultiplaCorretta(String answer) {
+    public static boolean sintassiPresaMultiplaCorretta(final String answer) {
         boolean sintassiCorretta = false;
         boolean sameNumber = false;
         boolean nonNumber = false;
@@ -218,8 +229,8 @@ public class InterfacciaInput {
             String[] numeri = answer.split("x");
             Set<Integer> values = new HashSet<>();
             for (String s : numeri) {
-                int value = Integer.valueOf(s);
-                if (value >= 1 && value <= 32) {
+                int value = Integer.parseInt(s);
+                if (value >= 1 && value <= Damiera.getGrandezzaPosizioni()) {
                     if (values.contains(value)) {
                         sameNumber = true;
 

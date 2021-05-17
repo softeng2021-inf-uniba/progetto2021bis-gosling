@@ -12,11 +12,12 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 
 /**
  * Tipo Classe: <<Entity>>
- * 
- * Contiene le informazioni relative al gicoatore come il colore e il tempo passato
- * 
+ *
+ * Contiene le informazioni relative al gicoatore come il colore e il tempo
+ * passato
+ *
  */
-public class Giocatore {
+public final class Giocatore {
 
     /* ------------ Stato ------------ */
     private String nome;
@@ -25,10 +26,9 @@ public class Giocatore {
     private LocalTime tempoPassato;
     private int mossaCorrente;
     private static final LocalTime TEMPO_DISP = LocalTime.of(0, 30, 0);
-    private int contaPrese;
 
     /* ------------ Costruttori ------------ */
-    Giocatore(int index) {
+    Giocatore(final int index) {
 
         switch (index) {
             case 1:
@@ -44,24 +44,23 @@ public class Giocatore {
                 this.setColore(Colore.nero);
                 break;
         }
-        
+
         this.segnaTempo = null;
         this.tempoPassato = LocalTime.of(0, 0, 0);
         this.mossaCorrente = 0;
     }
 
     /* ------------ Get & Set ------------ */
-    
-    private void setNome(String nome) {
-        this.nome = nome;
+    private void setNome(final String nomeIn) {
+        this.nome = nomeIn;
     }
 
     public String getNome() {
         return this.nome;
     }
 
-    private void setColore(Colore colore) {
-        this.colore = colore;
+    private void setColore(final Colore coloreIn) {
+        this.colore = coloreIn;
     }
 
     public Colore getColore() {
@@ -81,7 +80,7 @@ public class Giocatore {
         return (coloreAvversario);
     }
 
-    public void setSegnaTempo(LocalTime tempoInizioMossa) {
+    public void setSegnaTempo(final LocalTime tempoInizioMossa) {
         this.segnaTempo = tempoInizioMossa;
     }
 
@@ -95,10 +94,11 @@ public class Giocatore {
 
     /* ------------ Metodi ------------ */
     public void aggiornaTempoPassato() {
+        final int secondi = 60;
         LocalTime now = LocalTime.now();
 
         Long minutes = MINUTES.between(segnaTempo, now);
-        Long seconds = SECONDS.between(segnaTempo, now) % 60;
+        Long seconds = SECONDS.between(segnaTempo, now) % secondi;
         this.tempoPassato = this.tempoPassato.plusMinutes(minutes);
         this.tempoPassato = this.tempoPassato.plusSeconds(seconds);
         this.setSegnaTempo(LocalTime.now());
@@ -108,5 +108,5 @@ public class Giocatore {
         this.mossaCorrente++;
         this.setSegnaTempo(LocalTime.now());
     }
-    
+
 }
