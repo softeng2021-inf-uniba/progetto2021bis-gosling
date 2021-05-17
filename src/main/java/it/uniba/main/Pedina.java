@@ -5,9 +5,6 @@
  */
 package it.uniba.main;
 
-import it.uniba.main.types.TipoPedina;
-import it.uniba.main.types.Colore;
-
 /**
  * Tipo Classe: <<Entity>>
  *
@@ -21,7 +18,26 @@ public final class Pedina {
     private TipoPedina tipo;
     private Colore colore;
     private static boolean invertiColore = true;
-
+    /* ------------ Sottoclassi ------------ */
+    /**
+     *  <<noECB>>
+     * 
+     *  Descrive il tipo delle pedine
+     */
+    public enum Colore {
+        bianco,
+        nero
+    }
+    /**
+    * <<noECB>>
+    * 
+    * Rappresenta il tipo di pedina, se semplice o Dama (re)
+    * 
+    */
+    public enum TipoPedina {
+        pedinaSemplice,
+        pedinaRe
+    }
     /* ------------  Costruttori ------------ */
     Pedina(final Colore coloreIn) {
         this.colore = coloreIn;

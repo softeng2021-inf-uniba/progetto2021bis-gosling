@@ -5,8 +5,6 @@
  */
 package it.uniba.main;
 
-import it.uniba.main.types.Colore;
-import it.uniba.main.types.Turno;
 import it.uniba.main.interfacce.InterfacciaInput;
 
 /**
@@ -25,8 +23,16 @@ public final class Partita {
     private Giocatore giocatore2;
     private Turno turno;
     private boolean finita;
-
-
+    /* ------------ Sottoclassi ------------ */
+    /**
+     *  <<noECB>>
+     * 
+     *  Definisce il turno
+     */
+    public enum Turno {
+        turnoGiocatore1,
+        turnoGiocatore2
+    }
     /* ------------ Costruttori ------------ */
     private Partita() {
 
@@ -38,7 +44,7 @@ public final class Partita {
         al secondo tocca il complemento del primo*/
         giocatore2 = new Giocatore(2);
 
-        if (giocatore1.getColore() == Colore.bianco) {
+        if (giocatore1.getColore() == Pedina.Colore.bianco) {
             turno = Turno.turnoGiocatore1;
         } else {
             turno = Turno.turnoGiocatore2;
