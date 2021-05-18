@@ -1,5 +1,6 @@
 package it.uniba.main;
 
+import it.uniba.main.eccezioni.eccezionePresa;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -324,15 +325,10 @@ public final class Damiera {
         return spostamentoLecito;
     }
 
-    public boolean effettuaPresaSemplice(final String mossa, final Pedina.Colore coloreGiocatore) {
+    public boolean effettuaPresaSemplice(final String mossa, final Pedina.Colore coloreGiocatore) throws eccezionePresa {
         boolean presaLecita = false;
-        boolean posParValida = false;
-        boolean posArrValida = false; // Spazio di arrivo occupato
-        boolean coloreGiusto = false;
         boolean rigaCorretta = false;
         boolean colonnaCorretta = false;
-        boolean presaPossibile = false;
-        boolean presaPossibileDamatura = false;
 
         String[] numeri = mossa.split("x");
 
@@ -356,14 +352,13 @@ public final class Damiera {
             versoAvanzamento = 1;
             rigaBaseNemica = DAMIERA_SIZE - 1;
         }
-
-        if (contenutoPosPar != null) {
-            posParValida = true;
-            if (contenutoPosPar.getColore() == coloreGiocatore) {  // se il colore è il giusto
-                coloreGiusto = true;
-                if (contenutoPosArr == null) { // se lo spostamento non va in una casella già piena
-                    posArrValida = true;
-
+        // Se la posizione di partenza non è vuota
+        if (contenutoPosPar != null) { 
+            // e il colore è quello giusto
+            if (contenutoPosPar.getColore() == coloreGiocatore) {
+                // se lo spostamento non va in una casella già piena
+                if (contenutoPosArr == null) {
+                    // Se è una pedina semplice, verifico che sia corretta
                     if (contenutoPosPar.getTipo() == Pedina.TipoPedina.pedinaSemplice) {
                         rigaCorretta = (posArrivo.getRiga() == (posPartenza.getRiga() + versoAvanzamento * 2));
                     } else {
@@ -373,7 +368,8 @@ public final class Damiera {
 
                     colonnaCorretta = (posArrivo.getColonna() == (posPartenza.getColonna() - 2)
                             || posArrivo.getColonna() == (posPartenza.getColonna() + 2));
-                    if (rigaCorretta && colonnaCorretta) { // se la mossa è valida
+                    // se la mossa è valid
+                    if (rigaCorretta && colonnaCorretta) {
                         posDaMangiare.setRiga((posPartenza.getRiga() + 1 * versoAvanzamento));
                         /*
                         Quando implementeremo gli spostamenti della dama, il controllo sulla riga andrà svolto.
@@ -384,40 +380,41 @@ public final class Damiera {
                             posDaMangiare.setColonna((posPartenza.getColonna() - 1));
                         }
                         daMangiare = this.damieraGioco[posDaMangiare.getRiga()][posDaMangiare.getColonna()];
-                        // Se c'è qualcosa di effettivo da mangiare
+                        // Se c'è una pedina nella casella da mangiare ed è del colore giusto
                         if (daMangiare != null && daMangiare.getColore() != coloreGiocatore) {
-                            presaPossibile = true;
                             // se è una dama può mangiare tutto
-                            if (contenutoPosPar.getTipo() == Pedina.TipoPedina.pedinaRe) {
-                                presaPossibileDamatura = true;
+                            if (contenutoPosPar.getTipo() == Pedina.TipoPedina.pedinaRe) { // se a spostarsi è una dama può mangiare tutto
                                 presaLecita = true;
-                            } else {
+                            } else { 
                                 // altrimenti non può mangiare la dama
                                 if (daMangiare.getTipo() != Pedina.TipoPedina.pedinaRe) {
-                                    presaPossibileDamatura = true;
                                     presaLecita = true;
+                                } else { 
+                                    // Non puoi mangiare
+                                    throw new eccezionePresa("Non puoi mangiare una dama con una pedina semplice");
                                 }
-                            }
+                            } 
+                        } else { 
+                            // Da mangiare == null o il colore della pedina mangiata è la stessa
+                            throw new eccezionePresa("Presa non possibile");
                         }
+                    } else { 
+                        // riga o colonna non corretta
+                        throw new eccezionePresa("Movimento non lecito.");
                     }
-                }
+                } else {
+                    // Casella di arrivo non vuota
+                    throw new eccezionePresa("Presa non valida. La casella di arrivo non è vuota");
+                } 
+            } else {
+                // casella spostata dell'avversario
+                throw new eccezionePresa("Non puoi spostare una pedina del tuo avversario");
             }
+        } else {
+            // Casella di partenza vuota
+            throw new eccezionePresa("Presa non valida. La casella di partenza è vuota");
         }
-        
-        if (!posParValida) {
-            System.out.println("Presa non valida. La casella di partenza è vuota");
-        } else if (!posArrValida) {
-            System.out.println("Presa non valida. La casella di arrivo non è vuota");
-        } else if (!coloreGiusto) {
-            System.out.println("Non puoi spostare una pedina del tuo avversario");
-        } else if (!(rigaCorretta && colonnaCorretta)) {
-            System.out.println("Movimento non lecito.");
-        } else if (!presaPossibile) {
-            System.out.println("Presa non possibile");
-        } else if (!presaPossibileDamatura) {
-            System.out.println("Non puoi mangiare una dama con una pedina semplice");
-        }
-
+       
         if (presaLecita) {
             this.damieraGioco[posDaMangiare.getRiga()][posDaMangiare.getColonna()] = null;
             this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()]
@@ -432,15 +429,12 @@ public final class Damiera {
             } else {
                 incrementaPreseBianche();
             }
-
-            // Aggiungi la pedina mangiata alla lista delle pedine mangiate
-            // aggiungi la mossa alle liste di mosse effettuate nella partita
         }
 
         return presaLecita;
     }
 
-    public boolean effettuaPresaMultipla(final String mossa, final Pedina.Colore coloreGiocatore) {
+    public boolean effettuaPresaMultipla(final String mossa, final Pedina.Colore coloreGiocatore) throws eccezionePresa {
         boolean presaMultiplaLecita = false;
 
         int contatoreMosse = 0;

@@ -9,6 +9,7 @@ import it.uniba.main.Damiera;
 import it.uniba.main.Giocatore;
 import it.uniba.main.Help;
 import it.uniba.main.Partita;
+import it.uniba.main.eccezioni.eccezionePresa;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -170,14 +171,26 @@ public final class InterfacciaInput {
                                 Damiera.getDamiera().registraMosse(answer, corrente.getColore());
                             }
                         } else if (sintassiPresaSempliceCorretta(answer)) {
-                            isExiting = Damiera.getDamiera().effettuaPresaSemplice(answer, corrente.getColore());
-                            if (isExiting) {
-                                Damiera.getDamiera().registraMosse(answer, corrente.getColore());
+                            try { // Esegui 
+                                isExiting = Damiera.getDamiera().effettuaPresaSemplice(answer, corrente.getColore());
+                            }catch(eccezionePresa exc){ // se ti da errore stampalo e metti a false isExiting
+                                System.out.println(exc.getMessage());
+                                isExiting= false;
+                            } finally { // alla fine controlla
+                                if(isExiting) {
+                                    Damiera.getDamiera().registraMosse(answer, corrente.getColore());
+                                }
                             }
                         } else if (sintassiPresaMultiplaCorretta(answer)) {
-                            isExiting = Damiera.getDamiera().effettuaPresaMultipla(answer, corrente.getColore());
-                            if (isExiting) {
-                                Damiera.getDamiera().registraMosse(answer, corrente.getColore());
+                            try { // Esegui 
+                                isExiting = Damiera.getDamiera().effettuaPresaMultipla(answer, corrente.getColore());
+                            }catch(eccezionePresa exc){ // se ti da errore stampalo e metti a false isExiting
+                                System.out.println(exc.getMessage());
+                                isExiting= false;
+                            } finally { // alla fine controlla
+                                if(isExiting) {
+                                    Damiera.getDamiera().registraMosse(answer, corrente.getColore());
+                                } 
                             }
                         } else {
                             System.out.println("Comando inserito non valido.");
