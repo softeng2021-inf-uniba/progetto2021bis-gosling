@@ -1,6 +1,7 @@
 package it.uniba.main;
 
 import it.uniba.main.eccezioni.eccezionePresa;
+import it.uniba.main.eccezioni.eccezioneSpostamento;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -253,7 +254,7 @@ public final class Damiera {
         }
     }
 
-    public boolean spostamentoPedina(final String mossa, final Pedina.Colore coloreGiocatore) {
+    public boolean spostamentoPedina(final String mossa, final Pedina.Colore coloreGiocatore) throws eccezioneSpostamento {
 
         boolean spostamentoLecito = false;
 
@@ -295,10 +296,22 @@ public final class Damiera {
                 }
 
                 colonnaCorretta = (posArrivo.getColonna() == (posPartenza.getColonna() - 1)
-                        || posArrivo.getColonna() == (posPartenza.getColonna() + 1));
-
+                        || posArrivo.getColonna() == (posPartenza.getColonna() + 1));               
+                
                 spostamentoLecito = rigaCorretta && colonnaCorretta;
+            } else {
+                throw new eccezioneSpostamento("Colore della pedina sbagliato");
             }
+        } else {
+            if(contenutoPosPar==null && contenutoPosArr!=null) {
+                throw new eccezioneSpostamento("Casella di partenza nulla e di arrivo piena");
+            }else if(contenutoPosPar==null) {
+                throw new eccezioneSpostamento("Casella di partenza vuota");
+            } else if(contenutoPosArr!=null) {
+                throw new eccezioneSpostamento("Casella di arrivo piena");
+            }
+            
+            
         }
 
         if (spostamentoLecito) {

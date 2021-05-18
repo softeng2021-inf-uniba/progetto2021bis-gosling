@@ -5,6 +5,8 @@
  */
 package it.uniba.main;
 
+import it.uniba.main.eccezioni.eccezionePresa;
+import it.uniba.main.eccezioni.eccezioneSpostamento;
 import org.junit.jupiter.api.Test; 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  *
@@ -85,197 +88,285 @@ public class DamieraTest {
     @Test
     void testSpostamentoPedina_biancoLecito(){
         String mossa = "21-17";
-        assertTrue(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        try {
+            assertTrue(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        } catch (eccezioneSpostamento exc){
+            fail(exc.getMessage());
+        }
     }
     
     @Test
     void testSpostamentoPedina_neroLecito() {
         String mossa = "9-13";
-        assertTrue(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
+        try {
+            assertTrue(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
+        } catch (eccezioneSpostamento exc){
+            fail(exc.getMessage());
+        }
     }
 
     @Test
     void testSpostamentoPedina_lecitoConDamatura() {
-        damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
-        damiera.spostamentoPedina("21-17", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("12-16", Pedina.Colore.nero);
-        damiera.spostamentoPedina("26-21", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("8-12", Pedina.Colore.nero);
-        damiera.spostamentoPedina("29-26", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
-        damiera.spostamentoPedina("24-20", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
-        damiera.effettuaPresaSemplice("20x11", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("12-15", Pedina.Colore.nero);
-        damiera.spostamentoPedina("18-14", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("7-12", Pedina.Colore.nero);
-        damiera.spostamentoPedina("11-7", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("15-19", Pedina.Colore.nero);
+        try {
+            damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
+            damiera.spostamentoPedina("21-17", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("12-16", Pedina.Colore.nero);
+            damiera.spostamentoPedina("26-21", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("8-12", Pedina.Colore.nero);
+            damiera.spostamentoPedina("29-26", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
+            damiera.spostamentoPedina("24-20", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
+            damiera.effettuaPresaSemplice("20x11", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("12-15", Pedina.Colore.nero);
+            damiera.spostamentoPedina("18-14", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("7-12", Pedina.Colore.nero);
+            damiera.spostamentoPedina("11-7", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("15-19", Pedina.Colore.nero);
         assertTrue(damiera.spostamentoPedina("7-4", Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            fail(exc.getMessage());
+        }
     }
 
     @Test
     void testSpostamentoPedina_spostamentoIndietroDama() {
-        damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
-        damiera.spostamentoPedina("21-17", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("12-16", Pedina.Colore.nero);
-        damiera.spostamentoPedina("26-21", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("8-12", Pedina.Colore.nero);
-        damiera.spostamentoPedina("29-26", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
-        damiera.spostamentoPedina("24-20", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
-        damiera.effettuaPresaSemplice("20x11", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("12-15", Pedina.Colore.nero);
-        damiera.spostamentoPedina("18-14", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("7-12", Pedina.Colore.nero);
-        damiera.spostamentoPedina("11-7", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("15-19", Pedina.Colore.nero);
-        damiera.spostamentoPedina("7-4", Pedina.Colore.bianco);
-        assertTrue(damiera.spostamentoPedina("4-7", Pedina.Colore.bianco));
+        try{
+            damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
+            damiera.spostamentoPedina("21-17", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("12-16", Pedina.Colore.nero);
+            damiera.spostamentoPedina("26-21", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("8-12", Pedina.Colore.nero);
+            damiera.spostamentoPedina("29-26", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
+            damiera.spostamentoPedina("24-20", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
+            damiera.effettuaPresaSemplice("20x11", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("12-15", Pedina.Colore.nero);
+            damiera.spostamentoPedina("18-14", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("7-12", Pedina.Colore.nero);
+            damiera.spostamentoPedina("11-7", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("15-19", Pedina.Colore.nero);
+            damiera.spostamentoPedina("7-4", Pedina.Colore.bianco);
+            assertTrue(damiera.spostamentoPedina("4-7", Pedina.Colore.bianco));    
+        } catch (Exception exc) {
+            fail(exc.getMessage());
+        }
     }
     
     @Test
     void testSpostamentoPedina_spostamentoAvantiDama() {
-        damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
-        damiera.spostamentoPedina("21-17", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("12-16", Pedina.Colore.nero);
-        damiera.spostamentoPedina("26-21", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("8-12", Pedina.Colore.nero);
-        damiera.spostamentoPedina("29-26", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
-        damiera.spostamentoPedina("24-20", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
-        damiera.effettuaPresaSemplice("20x11", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("12-15", Pedina.Colore.nero);
-        damiera.spostamentoPedina("18-14", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("7-12", Pedina.Colore.nero);
-        damiera.spostamentoPedina("11-7", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("15-19", Pedina.Colore.nero);
-        damiera.spostamentoPedina("7-4", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("4-7", Pedina.Colore.bianco);
-        assertTrue(damiera.spostamentoPedina("7-4", Pedina.Colore.bianco));
+        try {
+            damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
+            damiera.spostamentoPedina("21-17", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("12-16", Pedina.Colore.nero);
+            damiera.spostamentoPedina("26-21", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("8-12", Pedina.Colore.nero);
+            damiera.spostamentoPedina("29-26", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
+            damiera.spostamentoPedina("24-20", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
+            damiera.effettuaPresaSemplice("20x11", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("12-15", Pedina.Colore.nero);
+            damiera.spostamentoPedina("18-14", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("7-12", Pedina.Colore.nero);
+            damiera.spostamentoPedina("11-7", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("15-19", Pedina.Colore.nero);
+            damiera.spostamentoPedina("7-4", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("4-7", Pedina.Colore.bianco);
+            assertTrue(damiera.spostamentoPedina("7-4", Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            fail(exc.getMessage());
+        }
     }
     
     @Test
     void testSpostamentoPedina_rigaCorrettaColonnaScorretta() {
         String mossa = "22-17";
-        assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        try {
+            assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
+        }
     }
 
     @Test
     void testSpostamentoPedina_rigaScorrettaColonnaCorretta() {
         String mossa = "22-11";
-        assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        try {
+            assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
+        }
     }
     
     @Test
     void testSpostamentoPedina_spostamentoErratoDama() {
-        damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
-        damiera.spostamentoPedina("21-17", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("12-16", Pedina.Colore.nero);
-        damiera.spostamentoPedina("26-21", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("8-12", Pedina.Colore.nero);
-        damiera.spostamentoPedina("29-26", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
-        damiera.spostamentoPedina("24-20", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
-        damiera.effettuaPresaSemplice("20x11", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("12-15", Pedina.Colore.nero);
-        damiera.spostamentoPedina("18-14", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("7-12", Pedina.Colore.nero);
-        damiera.spostamentoPedina("11-7", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("15-19", Pedina.Colore.nero);
-        damiera.spostamentoPedina("7-4", Pedina.Colore.bianco);
-        assertFalse(damiera.spostamentoPedina("4-11", Pedina.Colore.bianco));
+        try {
+            damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
+            damiera.spostamentoPedina("21-17", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("12-16", Pedina.Colore.nero);
+            damiera.spostamentoPedina("26-21", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("8-12", Pedina.Colore.nero);
+            damiera.spostamentoPedina("29-26", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
+            damiera.spostamentoPedina("24-20", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
+            damiera.effettuaPresaSemplice("20x11", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("12-15", Pedina.Colore.nero);
+            damiera.spostamentoPedina("18-14", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("7-12", Pedina.Colore.nero);
+            damiera.spostamentoPedina("11-7", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("15-19", Pedina.Colore.nero);
+            damiera.spostamentoPedina("7-4", Pedina.Colore.bianco);
+            assertFalse(damiera.spostamentoPedina("4-11", Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            fail(exc.getMessage());
+        }
     }
     
     @Test
     void testSpostamentoPedina_biancoSpostaAvversario() {
         String mossa = "9-13";
-        assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        try {
+            assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
+        }
     }
 
     @Test
     void testSpostamentoPedina_neroSpostaAvversario() {
         String mossa = "21-17";
-        assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
+        try {
+            assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
+        }
     }
     
     @Test
     void testSpostamentoPedina_biancoSpostaInesistente() {
         String mossa = "17-13";
-        assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        try {
+            assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
+        }
     }
     
     @Test
     void testSpostamentoPedina_neroSpostaInesistente() {
         String mossa = "13-17";
-        assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
+        try {
+            assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
+        }
     }
 
     @Test
     void testSpostamentoPedina_biancoSpostaInCellaOccupata() {
         String mossa = "29-25";
-        assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        try {
+            assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
+        }
     }
 
     @Test
     void testSpostamentoPedina_neroSpostaInCellaOccupata() {
         String mossa = "1-5";
-        assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
+        try {
+            assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
+        }
     }
     
     @Test
     void testSpostamentoPedina_biancoSpostaInCellaSbagliata() {
         String mossa = "21-13";
-        assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        try {
+            assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            fail(exc.getMessage());
+        }
     }
 
     @Test
     void testSpostamentoPedina_neroSpostaInCellaSbagliata() {
         String mossa = "9-17";
-        assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
+        try {
+            assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
+        } catch (Exception exc) {
+            fail(exc.getMessage());
+        }
     }
     
     @Test
     void testEffettuaPresaSemplice_presaBiancoCorretta(){
-        damiera.spostamentoPedina("21-18", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
-        assertTrue(damiera.effettuaPresaSemplice("18x9", Pedina.Colore.bianco));
+        try {
+            damiera.spostamentoPedina("21-18", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
+            assertTrue(damiera.effettuaPresaSemplice("18x9", Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            fail(exc.getMessage());
+        }
     }
     
     @Test
     void testEffettuaPresaSemplice_presaNeroCorretta() {
-        damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
-        assertTrue(damiera.effettuaPresaSemplice("13x22", Pedina.Colore.nero));
+        try {
+            damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
+            assertTrue(damiera.effettuaPresaSemplice("13x22", Pedina.Colore.nero));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
+        }
     }
     
     @Test
     void testEffettuaPresaSemplice_presaVuota(){
-        assertFalse(damiera.effettuaPresaSemplice("21x14", Pedina.Colore.bianco));
+        try {
+            assertFalse(damiera.effettuaPresaSemplice("21x14", Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
+        }
     }
     
     @Test
     void testEffettuaPresaSemplice_biancoPrendeConNero() {
-        damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
-        damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
-        assertFalse(damiera.effettuaPresaSemplice("13x22", Pedina.Colore.bianco));
+        try {
+            damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
+            assertFalse(damiera.effettuaPresaSemplice("13x22", Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
+        }
     }
 
     @Test
     void testEffettuaPresaSemplice_biancoPrendeBianco() {
-        damiera.spostamentoPedina("21-18", Pedina.Colore.bianco);
-        assertFalse(damiera.effettuaPresaSemplice("22x13", Pedina.Colore.bianco));
+        try {
+            damiera.spostamentoPedina("21-18", Pedina.Colore.bianco);
+            assertFalse(damiera.effettuaPresaSemplice("22x13", Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
+        }
     }
     
     @Test
     void testEffettuaPresaSemplice_presaDaCellaVuota() {
-        assertFalse(damiera.effettuaPresaSemplice("18x11", Pedina.Colore.bianco));
+        try {
+            assertFalse(damiera.effettuaPresaSemplice("18x11", Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
+        }
     }
 }

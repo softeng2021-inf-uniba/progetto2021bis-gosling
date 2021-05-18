@@ -10,6 +10,7 @@ import it.uniba.main.Giocatore;
 import it.uniba.main.Help;
 import it.uniba.main.Partita;
 import it.uniba.main.eccezioni.eccezionePresa;
+import it.uniba.main.eccezioni.eccezioneSpostamento;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -166,9 +167,14 @@ public final class InterfacciaInput {
                         break;
                     default:
                         if (sintassiSpostamentoCorretta(answer)) {
-                            isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
-                            if (isExiting) {
-                                Damiera.getDamiera().registraMosse(answer, corrente.getColore());
+                            try {
+                                isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
+                            }catch(eccezioneSpostamento exc) {
+                                System.out.println(exc.getMessage());
+                            } finally {
+                                if (isExiting) {
+                                    Damiera.getDamiera().registraMosse(answer, corrente.getColore());
+                                }
                             }
                         } else if (sintassiPresaSempliceCorretta(answer)) {
                             try { // Esegui 

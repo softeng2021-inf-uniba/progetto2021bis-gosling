@@ -6,15 +6,15 @@
 package it.uniba.main.eccezioni;
 
 /**
- * <<noECB>>
+ *
  * @author Pasquale
  */
-public class eccezionePresa extends Exception {
+public class eccezioneSpostamento extends Exception {
 
-    public eccezionePresa(String string) {
+    public eccezioneSpostamento(String string) {
         super(string);
     }
-    
+   
     @Override
     public String getMessage() {
         return super.getMessage(); 
