@@ -145,8 +145,16 @@ public final class Damiera {
         }
     }
 
-    private static Posizione convertiNumeroInPosizione(final int num) {
-        return VETTORE_POSIZIONI[num - 1];
+    public static Posizione convertiNumeroInPosizione(final int num) {
+        Posizione posizioneDesiderata;
+        
+        if (num >= 1 && num <= 32) {
+            posizioneDesiderata = VETTORE_POSIZIONI[num - 1];
+        } else {
+            posizioneDesiderata = new Posizione(-1, -1);
+        }
+        
+        return posizioneDesiderata;
     }
 
     public void preparaDamiera() {
@@ -173,7 +181,7 @@ public final class Damiera {
             }
         }
         for (int i = primaParte; i < secondaParte; i++) {
-            for (int j = 0; j < secondaParte; j++) {
+            for (int j = 0; j < DAMIERA_SIZE; j++) {
                 damieraGioco[i][j] = null;
             }
         }
@@ -297,8 +305,10 @@ public final class Damiera {
                     = this.damieraGioco[posPartenza.getRiga()][posPartenza.getColonna()];
             this.damieraGioco[posPartenza.getRiga()][posPartenza.getColonna()] = null;
 
+            Pedina contenutoPosArrivo = this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()];
+            
             // Aggiungi la mossa all'elenco di mosse
-            if (posArrivo.getRiga() == rigaBaseNemica) {
+            if (posArrivo.getRiga() == rigaBaseNemica && contenutoPosArrivo.getTipo() != Pedina.TipoPedina.pedinaRe) {
                 System.out.println("Hai effettuato la damatura!");
                 this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()].promuoviADama();
             }
@@ -393,8 +403,7 @@ public final class Damiera {
                 }
             }
         }
-
-        // Perfetto per il terzo sprint, perché è orribile
+        
         if (!posParValida) {
             System.out.println("Presa non valida. La casella di partenza è vuota");
         } else if (!posArrValida) {

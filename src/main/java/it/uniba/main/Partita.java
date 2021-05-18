@@ -70,7 +70,7 @@ public final class Partita {
             System.out.println("Non ci sono partite attive; creata una nuova partita.");
             partitaCorrente = new Partita();
         } else {
-            System.out.println("Una partita è già in corso; cosa fare?");
+            System.out.println("Una partita è già in corso.");
             //Poi si pensa
         }
     }
