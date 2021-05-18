@@ -1,8 +1,5 @@
 package it.uniba.main;
 
-import it.uniba.main.types.Colore;
-import it.uniba.main.types.Posizione;
-import it.uniba.main.types.TipoPedina;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,8 +25,42 @@ public final class Damiera {
     private int pedineBiancheMangiate;
     private List<String> listaMosse;
 
+    /**
+    * Tipo Classe: <<Entity>>
+    * 
+    * Registra le informazioni di una posizione
+    * 
+    */
+    public static final class Posizione {
+    /* ------------ Stato ------------ */
+        private int riga;
+        private int colonna;
+        /* ------------ Costruttori ------------ */
+        public Posizione() {
+        }
+        public Posizione(final int rigaIn, final int colonnaIn) {
+            this.riga = rigaIn;
+            this.colonna = colonnaIn;
+        }
+        /* ------------ Get & Set ------------ */
+        public int getRiga() {
+            return riga;
+        }
+
+        public int getColonna() {
+            return colonna;
+        }
+
+        public void setRiga(final int rigaIn) {
+            this.riga = rigaIn;
+        }
+
+        public void setColonna(final int colonnaIn) {
+            this.colonna = colonnaIn;
+        }
+    }
     /* ------------  Costruttori ------------ */
-    private Damiera() {
+    private Damiera()  {
         this.damieraGioco = new Pedina[DAMIERA_SIZE][DAMIERA_SIZE];
         this.damieraNumeri = new int[DAMIERA_SIZE][DAMIERA_SIZE];
         int counter = 1;
@@ -60,7 +91,6 @@ public final class Damiera {
         Damiera.inizializzaVettorePosizioni();
         this.listaMosse = new ArrayList<>();
     }
-
     /* ------------ Get & Set ------------*/
     public static Damiera getDamiera() { // Serve ad ottenere damiera
         if (singleIstance == null) {
@@ -129,13 +159,13 @@ public final class Damiera {
             for (int j = 0; j < DAMIERA_SIZE; j++) {
                 if (i % 2 == 0) {
                     if (j % 2 == 0) {
-                        damieraGioco[i][j] = new Pedina(Colore.nero);
+                        damieraGioco[i][j] = new Pedina(Pedina.Colore.nero);
                     } else {
                         damieraGioco[i][j] = null;
                     }
                 } else {
                     if (j % 2 != 0) {
-                        damieraGioco[i][j] = new Pedina(Colore.nero);
+                        damieraGioco[i][j] = new Pedina(Pedina.Colore.nero);
                     } else {
                         damieraGioco[i][j] = null;
                     }
@@ -151,13 +181,13 @@ public final class Damiera {
             for (int j = 0; j < DAMIERA_SIZE; j++) {
                 if (i % 2 == 0) {
                     if (j % 2 == 0) {
-                        damieraGioco[i][j] = new Pedina(Colore.bianco);
+                        damieraGioco[i][j] = new Pedina(Pedina.Colore.bianco);
                     } else {
                         damieraGioco[i][j] = null;
                     }
                 } else {
                     if (j % 2 != 0) {
-                        damieraGioco[i][j] = new Pedina(Colore.bianco);
+                        damieraGioco[i][j] = new Pedina(Pedina.Colore.bianco);
                     } else {
                         damieraGioco[i][j] = null;
                     }
@@ -214,7 +244,7 @@ public final class Damiera {
         }
     }
 
-    public boolean spostamentoPedina(final String mossa, final Colore coloreGiocatore) {
+    public boolean spostamentoPedina(final String mossa, final Pedina.Colore coloreGiocatore) {
 
         boolean spostamentoLecito = false;
 
@@ -233,7 +263,7 @@ public final class Damiera {
         }
         int versoAvanzamento;
         int rigaBaseNemica;
-        if (coloreGiocatore == Colore.bianco) {
+        if (coloreGiocatore == Pedina.Colore.bianco) {
             versoAvanzamento = -1;
             rigaBaseNemica = 0;
         } else {
@@ -248,7 +278,7 @@ public final class Damiera {
                 boolean rigaCorretta;
                 boolean colonnaCorretta;
 
-                if (contenutoPosPar.getTipo() == TipoPedina.pedinaSemplice) {
+                if (contenutoPosPar.getTipo() == Pedina.TipoPedina.pedinaSemplice) {
                     rigaCorretta = (posArrivo.getRiga() == (posPartenza.getRiga() + versoAvanzamento));
                 } else {
                     rigaCorretta = (posArrivo.getRiga() == (posPartenza.getRiga() + versoAvanzamento)
@@ -284,7 +314,7 @@ public final class Damiera {
         return spostamentoLecito;
     }
 
-    public boolean effettuaPresaSemplice(final String mossa, final Colore coloreGiocatore) {
+    public boolean effettuaPresaSemplice(final String mossa, final Pedina.Colore coloreGiocatore) {
         boolean presaLecita = false;
         boolean posParValida = false;
         boolean posArrValida = false; // Spazio di arrivo occupato
@@ -309,7 +339,7 @@ public final class Damiera {
 
         int versoAvanzamento;
         int rigaBaseNemica;
-        if (coloreGiocatore == Colore.bianco) {
+        if (coloreGiocatore == Pedina.Colore.bianco) {
             versoAvanzamento = -1;
             rigaBaseNemica = 0;
         } else {
@@ -324,7 +354,7 @@ public final class Damiera {
                 if (contenutoPosArr == null) { // se lo spostamento non va in una casella già piena
                     posArrValida = true;
 
-                    if (contenutoPosPar.getTipo() == TipoPedina.pedinaSemplice) {
+                    if (contenutoPosPar.getTipo() == Pedina.TipoPedina.pedinaSemplice) {
                         rigaCorretta = (posArrivo.getRiga() == (posPartenza.getRiga() + versoAvanzamento * 2));
                     } else {
                         rigaCorretta = (posArrivo.getRiga() == (posPartenza.getRiga() + versoAvanzamento * 2)
@@ -348,12 +378,12 @@ public final class Damiera {
                         if (daMangiare != null && daMangiare.getColore() != coloreGiocatore) {
                             presaPossibile = true;
                             // se è una dama può mangiare tutto
-                            if (contenutoPosPar.getTipo() == TipoPedina.pedinaRe) {
+                            if (contenutoPosPar.getTipo() == Pedina.TipoPedina.pedinaRe) {
                                 presaPossibileDamatura = true;
                                 presaLecita = true;
                             } else {
                                 // altrimenti non può mangiare la dama
-                                if (daMangiare.getTipo() != TipoPedina.pedinaRe) {
+                                if (daMangiare.getTipo() != Pedina.TipoPedina.pedinaRe) {
                                     presaPossibileDamatura = true;
                                     presaLecita = true;
                                 }
@@ -388,7 +418,7 @@ public final class Damiera {
                 System.out.println("Hai effettuato la damatura!");
                 this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()].promuoviADama();
             }
-            if (coloreGiocatore == Colore.bianco) {
+            if (coloreGiocatore == Pedina.Colore.bianco) {
                 incrementaPreseNere();
             } else {
                 incrementaPreseBianche();
@@ -401,7 +431,7 @@ public final class Damiera {
         return presaLecita;
     }
 
-    public boolean effettuaPresaMultipla(final String mossa, final Colore coloreGiocatore) {
+    public boolean effettuaPresaMultipla(final String mossa, final Pedina.Colore coloreGiocatore) {
         boolean presaMultiplaLecita = false;
 
         int contatoreMosse = 0;
@@ -474,9 +504,9 @@ public final class Damiera {
         System.out.println("");
     }
 
-    public void registraMosse(final String mossa, final Colore coloreGiocatore) {
+    public void registraMosse(final String mossa, final Pedina.Colore coloreGiocatore) {
         String mossaTotale;
-        if (coloreGiocatore == Colore.bianco) {
+        if (coloreGiocatore == Pedina.Colore.bianco) {
             mossaTotale = "B. " + mossa;
         } else {
             mossaTotale = "N. " + mossa;

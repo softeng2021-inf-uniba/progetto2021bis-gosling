@@ -5,7 +5,6 @@
  */
 package it.uniba.main;
 
-import it.uniba.main.types.Colore;
 import java.time.LocalTime;
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.time.temporal.ChronoUnit.SECONDS;
@@ -21,7 +20,7 @@ public final class Giocatore {
 
     /* ------------ Stato ------------ */
     private String nome;
-    private Colore colore;
+    private Pedina.Colore colore;
     private LocalTime segnaTempo;
     private LocalTime tempoPassato;
     private int mossaCorrente;
@@ -33,15 +32,15 @@ public final class Giocatore {
         switch (index) {
             case 1:
                 this.setNome("Giocatore 1");
-                this.setColore(Colore.bianco);
+                this.setColore(Pedina.Colore.bianco);
                 break;
             case 2:
                 this.setNome("Giocatore 2");
-                this.setColore(Colore.nero);
+                this.setColore(Pedina.Colore.nero);
                 break;
             default:
                 this.setNome("Giocatore 2");
-                this.setColore(Colore.nero);
+                this.setColore(Pedina.Colore.nero);
                 break;
         }
 
@@ -59,22 +58,22 @@ public final class Giocatore {
         return this.nome;
     }
 
-    private void setColore(final Colore coloreIn) {
+    private void setColore(final Pedina.Colore coloreIn) {
         this.colore = coloreIn;
     }
 
-    public Colore getColore() {
+    public Pedina.Colore getColore() {
         return (this.colore);
     }
 
-    public Colore getColoreAvversario() {
+    public Pedina.Colore getColoreAvversario() {
 
-        Colore coloreAvversario;
+        Pedina.Colore coloreAvversario;
 
-        if (this.getColore() == Colore.bianco) {
-            coloreAvversario = Colore.nero;
+        if (this.getColore() == Pedina.Colore.bianco) {
+            coloreAvversario = Pedina.Colore.nero;
         } else {
-            coloreAvversario = Colore.bianco;
+            coloreAvversario = Pedina.Colore.bianco;
         }
 
         return (coloreAvversario);
