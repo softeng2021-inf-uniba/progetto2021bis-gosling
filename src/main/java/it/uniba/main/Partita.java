@@ -44,11 +44,7 @@ public final class Partita {
         al secondo tocca il complemento del primo*/
         giocatore2 = new Giocatore(2);
 
-        if (giocatore1.getColore() == Pedina.Colore.bianco) {
-            turno = Turno.turnoGiocatore1;
-        } else {
-            turno = Turno.turnoGiocatore2;
-        }
+        turno = Turno.turnoGiocatore1;
 
         finita = false;
         System.out.println("La partita inizia ora.");

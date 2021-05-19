@@ -39,6 +39,7 @@ public final class InterfacciaInput {
             System.out.println("digitare 'si' o 'no'.");
             if (sc.hasNextLine()) {
                 answer = sc.nextLine();
+                System.out.println(answer);
                 answer = answer.replaceAll(" +", "");
                 switch (answer.toLowerCase()) {
                     case "si":
