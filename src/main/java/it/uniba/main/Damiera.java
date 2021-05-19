@@ -368,17 +368,13 @@ public final class Damiera {
         // Se la posizione di partenza non è vuota
         if (contenutoPosPar != null) {
             // e il colore è quello giusto
-            if (contenutoPosPar.getTipo() != Pedina.TipoPedina.pedinaRe) {
+            if (contenutoPosPar.getTipo() == Pedina.TipoPedina.pedinaSemplice) {
                 if (contenutoPosPar.getColore() == coloreGiocatore) {
                     // se lo spostamento non va in una casella già piena
                     if (contenutoPosArr == null) {
                         // Se è una pedina semplice, verifico che sia corretta
-                        if (contenutoPosPar.getTipo() == Pedina.TipoPedina.pedinaSemplice) {
-                            rigaCorretta = (posArrivo.getRiga() == (posPartenza.getRiga() + versoAvanzamento * 2));
-                        } else {
-                            rigaCorretta = (posArrivo.getRiga() == (posPartenza.getRiga() + versoAvanzamento * 2)
-                                    || posArrivo.getRiga() == (posPartenza.getRiga() - versoAvanzamento * 2));
-                        }
+                        rigaCorretta = (posArrivo.getRiga() == (posPartenza.getRiga() + versoAvanzamento * 2));
+                            
                         colonnaCorretta = (posArrivo.getColonna() == (posPartenza.getColonna() - 2)
                                 || posArrivo.getColonna() == (posPartenza.getColonna() + 2));
                         // se la mossa è valid
@@ -396,16 +392,12 @@ public final class Damiera {
                             // Se c'è una pedina nella casella da mangiare ed è del colore giusto
                             if (daMangiare != null && daMangiare.getColore() != coloreGiocatore) {
                                 // se è una dama può mangiare tutto
-                                if (contenutoPosPar.getTipo() == Pedina.TipoPedina.pedinaRe) { // se a spostarsi è una dama può mangiare tutto
+                                // altrimenti non può mangiare la dama
+                                if (daMangiare.getTipo() != Pedina.TipoPedina.pedinaRe) {
                                     presaLecita = true;
                                 } else {
-                                    // altrimenti non può mangiare la dama
-                                    if (daMangiare.getTipo() != Pedina.TipoPedina.pedinaRe) {
-                                        presaLecita = true;
-                                    } else {
-                                        // Non puoi mangiare
-                                        throw new eccezionePresa("Non puoi mangiare una dama con una pedina semplice");
-                                    }
+                                    // Non puoi mangiare
+                                    throw new eccezionePresa("Non puoi mangiare una dama con una pedina semplice");
                                 }
                             } else {
                                 // Da mangiare == null o il colore della pedina mangiata è la stessa
@@ -431,21 +423,19 @@ public final class Damiera {
             throw new eccezionePresa("Presa non valida. La casella di partenza è vuota");
         }
 
-        if (presaLecita) {
-            this.damieraGioco[posDaMangiare.getRiga()][posDaMangiare.getColonna()] = null;
-            this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()]
-                    = this.damieraGioco[posPartenza.getRiga()][posPartenza.getColonna()];
-            this.damieraGioco[posPartenza.getRiga()][posPartenza.getColonna()] = null;
-            Pedina contenutoPosArrivo = this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()];
-            if (posArrivo.getRiga() == rigaBaseNemica && contenutoPosArrivo.getTipo() != Pedina.TipoPedina.pedinaRe) {
-                System.out.println("Hai effettuato la damatura!");
-                this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()].promuoviADama();
-            }
-            if (coloreGiocatore == Pedina.Colore.bianco) {
-                incrementaPreseNere();
-            } else {
-                incrementaPreseBianche();
-            }
+        this.damieraGioco[posDaMangiare.getRiga()][posDaMangiare.getColonna()] = null;
+        this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()]
+                = this.damieraGioco[posPartenza.getRiga()][posPartenza.getColonna()];
+        this.damieraGioco[posPartenza.getRiga()][posPartenza.getColonna()] = null;
+
+        if (posArrivo.getRiga() == rigaBaseNemica) {
+            System.out.println("Hai effettuato la damatura!");
+            this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()].promuoviADama();
+        }
+        if (coloreGiocatore == Pedina.Colore.bianco) {
+            incrementaPreseNere();
+        } else {
+            incrementaPreseBianche();
         }
 
         return presaLecita;
