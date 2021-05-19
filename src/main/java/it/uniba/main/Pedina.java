@@ -16,7 +16,7 @@ public final class Pedina {
 
     /* ------------ Stato ------------ */
     private TipoPedina tipo;
-    private Colore colore;
+    private final Colore colore;
     private static boolean invertiColore = true;
     /* ------------ Sottoclassi ------------ */
     /**
@@ -45,14 +45,6 @@ public final class Pedina {
     }
 
     /* ------------ Get & Set ------------*/
-    private void setColore(final Colore colorIn) {
-        this.colore = colorIn;
-    }
-
-    private void setTipo(final TipoPedina tipoIn) {
-        this.tipo = tipoIn;
-    }
-
     public Colore getColore() {
         return this.colore;
     }

@@ -24,7 +24,6 @@ public final class Giocatore {
     private LocalTime segnaTempo;
     private LocalTime tempoPassato;
     private int mossaCorrente;
-    private static final LocalTime TEMPO_DISP = LocalTime.of(0, 30, 0);
 
     /* ------------ Costruttori ------------ */
     public Giocatore(final int index) {

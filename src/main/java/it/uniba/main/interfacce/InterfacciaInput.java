@@ -23,8 +23,10 @@ import java.util.Set;
  *
  */
 public final class InterfacciaInput {
+    
     private InterfacciaInput() {
     }
+    
     public static boolean chiediConferma(final String richiesta, final String casoAffermativo,
             final String casoNegativo) {
         boolean vuole = false;
@@ -39,7 +41,6 @@ public final class InterfacciaInput {
             System.out.println("digitare 'si' o 'no'.");
             if (sc.hasNextLine()) {
                 answer = sc.nextLine();
-                System.out.println(answer);
                 answer = answer.replaceAll(" +", "");
                 switch (answer.toLowerCase()) {
                     case "si":
@@ -174,7 +175,7 @@ public final class InterfacciaInput {
                                 System.out.println(exc.getMessage());
                             } finally {
                                 if (isExiting) {
-                                    Damiera.getDamiera().registraMosse(answer, corrente.getColore());
+                                    Damiera.getDamiera().registraMossa(answer, corrente.getColore());
                                 }
                             }
                         } else if (sintassiPresaSempliceCorretta(answer)) {
@@ -185,7 +186,7 @@ public final class InterfacciaInput {
                                 isExiting= false;
                             } finally { // alla fine controlla
                                 if(isExiting) {
-                                    Damiera.getDamiera().registraMosse(answer, corrente.getColore());
+                                    Damiera.getDamiera().registraMossa(answer, corrente.getColore());
                                 }
                             }
                         } else if (sintassiPresaMultiplaCorretta(answer)) {
@@ -196,7 +197,7 @@ public final class InterfacciaInput {
                                 isExiting= false;
                             } finally { // alla fine controlla
                                 if(isExiting) {
-                                    Damiera.getDamiera().registraMosse(answer, corrente.getColore());
+                                    Damiera.getDamiera().registraMossa(answer, corrente.getColore());
                                 } 
                             }
                         } else {
