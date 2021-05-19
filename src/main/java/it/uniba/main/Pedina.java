@@ -39,7 +39,7 @@ public final class Pedina {
         pedinaRe
     }
     /* ------------  Costruttori ------------ */
-    Pedina(final Colore coloreIn) {
+     public Pedina(final Colore coloreIn) {
         this.colore = coloreIn;
         this.tipo = TipoPedina.pedinaSemplice;
     }

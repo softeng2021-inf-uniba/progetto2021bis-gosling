@@ -27,7 +27,7 @@ public final class Giocatore {
     private static final LocalTime TEMPO_DISP = LocalTime.of(0, 30, 0);
 
     /* ------------ Costruttori ------------ */
-    Giocatore(final int index) {
+    public Giocatore(final int index) {
 
         switch (index) {
             case 1:
