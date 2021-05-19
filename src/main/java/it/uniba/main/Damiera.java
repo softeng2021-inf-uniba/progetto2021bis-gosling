@@ -474,20 +474,16 @@ public final class Damiera {
             }
         } catch(eccezionePresa exc) {
             presaMultiplaLecita = false;
-            System.out.println(exc.getMessage());
-        } finally {
-            if (!presaMultiplaLecita) {
-                //Se una delle mosse non era lecita, resetta la damiera com'era prima
-                for (int i = 0; i < DAMIERA_SIZE; i++) {
-                    for (int j = 0; j < DAMIERA_SIZE; j++) {
-                        damieraGioco[i][j] = damieraBackup[i][j];
-                    }
+            //Se una delle mosse non era lecita, resetta la damiera com'era prima
+            for (int i = 0; i < DAMIERA_SIZE; i++) {
+                for(int j = 0; j < DAMIERA_SIZE; j++) {
+                    damieraGioco[i][j] = damieraBackup[i][j];
                 }
-                this.pedineBiancheMangiate = backupMangiateBianco;
-                this.pedineNereMangiate = backupMangiateNero;
-                throw new eccezionePresa("Presa Multipla non effettuata poiché illegale");
             }
-        }
+            this.pedineBiancheMangiate = backupMangiateBianco;
+            this.pedineNereMangiate = backupMangiateNero;
+            throw exc;
+        } 
     
         return presaMultiplaLecita;
     }
