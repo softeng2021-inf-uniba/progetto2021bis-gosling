@@ -10,6 +10,7 @@ import it.uniba.main.eccezioni.eccezioneSpostamento;
 import org.junit.jupiter.api.Test; 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -230,7 +231,7 @@ public class DamieraTest {
     }
     
     @Test
-    void testSpostamentoPedina_biancoSpostaAvversario() {
+    void testSpostamentoPedina_spostamentoAvversario() {
         String mossa = "9-13";
         try {
             assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
@@ -240,17 +241,7 @@ public class DamieraTest {
     }
 
     @Test
-    void testSpostamentoPedina_neroSpostaAvversario() {
-        String mossa = "21-17";
-        try {
-            assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
-        } catch (Exception exc) {
-            System.out.println("Test passato: " + exc.getMessage());
-        }
-    }
-    
-    @Test
-    void testSpostamentoPedina_biancoSpostaInesistente() {
+    void testSpostamentoPedina_spostamentoPedinaInesistente() {
         String mossa = "17-13";
         try {
             assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
@@ -260,17 +251,7 @@ public class DamieraTest {
     }
     
     @Test
-    void testSpostamentoPedina_neroSpostaInesistente() {
-        String mossa = "13-17";
-        try {
-            assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
-        } catch (Exception exc) {
-            System.out.println("Test passato: " + exc.getMessage());
-        }
-    }
-
-    @Test
-    void testSpostamentoPedina_biancoSpostaInCellaOccupata() {
+    void testSpostamentoPedina_spostamentoInCellaOccupata() {
         String mossa = "29-25";
         try {
             assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
@@ -280,17 +261,7 @@ public class DamieraTest {
     }
 
     @Test
-    void testSpostamentoPedina_neroSpostaInCellaOccupata() {
-        String mossa = "1-5";
-        try {
-            assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
-        } catch (Exception exc) {
-            System.out.println("Test passato: " + exc.getMessage());
-        }
-    }
-    
-    @Test
-    void testSpostamentoPedina_biancoSpostaInCellaSbagliata() {
+    void testSpostamentoPedina_spostamentoInCellaSbagliata() {
         String mossa = "21-13";
         try {
             assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
@@ -300,12 +271,22 @@ public class DamieraTest {
     }
 
     @Test
-    void testSpostamentoPedina_neroSpostaInCellaSbagliata() {
-        String mossa = "9-17";
+    void testSpostamentoPedina_daCellaVuotaACellaPiena() {
+        String mossa = "18-21";
         try {
             assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
         } catch (Exception exc) {
-            fail(exc.getMessage());
+            System.out.println("Test passato: " + exc.getMessage());
+        }
+    }    
+    
+    @Test
+    void testSpostamentoPedina_daCellaPienaACellaPiena() {
+        String mossa = "29-25";
+        try {
+            assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
         }
     }
     
@@ -328,6 +309,81 @@ public class DamieraTest {
             assertTrue(damiera.effettuaPresaSemplice("13x22", Pedina.Colore.nero));
         } catch (Exception exc) {
             System.out.println("Test passato: " + exc.getMessage());
+        }
+    }
+     
+    @Test
+    void testEffettuaPresaSemplice_presaConDamatura(){
+        try{
+            damiera.spostamentoPedina("12-16", Pedina.Colore.nero);
+            damiera.spostamentoPedina("8-12", Pedina.Colore.nero);
+            damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
+            damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
+            damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("18-14", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("14-11", Pedina.Colore.bianco);
+            assertTrue(damiera.effettuaPresaSemplice("11x4", Pedina.Colore.bianco));
+        }catch(Exception exc){
+            fail(exc.getMessage());
+        }
+    }
+    
+    @Test
+    void testEffettuaPresaSemplice_presaConFalsaDamatura(){
+        try{
+            damiera.spostamentoPedina("12-16", Pedina.Colore.nero);
+            damiera.spostamentoPedina("8-12", Pedina.Colore.nero);
+            damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
+            damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
+            damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("18-14", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("14-11", Pedina.Colore.bianco);
+            damiera.effettuaPresaSemplice("11x4", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("4-7", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("7-11", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("3-7", Pedina.Colore.nero);
+            assertTrue(damiera.effettuaPresaSemplice("11x4", Pedina.Colore.bianco));
+        }catch(Exception exc){
+            fail(exc.getMessage());
+        }
+    }
+    
+    @Test
+    void testEffettuaPresaSemplice_presaConDamaInAvanti() {
+        try {
+            damiera.spostamentoPedina("12-16", Pedina.Colore.nero);
+            damiera.spostamentoPedina("8-12", Pedina.Colore.nero);
+            damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
+            damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
+            damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("18-14", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("14-11", Pedina.Colore.bianco);
+            damiera.effettuaPresaSemplice("11x4", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("4-7", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("7-11", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("3-7", Pedina.Colore.nero);
+            assertTrue(damiera.effettuaPresaSemplice("11x4", Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            fail(exc.getMessage());
+        }
+    }
+    
+    @Test
+    void testEffettuaPresaSemplice_presaConDamaIndietro() {
+        try {
+            damiera.spostamentoPedina("12-16", Pedina.Colore.nero);
+            damiera.spostamentoPedina("8-12", Pedina.Colore.nero);
+            damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
+            damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
+            damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("18-14", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("14-11", Pedina.Colore.bianco);
+            damiera.effettuaPresaSemplice("11x4", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("3-7", Pedina.Colore.nero);
+            assertTrue(damiera.effettuaPresaSemplice("4x11", Pedina.Colore.bianco));
+            damiera.stampaPedine();
+        } catch (Exception exc) {
+            fail(exc.getMessage());
         }
     }
     
@@ -365,6 +421,17 @@ public class DamieraTest {
     void testEffettuaPresaSemplice_presaDaCellaVuota() {
         try {
             assertFalse(damiera.effettuaPresaSemplice("18x11", Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            System.out.println("Test passato: " + exc.getMessage());
+        }
+    }
+    
+    @Test
+    void testEffettuaPresaSemplice_cellaArrivoOccupata(){
+        try{
+            damiera.spostamentoPedina("21-17", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
+            assertFalse(damiera.effettuaPresaSemplice("17x10", Pedina.Colore.bianco));
         } catch (Exception exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }

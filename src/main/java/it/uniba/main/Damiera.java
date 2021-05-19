@@ -305,13 +305,11 @@ public final class Damiera {
         } else {
             if(contenutoPosPar==null && contenutoPosArr!=null) {
                 throw new eccezioneSpostamento("Casella di partenza nulla e di arrivo piena");
-            }else if(contenutoPosPar==null) {
+            } else if(contenutoPosPar==null) {
                 throw new eccezioneSpostamento("Casella di partenza vuota");
-            } else if(contenutoPosArr!=null) {
+            } else {
                 throw new eccezioneSpostamento("Casella di arrivo piena");
             }
-            
-            
         }
 
         if (spostamentoLecito) {
@@ -328,11 +326,7 @@ public final class Damiera {
             }
 
         } else {
-            if (coloreSbagliato) {
-                System.out.println("Non puoi spostare una pedina del tuo avversario");
-            } else {
-                System.out.println("Mossa non valida.");
-            }
+            System.out.println("Mossa non valida.");
         }
 
         return spostamentoLecito;
@@ -433,7 +427,8 @@ public final class Damiera {
             this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()]
                     = this.damieraGioco[posPartenza.getRiga()][posPartenza.getColonna()];
             this.damieraGioco[posPartenza.getRiga()][posPartenza.getColonna()] = null;
-            if (posArrivo.getRiga() == rigaBaseNemica) {
+            Pedina contenutoPosArrivo = this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()];
+            if (posArrivo.getRiga() == rigaBaseNemica && contenutoPosArrivo.getTipo() != Pedina.TipoPedina.pedinaRe) {
                 System.out.println("Hai effettuato la damatura!");
                 this.damieraGioco[posArrivo.getRiga()][posArrivo.getColonna()].promuoviADama();
             }
