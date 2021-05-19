@@ -467,29 +467,28 @@ public final class Damiera {
 
         int contaTestPrese = 0;
 
-        while (contaTestPrese < prese.length) { // Per ogni mossa, verifica se è lecita
-            boolean correct = effettuaPresaSemplice(prese[contaTestPrese], coloreGiocatore);
-
-            if (!correct) {
-                presaMultiplaLecita = false; // se anche solo 1 mossa non è lecita, esce
-                break;
-            } else {
-                presaMultiplaLecita = true;
+        try {
+            while (contaTestPrese < prese.length) { // Per ogni mossa, verifica se è lecita
+                presaMultiplaLecita = effettuaPresaSemplice(prese[contaTestPrese], coloreGiocatore);
+                contaTestPrese++;
             }
-            contaTestPrese++;
-        }
-
-        if (!presaMultiplaLecita) {
-            //Se una delle mosse non era lecita, resetta la damiera com'era prima
-            for (int i = 0; i < DAMIERA_SIZE; i++) {
-                for (int j = 0; j < DAMIERA_SIZE; j++) {
-                    damieraGioco[i][j] = damieraBackup[i][j];
+        } catch(eccezionePresa exc) {
+            presaMultiplaLecita = false;
+            System.out.println(exc.getMessage());
+        } finally {
+            if (!presaMultiplaLecita) {
+                //Se una delle mosse non era lecita, resetta la damiera com'era prima
+                for (int i = 0; i < DAMIERA_SIZE; i++) {
+                    for (int j = 0; j < DAMIERA_SIZE; j++) {
+                        damieraGioco[i][j] = damieraBackup[i][j];
+                    }
                 }
+                this.pedineBiancheMangiate = backupMangiateBianco;
+                this.pedineNereMangiate = backupMangiateNero;
+                throw new eccezionePresa("Presa Multipla non effettuata poiché illegale");
             }
-            this.pedineBiancheMangiate = backupMangiateBianco;
-            this.pedineNereMangiate = backupMangiateNero;
         }
-
+    
         return presaMultiplaLecita;
     }
 
