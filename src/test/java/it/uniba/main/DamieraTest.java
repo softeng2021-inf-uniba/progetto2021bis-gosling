@@ -539,7 +539,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("10-14", Pedina.Colore.nero);
             assertFalse(damiera.effettuaPresaMultipla("18x11x3", Pedina.Colore.bianco));
         } catch (Exception exc) {
-            System.out.println("Test passatoooooooooooooooo: " + exc.getMessage());
+            System.out.println("Test passato: " + exc.getMessage());
         }
     }
 }
