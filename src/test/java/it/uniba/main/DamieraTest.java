@@ -504,4 +504,42 @@ public class DamieraTest {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
+    
+    @Test
+    void testEffettuaPresaMultipla_presaLecita(){
+        try {
+            damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
+            damiera.spostamentoPedina("21-17", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("12-16", Pedina.Colore.nero);            
+            damiera.spostamentoPedina("26-21", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("8-12", Pedina.Colore.nero);            
+            damiera.spostamentoPedina("29-26", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
+            damiera.spostamentoPedina("24-20", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("10-14", Pedina.Colore.nero);
+            assertTrue(damiera.effettuaPresaMultipla("18x11x4", Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            fail(exc.getMessage());
+        }
+    }
+    
+    @Test
+    void testEffettuaPresaMultipla_presaNonLecita(){
+        try {
+            damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
+            damiera.spostamentoPedina("21-17", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("12-16", Pedina.Colore.nero);
+            damiera.spostamentoPedina("26-21", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("8-12", Pedina.Colore.nero);
+            damiera.spostamentoPedina("29-26", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
+            damiera.spostamentoPedina("24-20", Pedina.Colore.bianco);
+            damiera.spostamentoPedina("10-14", Pedina.Colore.nero);
+            assertFalse(damiera.effettuaPresaMultipla("18x11x3", Pedina.Colore.bianco));
+        } catch (Exception exc) {
+            System.out.println("Test passatoooooooooooooooo: " + exc.getMessage());
+        }
+    }
 }
