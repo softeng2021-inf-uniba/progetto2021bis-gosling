@@ -59,6 +59,14 @@ public final class Partita {
         return finita;
     }
 
+    public Giocatore getGiocatore1() {
+        return giocatore1;
+    }
+
+    public Giocatore getGiocatore2() {
+        return giocatore2;
+    }
+
     /* ------------ Metodi ------------ */
     public static void nuovaPartita() {
 
@@ -91,7 +99,7 @@ public final class Partita {
 
         System.out.println("È il turno di: " + corrente.getNome() + " (" + corrente.getColore().toString() + ").");
 
-        InterfacciaInput.menuDiGico(corrente, avversario);
+        InterfacciaInput.menuDiGioco(corrente, avversario);
 
         corrente.aggiornaTempoPassato();
 

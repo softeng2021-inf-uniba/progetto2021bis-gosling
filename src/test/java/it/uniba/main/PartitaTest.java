@@ -5,6 +5,9 @@
  */
 package it.uniba.main;
 
+import it.uniba.main.interfacce.InterfacciaInput;
+import static it.uniba.main.interfacce.InterfacciaInput.menuDiGioco;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.Test;
@@ -62,7 +65,7 @@ public class PartitaTest {
     }
     
     @Test//Da finire
-    void testStampaTempoPassato(){
+    void testStampaTempoPassato_giocatore1(){
         PrintStream backupOut = System.out;
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -73,5 +76,59 @@ public class PartitaTest {
         System.setOut(backupOut);
 
         assertTrue(outContent.toString().length() != 0);
+    }    
+    
+    @Test//Da finire
+    void testStampaTempoPassato_giocatore2(){
+        PrintStream backupOut = System.out;
+
+        String commandSequence = "22-18" + System.lineSeparator() + "tempo" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
+
+        ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
+        InterfacciaInput.setInputStream(in);
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        partita.nuovoTurno();
+        partita.nuovoTurno();
+
+        System.setOut(backupOut);
+        
+        assertTrue(outContent.toString().contains("tempo"));
+
+        Partita.azzeraPartitaCorrente();
+    }
+    
+    @Test
+    void testGetGiocatore1(){
+        assertEquals(Pedina.Colore.bianco, partita.getGiocatore1().getColore());
+    }
+        
+    @Test
+    void testGetGiocatore2(){
+        assertEquals(Pedina.Colore.nero, partita.getGiocatore2().getColore());
+    }
+    
+    @Test
+    void testNuovoTurno(){
+        PrintStream backupOut = System.out;
+
+        String commandSequence = "22-18" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
+
+        ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
+        InterfacciaInput.setInputStream(in);
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        partita.nuovoTurno();
+        partita.nuovoTurno();
+
+        System.setOut(backupOut);
+        
+        assertTrue(outContent.toString().contains("turno di"));
+
+        Partita.azzeraPartitaCorrente();
     }
 }

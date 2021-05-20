@@ -278,6 +278,8 @@ public final class Damiera {
 
     public void stampaMosse() {
 
+        System.out.println("Lista mosse:");
+        
         for (int i = 0; i < this.listaMosse.size(); i++) {
             System.out.println(listaMosse.get(i));
         }

@@ -11,6 +11,7 @@ import it.uniba.main.Help;
 import it.uniba.main.Partita;
 import it.uniba.main.eccezioni.eccezionePresa;
 import it.uniba.main.eccezioni.eccezioneSpostamento;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,7 +25,13 @@ import java.util.Set;
  */
 public final class InterfacciaInput {
     
+    public static Scanner sc = new Scanner(System.in, "utf-8");
+    
     private InterfacciaInput() {
+    }
+    
+    public static void setInputStream(InputStream inputStream){
+        sc = new Scanner(inputStream, "utf-8");
     }
     
     public static boolean chiediConferma(final String richiesta, final String casoAffermativo,
@@ -35,7 +42,7 @@ public final class InterfacciaInput {
         boolean error;
         String answer;
 
-        Scanner sc = new Scanner(System.in, "utf-8");
+        //Scanner sc = new Scanner(System.in, "utf-8");
         do {
             error = false;
             System.out.println("digitare 'si' o 'no'.");
@@ -65,7 +72,7 @@ public final class InterfacciaInput {
     public static void menuDiInizio() {
         boolean isExiting = false;
         String answer;
-        Scanner sc = new Scanner(System.in, "utf-8");
+        //Scanner sc = new Scanner(System.in, "utf-8");
 
         do {
             System.out.println("-------------------------------- Menu Principale "
@@ -123,13 +130,13 @@ public final class InterfacciaInput {
         sc.close();
     }
 
-    public static void menuDiGico(final Giocatore corrente, final Giocatore avversario) {
+    public static void menuDiGioco(final Giocatore corrente, final Giocatore avversario) {
         boolean isExiting = false;
         String answer;
 
         corrente.iniziaMossa();
 
-        Scanner sc = new Scanner(System.in, "utf-8");
+        //Scanner sc = new Scanner(System.in, "utf-8");
         do {
             System.out.println("Digitare un comando valido...");
             if (sc.hasNextLine()) {
