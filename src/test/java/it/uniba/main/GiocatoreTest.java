@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 
 /**
  *
@@ -18,10 +20,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class GiocatoreTest {
     static Giocatore giocatore =null;
     
-    @BeforeAll
-    static void setupAll(){
+    @BeforeEach
+    void setUp(){
         giocatore = new Giocatore(1);
     }
+    
     
     @Test
     void testGetNome(){
@@ -58,9 +61,14 @@ public class GiocatoreTest {
     
     @Test
     void testAggiornaTempoPassato(){
-        giocatore.iniziaMossa();
-        LocalTime tempoNullo = LocalTime.of(1, 0, 0);
+        LocalTime tempoNullo = LocalTime.of(0, 0, 0);
         giocatore.aggiornaTempoPassato();
         assertNotEquals(tempoNullo, giocatore.getTempoPassato());
+    }
+    
+    @Test
+    void testInzioMossa(){
+        giocatore.iniziaMossa();
+        assertNotEquals(0, giocatore.getMossaCorrente());
     }
 }

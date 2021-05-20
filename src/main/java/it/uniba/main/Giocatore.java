@@ -43,7 +43,7 @@ public final class Giocatore {
                 break;
         }
 
-        this.segnaTempo = null;
+        this.segnaTempo = LocalTime.of(0, 0, 0);
         this.tempoPassato = LocalTime.of(0, 0, 0);
         this.mossaCorrente = 0;
     }
@@ -78,7 +78,7 @@ public final class Giocatore {
         return (coloreAvversario);
     }
 
-    public void setSegnaTempo(final LocalTime tempoInizioMossa) {
+    private void setSegnaTempo(final LocalTime tempoInizioMossa) {
         this.segnaTempo = tempoInizioMossa;
     }
 
@@ -98,7 +98,6 @@ public final class Giocatore {
         Long seconds = SECONDS.between(segnaTempo, now) % secondi;
         this.tempoPassato = this.tempoPassato.plusMinutes(minutes);
         this.tempoPassato = this.tempoPassato.plusSeconds(seconds);
-        System.out.println("sono qui 2");
         this.setSegnaTempo(LocalTime.now());
     }
 

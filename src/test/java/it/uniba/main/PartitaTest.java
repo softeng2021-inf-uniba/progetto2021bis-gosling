@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 
 /**
@@ -24,6 +25,12 @@ public class PartitaTest {
     
     @BeforeAll
     static void setUpAll() {
+        Partita.nuovaPartita();
+        partita = Partita.getPartita();
+    }
+    
+    @BeforeEach
+    void setUp() {
         Partita.nuovaPartita();
         partita = Partita.getPartita();
     }
@@ -49,5 +56,14 @@ public class PartitaTest {
         assertTrue(partita.isFinita());
     }
     
+    @Test
+    void testAzzeraPartitaCorrente(){
+        Partita.azzeraPartitaCorrente();
+        assertNull(Partita.getPartita());
+    }
     
+    @Test//Da finire
+    void testStampaTempoPassato(){
+        partita.stampaTempoPassato();
+    }
 }

@@ -53,6 +53,12 @@ public final class Pedina {
         return this.tipo;
     }
 
+    public static void setInvertiColore(boolean invertiColore) {
+        Pedina.invertiColore = invertiColore;
+    }
+    
+    
+
     /* ------------ Metodi ------------*/
     public void stampaPedina() {
         if (this.colore == Colore.bianco) {

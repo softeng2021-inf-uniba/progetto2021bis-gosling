@@ -586,16 +586,13 @@ public class DamieraTest {
     @Test
     void testRegistraMossa_bianco() {
         damiera.registraMossa("8-9", Pedina.Colore.bianco);
+        assertFalse(damiera.getListaMosse().isEmpty());
     }
 
     @Test
     void testRegistraMossa_nero() {
         damiera.registraMossa("8-9", Pedina.Colore.nero);
-    }
-    
-    @Test
-    void testSetListaMosse(){
-        damiera.setListaMosse(null);
+        assertFalse(damiera.getListaMosse().isEmpty());
     }
     
 }
