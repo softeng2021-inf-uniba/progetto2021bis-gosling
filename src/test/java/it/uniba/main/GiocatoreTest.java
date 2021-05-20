@@ -18,7 +18,8 @@ import org.junit.jupiter.api.Disabled;
  * @author mtubi
  */
 public class GiocatoreTest {
-    static Giocatore giocatore =null;
+    
+    private static Giocatore giocatore =null;
     
     @BeforeEach
     void setUp(){
@@ -45,11 +46,6 @@ public class GiocatoreTest {
     @Test
     void testGetTempoPassato(){
         assertNotNull(giocatore.getTempoPassato());
-    }
-    
-    @Test
-    void testGetMossaCorrente(){
-        assertNotNull(giocatore.getMossaCorrente());
     }
     
     @Test

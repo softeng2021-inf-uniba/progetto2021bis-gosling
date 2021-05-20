@@ -7,6 +7,9 @@ package it.uniba.main;
 
 import it.uniba.main.eccezioni.eccezionePresa;
 import it.uniba.main.eccezioni.eccezioneSpostamento;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -312,31 +315,6 @@ public class DamieraTest {
         }
     }
 
-    @Disabled
-    @Test
-    void testEffettuaPresaSemplice_presaCorrettaSinistra() {
-        try {
-            damiera.spostamentoPedina("21-18", Pedina.Colore.bianco);
-            damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
-            assertTrue(damiera.effettuaPresaSemplice("18x9", Pedina.Colore.bianco));
-        } catch (Exception exc) {
-            fail(exc.getMessage());
-        }
-    }
-
-    @Disabled
-    @Test
-    void testEffettuaPresaSemplice_presaCorrettaDestra() {
-        try {
-            damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
-            damiera.spostamentoPedina("10-14", Pedina.Colore.nero);
-            damiera.spostamentoPedina("21-18", Pedina.Colore.bianco);
-            assertTrue(damiera.effettuaPresaSemplice("18x11", Pedina.Colore.bianco));
-        } catch (Exception exc) {
-            fail(exc.getMessage());
-        }
-    }
-
     @Test
     void testEffettuaPresaSemplice_presaConDamatura() {
         try {
@@ -371,27 +349,6 @@ public class DamieraTest {
             damiera.spostamentoPedina("10-14", Pedina.Colore.nero);
             damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
             assertFalse(damiera.effettuaPresaSemplice("19x9", Pedina.Colore.bianco));
-        } catch (Exception exc) {
-            System.out.println("Test passato: " + exc.getMessage());
-        }
-    }
-
-    @Disabled
-    @Test
-    void testEffettuaPresaSemplice_presaConFalsaDamatura() {
-        try {
-            damiera.spostamentoPedina("12-16", Pedina.Colore.nero);
-            damiera.spostamentoPedina("8-12", Pedina.Colore.nero);
-            damiera.spostamentoPedina("4-8", Pedina.Colore.nero);
-            damiera.spostamentoPedina("11-15", Pedina.Colore.nero);
-            damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
-            damiera.spostamentoPedina("18-14", Pedina.Colore.bianco);
-            damiera.spostamentoPedina("14-11", Pedina.Colore.bianco);
-            damiera.effettuaPresaSemplice("11x4", Pedina.Colore.bianco);
-            damiera.spostamentoPedina("4-7", Pedina.Colore.bianco);
-            damiera.spostamentoPedina("7-11", Pedina.Colore.bianco);
-            damiera.spostamentoPedina("3-7", Pedina.Colore.nero);
-            assertFalse(damiera.effettuaPresaSemplice("11x4", Pedina.Colore.bianco));
         } catch (Exception exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
@@ -545,21 +502,52 @@ public class DamieraTest {
 
     @Test
     void testStampaNumeri() {
+        
+        PrintStream backupOut = System.out;
+        
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        
         damiera.stampaNumeri();
+
+        System.setOut(backupOut);
+        
+        assertTrue(outContent.toString().length() != 0);
     }
 
     @Test
     void testStampaPedine() {
+        
+        PrintStream backupOut = System.out;
+        
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        
         damiera.stampaPedine();
+
+        System.setOut(backupOut);
+        
+        assertTrue(outContent.toString().length() != 0);
     }
 
     @Test
-    void testStampaPeidneMangiate_bianche() {
+    void testStampaPedineMangiate_bianche() {
         try {
             damiera.spostamentoPedina("21-18", Pedina.Colore.bianco);
             damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
             damiera.effettuaPresaSemplice("18x9", Pedina.Colore.bianco);
+            
+            PrintStream backupOut = System.out;
+
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent));
+
             damiera.stampaPedineMangiate();
+
+            System.setOut(backupOut);
+
+            assertTrue(outContent.toString().length() != 0);
+            
         } catch (Exception exc) {
             fail(exc.getMessage());
         }
@@ -571,7 +559,18 @@ public class DamieraTest {
             damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
             damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
             damiera.effettuaPresaSemplice("13x22", Pedina.Colore.nero);
+            
+            PrintStream backupOut = System.out;
+
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent));
+
             damiera.stampaPedineMangiate();
+
+            System.setOut(backupOut);
+
+            assertTrue(outContent.toString().length() != 0);
+            
         } catch (Exception exc) {
             fail(exc.getMessage());
         }
@@ -580,7 +579,17 @@ public class DamieraTest {
     @Test
     void testStampaMosse() {
         damiera.registraMossa("8-9", Pedina.Colore.bianco);
+        
+        PrintStream backupOut = System.out;
+        
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        
         damiera.stampaMosse();
+
+        System.setOut(backupOut);
+        
+        assertTrue(outContent.toString().length() != 0);
     }
 
     @Test

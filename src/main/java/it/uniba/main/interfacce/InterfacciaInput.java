@@ -76,7 +76,7 @@ public final class InterfacciaInput {
                 answer = answer.replaceAll(" +", "");
                 switch (answer.toLowerCase()) {
                     case "help":
-                        Help.getMenuHelp();
+                        Help.stampaHelpMenu();
                         break;
                     case "gioca":
                         Partita.nuovaPartita();
@@ -137,7 +137,7 @@ public final class InterfacciaInput {
                 answer = answer.replaceAll("\\s+", "");
                 switch (answer.toLowerCase()) {
                     case "help":
-                        Help.getMenuHelp();
+                        Help.stampaHelpMenu();
                         break;
                     case "numeri":
                         Damiera.getDamiera().stampaNumeri();

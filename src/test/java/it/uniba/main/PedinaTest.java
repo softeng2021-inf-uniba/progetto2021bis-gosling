@@ -4,12 +4,16 @@
  * and open the template in the editor.
  */
 package it.uniba.main;
+
 import it.uniba.main.Pedina.Colore;
 import it.uniba.main.Pedina.TipoPedina;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 
 /**
@@ -17,87 +21,168 @@ import org.junit.jupiter.api.BeforeEach;
  * @author mtubi
  */
 public class PedinaTest {
-    static Pedina pedina = null;
-    
+
+    private static Pedina pedina = null;
+
     @BeforeAll
-    static void setUpAll(){
+    static void setUpAll() {
         pedina = new Pedina(Colore.bianco);
     }
-    
+
     @BeforeEach
-    void setUp(){
+    void setUp() {
         pedina = new Pedina(Colore.bianco);
     }
-    
+
     @Test
-    void testGetColore(){
+    void testGetColore() {
         assertNotNull(pedina.getColore());
     }
-    
+
     @Test
-    void testGetTipo(){
+    void testGetTipo() {
         assertNotNull(pedina.getTipo());
     }
-    
+
     @Test
-    void testPromuoviADama(){
+    void testPromuoviADama() {
         pedina.promuoviADama();
         assertNotEquals(TipoPedina.pedinaSemplice, pedina.getTipo());
     }
-    
+
     @Test
-    void testStampaPedina_sempliceBiancaNonInvertita(){
-        Pedina.setInvertiColore(true);
-        pedina.stampaPedina();
-    }
-    
-    @Test
-    void testStampaPedina_sempliceNeraNonInvertita(){
-        Pedina.setInvertiColore(true);
-        pedina = new Pedina(Colore.nero);
-        pedina.stampaPedina();
-    }
-    
-    @Test
-    void testStampaPedina_sempliceBiancaInvertita(){
+    void testStampaPedina_sempliceBiancaNonInvertita() {
         Pedina.setInvertiColore(false);
+
+        PrintStream backupOut = System.out;
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
         pedina.stampaPedina();
+
+        System.setOut(backupOut);
+
+        assertTrue(outContent.toString().length() != 0);
     }
-    
+
     @Test
-    void testStampaPedina_sempliceNeraInvertita(){
+    void testStampaPedina_sempliceNeraNonInvertita() {
         Pedina.setInvertiColore(false);
         pedina = new Pedina(Colore.nero);
+
+        PrintStream backupOut = System.out;
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
         pedina.stampaPedina();
+
+        System.setOut(backupOut);
+
+        assertTrue(outContent.toString().length() != 0);
     }
-    
+
     @Test
-    void testStampaPedina_reBiancaNonInvertita(){
+    void testStampaPedina_sempliceBiancaInvertita() {
+        Pedina.setInvertiColore(true);
+
+        PrintStream backupOut = System.out;
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        pedina.stampaPedina();
+
+        System.setOut(backupOut);
+
+        assertTrue(outContent.toString().length() != 0);
+    }
+
+    @Test
+    void testStampaPedina_sempliceNeraInvertita() {
+        Pedina.setInvertiColore(true);
+        pedina = new Pedina(Colore.nero);
+
+        PrintStream backupOut = System.out;
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        pedina.stampaPedina();
+
+        System.setOut(backupOut);
+
+        assertTrue(outContent.toString().length() != 0);
+    }
+
+    @Test
+    void testStampaPedina_reBiancaNonInvertita() {
+        Pedina.setInvertiColore(false);
+        pedina.promuoviADama();
+
+        PrintStream backupOut = System.out;
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        pedina.stampaPedina();
+
+        System.setOut(backupOut);
+
+        assertTrue(outContent.toString().length() != 0);
+    }
+
+    @Test
+    void testStampaPedina_reNeroNonInvertita() {
+        Pedina.setInvertiColore(false);
+        pedina = new Pedina(Colore.nero);
+        pedina.promuoviADama();
+
+        PrintStream backupOut = System.out;
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        pedina.stampaPedina();
+
+        System.setOut(backupOut);
+
+        assertTrue(outContent.toString().length() != 0);
+    }
+
+    @Test
+    void testStampaPedina_reBiancoInvertita() {
         Pedina.setInvertiColore(true);
         pedina.promuoviADama();
+
+        PrintStream backupOut = System.out;
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
         pedina.stampaPedina();
+
+        System.setOut(backupOut);
+
+        assertTrue(outContent.toString().length() != 0);
     }
-    
+
     @Test
-    void testStampaPedina_reNeroNonInvertita(){
+    void testStampaPedina_reNeroInvertito() {
         Pedina.setInvertiColore(true);
         pedina = new Pedina(Colore.nero);
         pedina.promuoviADama();
+
+        PrintStream backupOut = System.out;
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
         pedina.stampaPedina();
-    }
-    
-    @Test
-    void testStampaPedina_reBiancoInvertita(){
-        Pedina.setInvertiColore(false);
-        pedina.promuoviADama();
-        pedina.stampaPedina();
-    }
-    
-    @Test
-    void testStampaPedina_reNeroInvertito(){
-        Pedina.setInvertiColore(false);
-        pedina = new Pedina(Colore.nero);
-        pedina.promuoviADama();
-        pedina.stampaPedina();
+
+        System.setOut(backupOut);
+
+        assertTrue(outContent.toString().length() != 0);
     }
 }

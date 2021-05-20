@@ -5,6 +5,8 @@
  */
 package it.uniba.main;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -13,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 
@@ -21,7 +24,8 @@ import org.junit.jupiter.api.Disabled;
  * @author mtubi
  */
 public class PartitaTest {
-    static Partita partita = null;
+    
+    private static Partita partita = null;
     
     @BeforeAll
     static void setUpAll() {
@@ -38,11 +42,6 @@ public class PartitaTest {
     @Test
     void testGetPartita(){
         assertNotNull(Partita.getPartita());
-    }
-    
-    @Test
-    void testNuovaPartita(){
-        Partita.nuovaPartita();
     }
     
     @Test
@@ -64,6 +63,15 @@ public class PartitaTest {
     
     @Test//Da finire
     void testStampaTempoPassato(){
+        PrintStream backupOut = System.out;
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
         partita.stampaTempoPassato();
+
+        System.setOut(backupOut);
+
+        assertTrue(outContent.toString().length() != 0);
     }
 }

@@ -28,7 +28,7 @@ public final class AppMain {
             switch (args[0]) {
                 case "--help":
                 case "-h":
-                    Help.getMenuHelp();
+                    Help.stampaHelpMenu();
                     break;
                 default:
                     break;
