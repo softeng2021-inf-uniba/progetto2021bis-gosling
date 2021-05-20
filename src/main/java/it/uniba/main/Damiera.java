@@ -93,11 +93,11 @@ public final class Damiera {
     public void setListaMosse(final List<String> listaMosseIn) {
         this.listaMosse = listaMosseIn;
     }
-
+    /*
     public void addListaMosse(final String... mosse) {
         listaMosse.addAll(Arrays.asList(mosse));
-    }
-
+    }*/
+    
     public static int getGrandezzaPosizioni() {
         return GRANDEZZA_POSIZIONI;
     }

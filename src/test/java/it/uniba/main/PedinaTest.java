@@ -5,9 +5,11 @@
  */
 package it.uniba.main;
 import it.uniba.main.Pedina.Colore;
+import it.uniba.main.Pedina.TipoPedina;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  *
@@ -30,4 +32,11 @@ public class PedinaTest {
     void testGetTipo(){
         assertNotNull(pedina.getTipo());
     }
+    
+    @Test
+    void testPromuoviADama(){
+        pedina.promuoviADama();
+        assertNotEquals(TipoPedina.pedinaSemplice, pedina.getTipo());
+    }
+    
 }

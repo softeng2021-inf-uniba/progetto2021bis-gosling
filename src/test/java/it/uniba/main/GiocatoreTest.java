@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package it.uniba.main;
+import java.time.LocalTime;
 import org.junit.jupiter.api.Test; 
 import org.junit.jupiter.api.BeforeAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -53,5 +54,13 @@ public class GiocatoreTest {
         Giocatore nuovoGiocatore = new Giocatore(3);
         String nomeAspettato = "Giocatore 2";
         assertEquals(nomeAspettato, nuovoGiocatore.getNome());
+    }
+    
+    @Test
+    void testAggiornaTempoPassato(){
+        giocatore.iniziaMossa();
+        LocalTime tempoNullo = LocalTime.of(1, 0, 0);
+        giocatore.aggiornaTempoPassato();
+        assertNotEquals(tempoNullo, giocatore.getTempoPassato());
     }
 }

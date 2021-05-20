@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.jupiter.api.Disabled;
 
 /**
  *
@@ -40,5 +42,12 @@ public class PartitaTest {
     void testIsFinita(){
         assertFalse(partita.isFinita());
     }
+    
+    @Test
+    void testFinisciPerrtita(){
+        partita.finisciPartita();
+        assertTrue(partita.isFinita());
+    }
+    
     
 }

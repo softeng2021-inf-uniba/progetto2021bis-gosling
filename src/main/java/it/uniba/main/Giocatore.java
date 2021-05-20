@@ -94,11 +94,11 @@ public final class Giocatore {
     public void aggiornaTempoPassato() {
         final int secondi = 60;
         LocalTime now = LocalTime.now();
-
         Long minutes = MINUTES.between(segnaTempo, now);
         Long seconds = SECONDS.between(segnaTempo, now) % secondi;
         this.tempoPassato = this.tempoPassato.plusMinutes(minutes);
         this.tempoPassato = this.tempoPassato.plusSeconds(seconds);
+        System.out.println("sono qui 2");
         this.setSegnaTempo(LocalTime.now());
     }
 
