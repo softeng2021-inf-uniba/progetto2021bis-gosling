@@ -93,7 +93,7 @@ public final class Damiera {
     public void setListaMosse(final List<String> listaMosseIn) {
         this.listaMosse = listaMosseIn;
     }
-
+    
     public static int getGrandezzaPosizioni() {
         return GRANDEZZA_POSIZIONI;
     }

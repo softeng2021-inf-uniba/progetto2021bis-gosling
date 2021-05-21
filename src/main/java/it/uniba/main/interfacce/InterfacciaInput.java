@@ -25,13 +25,9 @@ import java.util.Set;
  */
 public final class InterfacciaInput {
     
-    public static Scanner sc = new Scanner(System.in, "utf-8");
+    private static Scanner sc = new Scanner(System.in, "utf-8");
     
     private InterfacciaInput() {
-    }
-    
-    public static void setInputStream(InputStream inputStream){
-        sc = new Scanner(inputStream, "utf-8");
     }
     
     public static boolean chiediConferma(final String richiesta, final String casoAffermativo,
@@ -166,7 +162,6 @@ public final class InterfacciaInput {
                                     + ")" + " ha vinto per abbandono.");
                             Partita.getPartita().finisciPartita();
                         }
-
                         break;
                     case "prese":
                         Damiera.getDamiera().stampaPedineMangiate();
@@ -214,6 +209,7 @@ public final class InterfacciaInput {
                         break;
                 }
             }
+            
         } while (!isExiting);
     }
 
@@ -279,5 +275,9 @@ public final class InterfacciaInput {
         }
 
         return sintassiCorretta;
+    }
+    
+    public static void setInputStream(InputStream inputStream){
+        sc = new Scanner(inputStream, "utf-8");
     }
 }

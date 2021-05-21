@@ -5,6 +5,7 @@
  */
 package it.uniba.main.interfacce;
 
+import it.uniba.main.Damiera;
 import it.uniba.main.Giocatore;
 import it.uniba.main.Partita;
 import static it.uniba.main.interfacce.InterfacciaInput.*;
@@ -14,9 +15,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.io.StringReader;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -254,7 +257,7 @@ public class InterfacciaInputTest {
         System.setOut(backupOut);
 
         assertTrue(outContent.toString().contains("HELP"));
-        
+
         Partita.azzeraPartitaCorrente();
     }
 
@@ -278,7 +281,7 @@ public class InterfacciaInputTest {
         System.setOut(backupOut);
 
         assertTrue(outContent.toString().contains("+---+---+---+---+---+---+---+---+"));
-        
+
         Partita.azzeraPartitaCorrente();
     }
 
@@ -302,7 +305,7 @@ public class InterfacciaInputTest {
         System.setOut(backupOut);
 
         assertTrue(outContent.toString().contains("+---+---+---+---+---+---+---+---+"));
-        
+
         Partita.azzeraPartitaCorrente();
     }
 
@@ -326,10 +329,10 @@ public class InterfacciaInputTest {
         System.setOut(backupOut);
 
         assertTrue(outContent.toString().contains("Il tempo di gioco di"));
-        
+
         Partita.azzeraPartitaCorrente();
     }
-    
+
     @Test
     void testMenuDiGioco_abbandona() {
         PrintStream backupOut = System.out;
@@ -344,16 +347,16 @@ public class InterfacciaInputTest {
 
         Partita.nuovaPartita();
         Partita partita = Partita.getPartita();
-        
+
         menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
 
         System.setOut(backupOut);
 
         assertTrue(outContent.toString().contains("ha abbandonato il gioco"));
-        
+
         Partita.azzeraPartitaCorrente();
     }
-    
+
     @Test
     void testMenuDiGioco_prese() {
         PrintStream backupOut = System.out;
@@ -368,16 +371,16 @@ public class InterfacciaInputTest {
 
         Partita.nuovaPartita();
         Partita partita = Partita.getPartita();
-        
+
         menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
 
         System.setOut(backupOut);
 
         assertTrue(outContent.toString().contains("Nero:") && outContent.toString().contains("Bianco:"));
-        
+
         Partita.azzeraPartitaCorrente();
-    }    
-    
+    }
+
     @Test
     void testMenuDiGioco_mosse() {
         PrintStream backupOut = System.out;
@@ -392,211 +395,111 @@ public class InterfacciaInputTest {
 
         Partita.nuovaPartita();
         Partita partita = Partita.getPartita();
-        
+
         menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
 
         System.setOut(backupOut);
 
         assertTrue(outContent.toString().contains("Lista mosse:"));
-        
+
         Partita.azzeraPartitaCorrente();
-    }    
-       
+    }
+
     @Test
     void testMenuDiGioco_spostamentoCorretto() {
-        PrintStream backupOut = System.out;
-
         String commandSequence = "22-18" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
 
         ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
         InterfacciaInput.setInputStream(in);
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
         Partita.nuovaPartita();
-        Partita partita = Partita.getPartita();
+        Partita.getPartita().giocaPartita();
         
-        menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
+        assertTrue(Damiera.getDamiera().getListaMosse().contains("B. 22-18"));
 
-        System.setOut(backupOut);
-
-        assertTrue(!outContent.toString().contains("Comando inserito non valido."));
-        
         Partita.azzeraPartitaCorrente();
-    }   
-    
-            
+    }
+
     @Test
     void testMenuDiGioco_spostamentoErrato() {
-        PrintStream backupOut = System.out;
-
         String commandSequence = "18-13" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
 
         ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
         InterfacciaInput.setInputStream(in);
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
         Partita.nuovaPartita();
-        Partita partita = Partita.getPartita();
+        Partita.getPartita().giocaPartita();
         
-        menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
+        assertFalse(Damiera.getDamiera().getListaMosse().contains("B. 18-13"));
 
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("Casella di partenza vuota"));
-        
         Partita.azzeraPartitaCorrente();
     }
-           
-    @Disabled
+
     @Test
     void testMenuDiGioco_presaSempliceCorretta() {
-        PrintStream backupOut = System.out;
-
-        String commandSequence = "22-18" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
+        String commandSequence = "21-18" + System.lineSeparator() + "9-13" 
+                + System.lineSeparator() + "18x9" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
 
         ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
         InterfacciaInput.setInputStream(in);
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
         Partita.nuovaPartita();
-        Partita partita = Partita.getPartita();
+        Partita.getPartita().giocaPartita();
         
-        menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
+        assertTrue(Damiera.getDamiera().getListaMosse().contains("B. 18x9"));
 
-        System.setOut(backupOut);
-
-        assertTrue(!outContent.toString().contains("Comando inserito non valido."));
-        
         Partita.azzeraPartitaCorrente();
-    }   
-    
+    }
+
     @Test
     void testMenuDiGioco_presaSempliceErrata() {
-        PrintStream backupOut = System.out;
-
-        String commandSequence = "18x13" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
+        String commandSequence = "18x8" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
 
         ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
         InterfacciaInput.setInputStream(in);
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
         Partita.nuovaPartita();
-        Partita partita = Partita.getPartita();
+        Partita.getPartita().giocaPartita();
         
-        menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
+        assertFalse(Damiera.getDamiera().getListaMosse().contains("B. 18x8"));
 
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("Presa non valida. La casella di partenza è vuota"));
-        
         Partita.azzeraPartitaCorrente();
-    }   
-               
-    @Disabled
+    }
+
     @Test
     void testMenuDiGioco_presaMultiplaCorretta() {
-        PrintStream backupOut = System.out;
-
-        String commandSequence = "22-18" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
+        String commandSequence = "22-18" + System.lineSeparator() + "11-15" + System.lineSeparator() + "21-17"
+                 + System.lineSeparator() + "12-16"  + System.lineSeparator() + "26-21"  + System.lineSeparator() + "8-12"
+                 + System.lineSeparator() + "29-26"  + System.lineSeparator() + "4-8"  + System.lineSeparator() + "24-20"
+                 + System.lineSeparator() + "10-14" + System.lineSeparator() + "18x11x4"  + System.lineSeparator() + "abbandona"
+                 + System.lineSeparator() + "si";
 
         ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
         InterfacciaInput.setInputStream(in);
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
         Partita.nuovaPartita();
-        Partita partita = Partita.getPartita();
+        Partita.getPartita().giocaPartita();
         
-        menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
+        assertTrue(Damiera.getDamiera().getListaMosse().contains("B. 18x11x4"));
 
-        System.setOut(backupOut);
-
-        assertTrue(!outContent.toString().contains("Comando inserito non valido."));
-        
         Partita.azzeraPartitaCorrente();
-    }   
-    
+    }
+
     @Test
     void testMenuDiGioco_presaMultiplaErrata() {
-        PrintStream backupOut = System.out;
-
-        String commandSequence = "18x13x9" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
+        String commandSequence = "18x13x10" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
 
         ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
         InterfacciaInput.setInputStream(in);
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
         Partita.nuovaPartita();
-        Partita partita = Partita.getPartita();
+        Partita.getPartita().giocaPartita();
         
-        menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("Presa non valida. La casella di partenza è vuota"));
-        
-        Partita.azzeraPartitaCorrente();
-    }   
-    
-    @Test
-    void testMenuDiGioco_presaMultiplaErrataStessaCaselle() {
-        PrintStream backupOut = System.out;
-
-        String commandSequence = "18x18x18" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        Partita.nuovaPartita();
-        Partita partita = Partita.getPartita();
-
-        menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("Numeri inseriti non validi"));
+        assertFalse(Damiera.getDamiera().getListaMosse().contains("B. 18x13x10"));
 
         Partita.azzeraPartitaCorrente();
     }
-        
-    @Test
-    void testMenuDiGioco_presaMultiplaErrataNumeriGrandi() {
-        PrintStream backupOut = System.out;
 
-        String commandSequence = "55x55x55" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        Partita.nuovaPartita();
-        Partita partita = Partita.getPartita();
-
-        menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("Numeri inseriti non validi"));
-
-        Partita.azzeraPartitaCorrente();
-    }
-    
     @Test
     void testMenuDiGioco_comandoErrato() {
         PrintStream backupOut = System.out;
@@ -611,13 +514,25 @@ public class InterfacciaInputTest {
 
         Partita.nuovaPartita();
         Partita partita = Partita.getPartita();
-        
+
         menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
 
         System.setOut(backupOut);
 
         assertTrue(outContent.toString().contains("Comando inserito non valido."));
-        
+
         Partita.azzeraPartitaCorrente();
+    }
+
+    @Test
+    void testSintassiPresaMultiplaCorretta_errataStessaCaselle() {
+        String mossa = "18x18x18";
+        assertFalse(sintassiPresaMultiplaCorretta(mossa));
+    }
+
+    @Test
+    void testSintassiPresaMultiplaCorretta_errataNumeriSbagliati() {
+        String mossa = "55x55x55";
+        assertFalse(sintassiPresaMultiplaCorretta(mossa));
     }
 }
