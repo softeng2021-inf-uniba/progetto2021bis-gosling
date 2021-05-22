@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,11 +24,15 @@ import static org.junit.jupiter.api.Assertions.fail;
  */
 public class DamieraTest {
 
-    private Damiera damiera = null;
+    private static Damiera damiera = null;
+
+    @BeforeAll
+    static void setUpAll() {
+        damiera = Damiera.getDamiera();
+    }
 
     @BeforeEach
     void setUp() {
-        damiera = Damiera.getDamiera();
         damiera.preparaDamiera();
     }
 

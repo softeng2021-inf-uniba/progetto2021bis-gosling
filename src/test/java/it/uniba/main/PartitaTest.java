@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  */
 public class PartitaTest {
     
-    private Partita partita = null;
+    private static Partita partita = null;
     
     @BeforeEach
     void setUp() {
