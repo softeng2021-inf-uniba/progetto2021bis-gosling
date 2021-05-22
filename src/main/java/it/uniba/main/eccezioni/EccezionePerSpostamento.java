@@ -6,12 +6,12 @@
 package it.uniba.main.eccezioni;
 
 /**
- * <<noECB>>
+ *
  * @author Pasquale
  */
-public final class EccezionePresa extends Exception {
+public final class EccezionePerSpostamento extends Exception {
 
-    public EccezionePresa(final String string) {
+    public EccezionePerSpostamento(final String string) {
         super(string);
     }
 

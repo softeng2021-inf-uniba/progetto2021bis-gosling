@@ -1,7 +1,7 @@
 package it.uniba.main;
 
-import it.uniba.main.eccezioni.EccezionePresa;
-import it.uniba.main.eccezioni.EccezioneSpostamento;
+import it.uniba.main.eccezioni.EccezionePerPresa;
+import it.uniba.main.eccezioni.EccezionePerSpostamento;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -285,7 +285,7 @@ public final class Damiera {
 
     /* -- Movimento --*/
     public boolean spostamentoPedina(final String mossa, final Pedina.Colore coloreGiocatore)
-            throws EccezioneSpostamento {
+            throws EccezionePerSpostamento {
 
         boolean spostamentoLecito = false;
 
@@ -331,15 +331,15 @@ public final class Damiera {
 
                 spostamentoLecito = rigaCorretta && colonnaCorretta;
             } else {
-                throw new EccezioneSpostamento("Colore della pedina sbagliato");
+                throw new EccezionePerSpostamento("Colore della pedina sbagliato");
             }
         } else {
             if (contenutoPosPar == null && contenutoPosArr != null) {
-                throw new EccezioneSpostamento("Casella di partenza nulla e di arrivo piena");
+                throw new EccezionePerSpostamento("Casella di partenza nulla e di arrivo piena");
             } else if (contenutoPosPar == null) {
-                throw new EccezioneSpostamento("Casella di partenza vuota");
+                throw new EccezionePerSpostamento("Casella di partenza vuota");
             } else {
-                throw new EccezioneSpostamento("Casella di arrivo piena");
+                throw new EccezionePerSpostamento("Casella di arrivo piena");
             }
         }
 
@@ -364,7 +364,7 @@ public final class Damiera {
     }
 
     public boolean effettuaPresaSemplice(final String mossa, final Pedina.Colore coloreGiocatore)
-            throws EccezionePresa {
+            throws EccezionePerPresa {
         boolean presaLecita = false;
         boolean rigaCorretta;
         boolean colonnaCorretta;
@@ -422,30 +422,30 @@ public final class Damiera {
                                     presaLecita = true;
                                 } else {
                                     // Non puoi mangiare
-                                    throw new EccezionePresa("Non puoi mangiare una dama con una pedina semplice");
+                                    throw new EccezionePerPresa("Non puoi mangiare una dama con una pedina semplice");
                                 }
                             } else {
                                 // Da mangiare == null o il colore della pedina mangiata è la stessa
-                                throw new EccezionePresa("Presa non possibile");
+                                throw new EccezionePerPresa("Presa non possibile");
                             }
                         } else {
                             // riga o colonna non corretta
-                            throw new EccezionePresa("Movimento non lecito.");
+                            throw new EccezionePerPresa("Movimento non lecito.");
                         }
                     } else {
                         // Casella di arrivo non vuota
-                        throw new EccezionePresa("Presa non valida. La casella di arrivo non è vuota");
+                        throw new EccezionePerPresa("Presa non valida. La casella di arrivo non è vuota");
                     }
                 } else {
                     // casella spostata dell'avversario
-                    throw new EccezionePresa("Non puoi spostare una pedina del tuo avversario");
+                    throw new EccezionePerPresa("Non puoi spostare una pedina del tuo avversario");
                 }
             } else {
-                throw new EccezionePresa("La presa con dama non è stata implementata");
+                throw new EccezionePerPresa("La presa con dama non è stata implementata");
             }
         } else {
             // Casella di partenza vuota
-            throw new EccezionePresa("Presa non valida. La casella di partenza è vuota");
+            throw new EccezionePerPresa("Presa non valida. La casella di partenza è vuota");
         }
 
         this.damieraGioco[posDaMangiare.getRiga()][posDaMangiare.getColonna()] = null;
@@ -467,7 +467,7 @@ public final class Damiera {
     }
 
     public boolean effettuaPresaMultipla(final String mossa, final Pedina.Colore coloreGiocatore)
-            throws EccezionePresa {
+            throws EccezionePerPresa {
         boolean presaMultiplaLecita = false;
 
         int contatoreMosse = 0;
@@ -498,7 +498,7 @@ public final class Damiera {
                 presaMultiplaLecita = effettuaPresaSemplice(prese[contaTestPrese], coloreGiocatore);
                 contaTestPrese++;
             }
-        } catch (EccezionePresa exc) {
+        } catch (EccezionePerPresa exc) {
             presaMultiplaLecita = false;
             //Se una delle mosse non era lecita, resetta la damiera com'era prima
             for (int i = 0; i < DAMIERA_SIZE; i++) {

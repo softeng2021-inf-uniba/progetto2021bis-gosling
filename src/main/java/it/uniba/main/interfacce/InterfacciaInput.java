@@ -10,8 +10,8 @@ import it.uniba.main.Giocatore;
 import it.uniba.main.Help;
 import it.uniba.main.Partita;
 
-import it.uniba.main.eccezioni.EccezionePresa;
-import it.uniba.main.eccezioni.EccezioneSpostamento;
+import it.uniba.main.eccezioni.EccezionePerPresa;
+import it.uniba.main.eccezioni.EccezionePerSpostamento;
 
 import java.util.Scanner;
 import java.io.InputStream;
@@ -173,7 +173,7 @@ public final class InterfacciaInput {
                         if (sintassiSpostamentoCorretta(answer)) {
                             try {
                                 isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
-                            } catch (EccezioneSpostamento exc) {
+                            } catch (EccezionePerSpostamento exc) {
                                 System.out.println(exc.getMessage());
                             } finally {
                                 if (isExiting) {
@@ -183,7 +183,7 @@ public final class InterfacciaInput {
                         } else if (sintassiPresaSempliceCorretta(answer)) {
                             try { // Esegui
                                 isExiting = Damiera.getDamiera().effettuaPresaSemplice(answer, corrente.getColore());
-                            } catch (EccezionePresa exc) { // se ti da errore stampalo e metti a false isExiting
+                            } catch (EccezionePerPresa exc) { // se ti da errore stampalo e metti a false isExiting
                                 System.out.println(exc.getMessage());
                                 isExiting = false;
                             } finally { // alla fine controlla
@@ -194,7 +194,7 @@ public final class InterfacciaInput {
                         } else if (sintassiPresaMultiplaCorretta(answer)) {
                             try { // Esegui
                                 isExiting = Damiera.getDamiera().effettuaPresaMultipla(answer, corrente.getColore());
-                            } catch (EccezionePresa exc) { // se ti da errore stampalo e metti a false isExiting
+                            } catch (EccezionePerPresa exc) { // se ti da errore stampalo e metti a false isExiting
                                 System.out.println(exc.getMessage());
                                 isExiting = false;
                             } finally { // alla fine controlla
