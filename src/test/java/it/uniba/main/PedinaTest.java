@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  */
 public class PedinaTest {
 
-    private static Pedina pedina = null;
+    private Pedina pedina = null;
 
     @BeforeEach
     void setUp() {
