@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 public class GiocatoreTest {
     
-    private Giocatore giocatore =null;
+    private Giocatore giocatore = null;
     
     @BeforeEach
     void setUp(){

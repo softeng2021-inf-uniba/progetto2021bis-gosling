@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class PedinaTest {
 
-    private static Pedina pedina = null;
+    private Pedina pedina = null;
 
     @BeforeEach
     void setUp() {

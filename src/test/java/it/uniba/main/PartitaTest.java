@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class PartitaTest {
     
-    private static Partita partita = null;
+    private Partita partita = null;
     
     @BeforeEach
     void setUp() {
