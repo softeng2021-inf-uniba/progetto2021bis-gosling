@@ -16,7 +16,7 @@ public final class Pedina {
 
     /* ------------ Stato ------------ */
     private TipoPedina tipo;
-    private Colore colore;
+    private final Colore colore;
     private static boolean invertiColore = true;
     /* ------------ Sottoclassi ------------ */
     /**
@@ -39,20 +39,12 @@ public final class Pedina {
         pedinaRe
     }
     /* ------------  Costruttori ------------ */
-    Pedina(final Colore coloreIn) {
+     public Pedina(final Colore coloreIn) {
         this.colore = coloreIn;
         this.tipo = TipoPedina.pedinaSemplice;
     }
 
     /* ------------ Get & Set ------------*/
-    private void setColore(final Colore colorIn) {
-        this.colore = colorIn;
-    }
-
-    private void setTipo(final TipoPedina tipoIn) {
-        this.tipo = tipoIn;
-    }
-
     public Colore getColore() {
         return this.colore;
     }
@@ -60,6 +52,12 @@ public final class Pedina {
     public TipoPedina getTipo() {
         return this.tipo;
     }
+
+    public static void setInvertiColore(boolean invertiColore) {
+        Pedina.invertiColore = invertiColore;
+    }
+    
+    
 
     /* ------------ Metodi ------------*/
     public void stampaPedina() {

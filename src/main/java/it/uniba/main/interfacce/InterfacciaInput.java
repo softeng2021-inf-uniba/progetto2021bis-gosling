@@ -4,11 +4,17 @@
  * and open the template in the editor.
  */
 package it.uniba.main.interfacce;
-import java.util.Scanner;
+
 import it.uniba.main.Damiera;
 import it.uniba.main.Giocatore;
 import it.uniba.main.Help;
 import it.uniba.main.Partita;
+
+import it.uniba.main.eccezioni.eccezionePresa;
+import it.uniba.main.eccezioni.eccezioneSpostamento;
+
+import java.util.Scanner;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,8 +27,12 @@ import java.util.Set;
  *
  */
 public final class InterfacciaInput {
+    
+    private static Scanner sc = new Scanner(System.in, "utf-8");
+    
     private InterfacciaInput() {
     }
+    
     public static boolean chiediConferma(final String richiesta, final String casoAffermativo,
             final String casoNegativo) {
         boolean vuole = false;
@@ -31,7 +41,6 @@ public final class InterfacciaInput {
         boolean error;
         String answer;
 
-        Scanner sc = new Scanner(System.in, "utf-8");
         do {
             error = false;
             System.out.println("digitare 'si' o 'no'.");
@@ -61,7 +70,6 @@ public final class InterfacciaInput {
     public static void menuDiInizio() {
         boolean isExiting = false;
         String answer;
-        Scanner sc = new Scanner(System.in, "utf-8");
 
         do {
             System.out.println("-------------------------------- Menu Principale "
@@ -72,7 +80,7 @@ public final class InterfacciaInput {
                 answer = answer.replaceAll(" +", "");
                 switch (answer.toLowerCase()) {
                     case "help":
-                        Help.getMenuHelp();
+                        Help.stampaHelpMenu();
                         break;
                     case "gioca":
                         Partita.nuovaPartita();
@@ -119,13 +127,12 @@ public final class InterfacciaInput {
         sc.close();
     }
 
-    public static void menuDiGico(final Giocatore corrente, final Giocatore avversario) {
+    public static void menuDiGioco(final Giocatore corrente, final Giocatore avversario) {
         boolean isExiting = false;
         String answer;
 
         corrente.iniziaMossa();
 
-        Scanner sc = new Scanner(System.in, "utf-8");
         do {
             System.out.println("Digitare un comando valido...");
             if (sc.hasNextLine()) {
@@ -133,7 +140,7 @@ public final class InterfacciaInput {
                 answer = answer.replaceAll("\\s+", "");
                 switch (answer.toLowerCase()) {
                     case "help":
-                        Help.getMenuHelp();
+                        Help.stampaHelpMenu();
                         break;
                     case "numeri":
                         Damiera.getDamiera().stampaNumeri();
@@ -155,7 +162,6 @@ public final class InterfacciaInput {
                                     + ")" + " ha vinto per abbandono.");
                             Partita.getPartita().finisciPartita();
                         }
-
                         break;
                     case "prese":
                         Damiera.getDamiera().stampaPedineMangiate();
@@ -165,19 +171,36 @@ public final class InterfacciaInput {
                         break;
                     default:
                         if (sintassiSpostamentoCorretta(answer)) {
-                            isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
-                            if (isExiting) {
-                                Damiera.getDamiera().registraMosse(answer, corrente.getColore());
+                            try {
+                                isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
+                            }catch(eccezioneSpostamento exc) {
+                                System.out.println(exc.getMessage());
+                            } finally {
+                                if (isExiting) {
+                                    Damiera.getDamiera().registraMossa(answer, corrente.getColore());
+                                }
                             }
                         } else if (sintassiPresaSempliceCorretta(answer)) {
-                            isExiting = Damiera.getDamiera().effettuaPresaSemplice(answer, corrente.getColore());
-                            if (isExiting) {
-                                Damiera.getDamiera().registraMosse(answer, corrente.getColore());
+                            try { // Esegui 
+                                isExiting = Damiera.getDamiera().effettuaPresaSemplice(answer, corrente.getColore());
+                            }catch(eccezionePresa exc){ // se ti da errore stampalo e metti a false isExiting
+                                System.out.println(exc.getMessage());
+                                isExiting= false;
+                            } finally { // alla fine controlla
+                                if(isExiting) {
+                                    Damiera.getDamiera().registraMossa(answer, corrente.getColore());
+                                }
                             }
                         } else if (sintassiPresaMultiplaCorretta(answer)) {
-                            isExiting = Damiera.getDamiera().effettuaPresaMultipla(answer, corrente.getColore());
-                            if (isExiting) {
-                                Damiera.getDamiera().registraMosse(answer, corrente.getColore());
+                            try { // Esegui 
+                                isExiting = Damiera.getDamiera().effettuaPresaMultipla(answer, corrente.getColore());
+                            }catch(eccezionePresa exc){ // se ti da errore stampalo e metti a false isExiting
+                                System.out.println(exc.getMessage());
+                                isExiting= false;
+                            } finally { // alla fine controlla
+                                if(isExiting) {
+                                    Damiera.getDamiera().registraMossa(answer, corrente.getColore());
+                                } 
                             }
                         } else {
                             System.out.println("Comando inserito non valido.");
@@ -186,6 +209,7 @@ public final class InterfacciaInput {
                         break;
                 }
             }
+            
         } while (!isExiting);
     }
 
@@ -251,5 +275,9 @@ public final class InterfacciaInput {
         }
 
         return sintassiCorretta;
+    }
+    
+    public static void setInputStream(InputStream inputStream){
+        sc = new Scanner(inputStream, "utf-8");
     }
 }

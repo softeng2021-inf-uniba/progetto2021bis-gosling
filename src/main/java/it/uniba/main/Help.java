@@ -12,26 +12,12 @@ package it.uniba.main;
  * 
  */
 public final class Help {
-
-    /* ------------ Stato ------------ */
-    private static Help singleIstance = null;
-
-    /* ------------  Costruttori ------------ */
-    private Help() {
-
+    
+    public Help(){
     }
-
-    public Help getHelp() {
-        if (singleIstance == null) {
-            singleIstance = new Help();
-        }
-
-        return singleIstance;
-    }
-
-    /* ------------ Get & Set ------------*/
+    
  /* ------------ Metodi ------------*/
-    public static void getMenuHelp() {
+    public static void stampaHelpMenu() {
         System.out.println("");
         System.out.println("+------------------ HELP ------------------+");
         System.out.println("Benvenuto nell'applicazione di Dama sviluppata dal Team gosling!");

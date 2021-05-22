@@ -28,13 +28,14 @@ public final class AppMain {
             switch (args[0]) {
                 case "--help":
                 case "-h":
-                    Help.getMenuHelp();
+                    Help.stampaHelpMenu();
                     break;
                 default:
                     break;
             }
         }
 
+        InterfacciaInput.setInputStream(System.in);
         InterfacciaInput.menuDiInizio();
         System.exit(0);
     }

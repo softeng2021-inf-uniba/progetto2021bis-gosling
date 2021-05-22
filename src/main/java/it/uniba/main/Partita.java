@@ -40,15 +40,9 @@ public final class Partita {
         damiera.preparaDamiera();
 
         giocatore1 = new Giocatore(1);
-        /*Solo il primo giocatore, chiaramente, può scegliere il colore,
-        al secondo tocca il complemento del primo*/
         giocatore2 = new Giocatore(2);
 
-        if (giocatore1.getColore() == Pedina.Colore.bianco) {
-            turno = Turno.turnoGiocatore1;
-        } else {
-            turno = Turno.turnoGiocatore2;
-        }
+        turno = Turno.turnoGiocatore1;
 
         finita = false;
         System.out.println("La partita inizia ora.");
@@ -63,6 +57,14 @@ public final class Partita {
         return finita;
     }
 
+    public Giocatore getGiocatore1() {
+        return giocatore1;
+    }
+
+    public Giocatore getGiocatore2() {
+        return giocatore2;
+    }
+
     /* ------------ Metodi ------------ */
     public static void nuovaPartita() {
 
@@ -70,8 +72,8 @@ public final class Partita {
             System.out.println("Non ci sono partite attive; creata una nuova partita.");
             partitaCorrente = new Partita();
         } else {
-            System.out.println("Una partita è già in corso; cosa fare?");
-            //Poi si pensa
+            System.out.println("Una partita è già in corso.");
+            //Non ancora implementata
         }
     }
 
@@ -95,7 +97,7 @@ public final class Partita {
 
         System.out.println("È il turno di: " + corrente.getNome() + " (" + corrente.getColore().toString() + ").");
 
-        InterfacciaInput.menuDiGico(corrente, avversario);
+        InterfacciaInput.menuDiGioco(corrente, avversario);
 
         corrente.aggiornaTempoPassato();
 

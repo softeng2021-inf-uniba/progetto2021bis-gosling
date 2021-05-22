@@ -24,10 +24,9 @@ public final class Giocatore {
     private LocalTime segnaTempo;
     private LocalTime tempoPassato;
     private int mossaCorrente;
-    private static final LocalTime TEMPO_DISP = LocalTime.of(0, 30, 0);
 
     /* ------------ Costruttori ------------ */
-    Giocatore(final int index) {
+    public Giocatore(final int index) {
 
         switch (index) {
             case 1:
@@ -44,7 +43,7 @@ public final class Giocatore {
                 break;
         }
 
-        this.segnaTempo = null;
+        this.segnaTempo = LocalTime.of(0, 0, 0);
         this.tempoPassato = LocalTime.of(0, 0, 0);
         this.mossaCorrente = 0;
     }
@@ -79,8 +78,8 @@ public final class Giocatore {
         return (coloreAvversario);
     }
 
-    public void setSegnaTempo(final LocalTime tempoInizioMossa) {
-        this.segnaTempo = tempoInizioMossa;
+    private void setSegnaTempo(final LocalTime tempoUltimoAggiornamento) {
+        this.segnaTempo = tempoUltimoAggiornamento;
     }
 
     public LocalTime getTempoPassato() {
@@ -95,7 +94,6 @@ public final class Giocatore {
     public void aggiornaTempoPassato() {
         final int secondi = 60;
         LocalTime now = LocalTime.now();
-
         Long minutes = MINUTES.between(segnaTempo, now);
         Long seconds = SECONDS.between(segnaTempo, now) % secondi;
         this.tempoPassato = this.tempoPassato.plusMinutes(minutes);
