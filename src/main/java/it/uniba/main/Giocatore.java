@@ -78,8 +78,8 @@ public final class Giocatore {
         return (coloreAvversario);
     }
 
-    private void setSegnaTempo(final LocalTime tempoInizioMossa) {
-        this.segnaTempo = tempoInizioMossa;
+    private void setSegnaTempo(final LocalTime tempoUltimoAggiornamento) {
+        this.segnaTempo = tempoUltimoAggiornamento;
     }
 
     public LocalTime getTempoPassato() {

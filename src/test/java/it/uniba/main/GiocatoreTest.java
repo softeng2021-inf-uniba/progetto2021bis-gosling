@@ -4,14 +4,14 @@
  * and open the template in the editor.
  */
 package it.uniba.main;
+
 import java.time.LocalTime;
+
 import org.junit.jupiter.api.Test; 
-import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  *

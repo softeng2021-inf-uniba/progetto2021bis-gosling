@@ -35,6 +35,7 @@ public final class AppMain {
             }
         }
 
+        InterfacciaInput.setInputStream(System.in);
         InterfacciaInput.menuDiInizio();
         System.exit(0);
     }

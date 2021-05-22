@@ -9,12 +9,12 @@ import it.uniba.main.Pedina.Colore;
 import it.uniba.main.Pedina.TipoPedina;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -23,11 +23,6 @@ import org.junit.jupiter.api.BeforeEach;
 public class PedinaTest {
 
     private static Pedina pedina = null;
-
-    @BeforeAll
-    static void setUpAll() {
-        pedina = new Pedina(Colore.bianco);
-    }
 
     @BeforeEach
     void setUp() {

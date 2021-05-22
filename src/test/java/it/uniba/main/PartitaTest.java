@@ -6,21 +6,17 @@
 package it.uniba.main;
 
 import it.uniba.main.interfacce.InterfacciaInput;
-import static it.uniba.main.interfacce.InterfacciaInput.menuDiGioco;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 
 /**
  *
@@ -29,12 +25,6 @@ import org.junit.jupiter.api.Disabled;
 public class PartitaTest {
     
     private static Partita partita = null;
-    
-    @BeforeAll
-    static void setUpAll() {
-        Partita.nuovaPartita();
-        partita = Partita.getPartita();
-    }
     
     @BeforeEach
     void setUp() {
@@ -64,21 +54,28 @@ public class PartitaTest {
         assertNull(Partita.getPartita());
     }
     
-    @Test//Da finire
+    @Test
     void testStampaTempoPassato_giocatore1(){
         PrintStream backupOut = System.out;
+
+        String commandSequence = "tempo" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
+
+        ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
+        InterfacciaInput.setInputStream(in);
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        partita.stampaTempoPassato();
+        partita.giocaPartita();
 
         System.setOut(backupOut);
+        
+        assertTrue(outContent.toString().contains("tempo"));
 
-        assertTrue(outContent.toString().length() != 0);
+        Partita.azzeraPartitaCorrente();
     }    
     
-    @Test//Da finire
+    @Test
     void testStampaTempoPassato_giocatore2(){
         PrintStream backupOut = System.out;
 
@@ -90,8 +87,7 @@ public class PartitaTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        partita.nuovoTurno();
-        partita.nuovoTurno();
+        partita.giocaPartita();
 
         System.setOut(backupOut);
         
@@ -114,7 +110,7 @@ public class PartitaTest {
     void testNuovoTurno(){
         PrintStream backupOut = System.out;
 
-        String commandSequence = "22-18" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
+        String commandSequence = "abbandona" + System.lineSeparator() + "si";
 
         ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
         InterfacciaInput.setInputStream(in);
@@ -122,8 +118,7 @@ public class PartitaTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        partita.nuovoTurno();
-        partita.nuovoTurno();
+        partita.giocaPartita();
 
         System.setOut(backupOut);
         

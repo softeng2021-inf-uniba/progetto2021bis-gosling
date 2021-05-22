@@ -3,7 +3,6 @@ package it.uniba.main;
 import it.uniba.main.eccezioni.eccezionePresa;
 import it.uniba.main.eccezioni.eccezioneSpostamento;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -71,8 +70,8 @@ public final class Damiera {
         Damiera.inizializzaVettorePosizioni();
         this.damieraNumeri = new int[DAMIERA_SIZE][DAMIERA_SIZE];
         this.damieraGioco = new Pedina[DAMIERA_SIZE][DAMIERA_SIZE];
-        preparaDamiera();
         preparaNumeri();
+        preparaDamiera();
         this.pedineNereMangiate = 0;
         this.pedineBiancheMangiate = 0;
         this.setListaMosse(new ArrayList<>());
@@ -366,8 +365,8 @@ public final class Damiera {
 
     public boolean effettuaPresaSemplice(final String mossa, final Pedina.Colore coloreGiocatore) throws eccezionePresa {
         boolean presaLecita = false;
-        boolean rigaCorretta = false;
-        boolean colonnaCorretta = false;
+        boolean rigaCorretta;
+        boolean colonnaCorretta;
 
         String[] numeri = mossa.split("x");
 

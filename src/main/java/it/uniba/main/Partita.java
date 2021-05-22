@@ -40,8 +40,6 @@ public final class Partita {
         damiera.preparaDamiera();
 
         giocatore1 = new Giocatore(1);
-        /*Solo il primo giocatore, chiaramente, può scegliere il colore,
-        al secondo tocca il complemento del primo*/
         giocatore2 = new Giocatore(2);
 
         turno = Turno.turnoGiocatore1;
@@ -75,7 +73,7 @@ public final class Partita {
             partitaCorrente = new Partita();
         } else {
             System.out.println("Una partita è già in corso.");
-            //Poi si pensa
+            //Non ancora implementata
         }
     }
 

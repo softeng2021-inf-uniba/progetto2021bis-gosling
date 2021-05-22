@@ -5,13 +5,12 @@
  */
 package it.uniba.main;
 
-import it.uniba.main.Help;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  *
@@ -37,7 +36,7 @@ public class HelpTest {
 
         System.setOut(backupOut);
 
-        assertTrue(outContent.toString().length() != 0);
+        assertTrue(outContent.toString().contains("HELP"));
     }
 
 }

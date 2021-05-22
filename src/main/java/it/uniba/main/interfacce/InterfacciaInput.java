@@ -4,13 +4,16 @@
  * and open the template in the editor.
  */
 package it.uniba.main.interfacce;
-import java.util.Scanner;
+
 import it.uniba.main.Damiera;
 import it.uniba.main.Giocatore;
 import it.uniba.main.Help;
 import it.uniba.main.Partita;
+
 import it.uniba.main.eccezioni.eccezionePresa;
 import it.uniba.main.eccezioni.eccezioneSpostamento;
+
+import java.util.Scanner;
 import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,7 +41,6 @@ public final class InterfacciaInput {
         boolean error;
         String answer;
 
-        //Scanner sc = new Scanner(System.in, "utf-8");
         do {
             error = false;
             System.out.println("digitare 'si' o 'no'.");
@@ -68,7 +70,6 @@ public final class InterfacciaInput {
     public static void menuDiInizio() {
         boolean isExiting = false;
         String answer;
-        //Scanner sc = new Scanner(System.in, "utf-8");
 
         do {
             System.out.println("-------------------------------- Menu Principale "
@@ -132,7 +133,6 @@ public final class InterfacciaInput {
 
         corrente.iniziaMossa();
 
-        //Scanner sc = new Scanner(System.in, "utf-8");
         do {
             System.out.println("Digitare un comando valido...");
             if (sc.hasNextLine()) {
