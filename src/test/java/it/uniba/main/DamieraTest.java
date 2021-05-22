@@ -5,7 +5,6 @@
  */
 package it.uniba.main;
 
-import it.uniba.main.eccezioni.eccezioneSpostamento;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -89,7 +88,7 @@ public class DamieraTest {
         String mossa = "21-17";
         try {
             assertTrue(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
-        } catch (eccezioneSpostamento exc) {
+        } catch (Exception exc) {
             fail(exc.getMessage());
         }
     }
@@ -99,7 +98,7 @@ public class DamieraTest {
         String mossa = "9-13";
         try {
             assertTrue(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
-        } catch (eccezioneSpostamento exc) {
+        } catch (Exception exc) {
             fail(exc.getMessage());
         }
     }

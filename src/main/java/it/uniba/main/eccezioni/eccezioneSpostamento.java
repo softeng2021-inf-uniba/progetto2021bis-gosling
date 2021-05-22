@@ -9,14 +9,14 @@ package it.uniba.main.eccezioni;
  *
  * @author Pasquale
  */
-public class eccezioneSpostamento extends Exception {
+public final class EccezioneSpostamento extends Exception {
 
-    public eccezioneSpostamento(String string) {
+    public EccezioneSpostamento(final String string) {
         super(string);
     }
-   
+
     @Override
     public String getMessage() {
-        return super.getMessage(); 
+        return super.getMessage();
     }
 }

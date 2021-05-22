@@ -22,7 +22,7 @@ public class HelpTest {
     
     @BeforeAll
     static void setUpAll() {
-        help = new Help();
+        help = Help.getHelp();
     }
 
     @Test
