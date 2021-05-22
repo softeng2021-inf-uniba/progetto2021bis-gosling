@@ -9,12 +9,14 @@ import it.uniba.main.Pedina.Colore;
 import it.uniba.main.Pedina.TipoPedina;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  *
@@ -47,137 +49,169 @@ public class PedinaTest {
 
     @Test
     void testStampaPedina_sempliceBiancaNonInvertita() {
-        Pedina.setInvertiColore(false);
-
-        PrintStream backupOut = System.out;
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        pedina.stampaPedina();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().length() != 0);
+        try {
+            Pedina.setInvertiColore(false);
+            
+            PrintStream backupOut = System.out;
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            pedina.stampaPedina();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").length() != 0);
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testStampaPedina_sempliceNeraNonInvertita() {
-        Pedina.setInvertiColore(false);
-        pedina = new Pedina(Colore.nero);
-
-        PrintStream backupOut = System.out;
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        pedina.stampaPedina();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().length() != 0);
+        try {
+            Pedina.setInvertiColore(false);
+            pedina = new Pedina(Colore.nero);
+            
+            PrintStream backupOut = System.out;
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            pedina.stampaPedina();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").length() != 0);
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testStampaPedina_sempliceBiancaInvertita() {
-        Pedina.setInvertiColore(true);
-
-        PrintStream backupOut = System.out;
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        pedina.stampaPedina();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().length() != 0);
+        try {
+            Pedina.setInvertiColore(true);
+            
+            PrintStream backupOut = System.out;
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            pedina.stampaPedina();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").length() != 0);
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testStampaPedina_sempliceNeraInvertita() {
-        Pedina.setInvertiColore(true);
-        pedina = new Pedina(Colore.nero);
-
-        PrintStream backupOut = System.out;
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        pedina.stampaPedina();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().length() != 0);
+        try {
+            Pedina.setInvertiColore(true);
+            pedina = new Pedina(Colore.nero);
+            
+            PrintStream backupOut = System.out;
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            pedina.stampaPedina();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").length() != 0);
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testStampaPedina_reBiancaNonInvertita() {
-        Pedina.setInvertiColore(false);
-        pedina.promuoviADama();
-
-        PrintStream backupOut = System.out;
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        pedina.stampaPedina();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().length() != 0);
+        try {
+            Pedina.setInvertiColore(false);
+            pedina.promuoviADama();
+            
+            PrintStream backupOut = System.out;
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            pedina.stampaPedina();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").length() != 0);
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testStampaPedina_reNeroNonInvertita() {
-        Pedina.setInvertiColore(false);
-        pedina = new Pedina(Colore.nero);
-        pedina.promuoviADama();
-
-        PrintStream backupOut = System.out;
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        pedina.stampaPedina();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().length() != 0);
+        try {
+            Pedina.setInvertiColore(false);
+            pedina = new Pedina(Colore.nero);
+            pedina.promuoviADama();
+            
+            PrintStream backupOut = System.out;
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            pedina.stampaPedina();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").length() != 0);
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testStampaPedina_reBiancoInvertita() {
-        Pedina.setInvertiColore(true);
-        pedina.promuoviADama();
-
-        PrintStream backupOut = System.out;
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        pedina.stampaPedina();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().length() != 0);
+        try {
+            Pedina.setInvertiColore(true);
+            pedina.promuoviADama();
+            
+            PrintStream backupOut = System.out;
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            pedina.stampaPedina();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").length() != 0);
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testStampaPedina_reNeroInvertito() {
-        Pedina.setInvertiColore(true);
-        pedina = new Pedina(Colore.nero);
-        pedina.promuoviADama();
-
-        PrintStream backupOut = System.out;
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        pedina.stampaPedina();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().length() != 0);
+        try {
+            Pedina.setInvertiColore(true);
+            pedina = new Pedina(Colore.nero);
+            pedina.promuoviADama();
+            
+            PrintStream backupOut = System.out;
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            pedina.stampaPedina();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").length() != 0);
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 }

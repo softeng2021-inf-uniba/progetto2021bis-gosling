@@ -10,12 +10,17 @@ import it.uniba.main.Partita;
 import static it.uniba.main.interfacce.InterfacciaInput.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  *
@@ -31,251 +36,326 @@ public class InterfacciaInputTest {
     @Test
     void testChiediConferma_affermativo() {
 
-        String sequenzaDiComandi = "si";
-        ByteArrayInputStream in = new ByteArrayInputStream(sequenzaDiComandi.getBytes());
-
-        InterfacciaInput.setInputStream(in);
-        assertTrue(chiediConferma("Domanda", "Caso affermativo", "Caso negativo"));
+        ByteArrayInputStream in = null;
+        try {
+            String sequenzaDiComandi = "si";
+            in = new ByteArrayInputStream(sequenzaDiComandi.getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            assertTrue(chiediConferma("Domanda", "Caso affermativo", "Caso negativo"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        } finally {
+            try {
+                in.close();
+            } catch (IOException ex) {
+                fail(ex.getMessage());
+            }
+        }
     }
 
     @Test
     void testChiediConferma_negativo() {
 
-        String sequenzaDiComandi = "no";
-        ByteArrayInputStream in = new ByteArrayInputStream(sequenzaDiComandi.getBytes());
-
-        InterfacciaInput.setInputStream(in);
-        assertFalse(chiediConferma("Domanda", "Caso affermativo", "Caso negativo"));
+        ByteArrayInputStream in = null;
+        try {
+            String sequenzaDiComandi = "no";
+            in = new ByteArrayInputStream(sequenzaDiComandi.getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            assertFalse(chiediConferma("Domanda", "Caso affermativo", "Caso negativo"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        } finally {
+            try {
+                in.close();
+            } catch (IOException ex) {
+                fail(ex.getMessage());
+            }
+        }
     }
 
     @Test
     void testChiediConferma_inputErrato() {
 
-        String sequenzaDiComandi = "errato" + System.lineSeparator() + "si";
-        ByteArrayInputStream in = new ByteArrayInputStream(sequenzaDiComandi.getBytes());
-
-        InterfacciaInput.setInputStream(in);
-        assertTrue(chiediConferma("Domanda", "Caso affermativo", "Caso negativo"));
+        ByteArrayInputStream in = null;
+        try {
+            String sequenzaDiComandi = "errato" + System.lineSeparator() + "si";
+            in = new ByteArrayInputStream(sequenzaDiComandi.getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            assertTrue(chiediConferma("Domanda", "Caso affermativo", "Caso negativo"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        } finally {
+            try {
+                in.close();
+            } catch (IOException ex) {
+                fail(ex.getMessage());
+            }
+        }
     }
 
     @Test
     void testMenuDiInizio_help() {
-        PrintStream backupOut = System.out;
-
-        String sequenzaDiComandi = "help" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        menuDiInizio();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("HELP"));
+        try {
+            PrintStream backupOut = System.out;
+            
+            String sequenzaDiComandi = "help" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
+            
+            ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            menuDiInizio();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").contains("HELP"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testMenuDiInizio_gioca() {
-        PrintStream backupOut = System.out;
-
-        String sequenzaDiComandi = "gioca" + System.lineSeparator() + "abbandona" + System.lineSeparator()
-                + "si" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        menuDiInizio();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("La partita inizia ora"));
+        ByteArrayInputStream in = null;
+        try {
+            PrintStream backupOut = System.out;
+            String sequenzaDiComandi = "gioca" + System.lineSeparator() + "abbandona" + System.lineSeparator()
+                    + "si" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
+            in = new ByteArrayInputStream((sequenzaDiComandi).getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            menuDiInizio();
+            System.setOut(backupOut);
+            assertTrue(outContent.toString("utf-8").contains("La partita inizia ora"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        } finally {
+            try {
+                in.close();
+            } catch (IOException ex) {
+                fail(ex.getMessage());
+            }
+        }
     }
 
     @Test
     void testMenuDiInizio_numeri() {
-        PrintStream backupOut = System.out;
-
-        String sequenzaDiComandi = "numeri" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        menuDiInizio();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("+---+---+---+---+---+---+---+---+"));
+        try {
+            PrintStream backupOut = System.out;
+            
+            String sequenzaDiComandi = "numeri" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
+            
+            ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            menuDiInizio();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").contains("+---+---+---+---+---+---+---+---+"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testMenuDiInizio_damiera() {
-        PrintStream backupOut = System.out;
-
-        String sequenzaDiComandi = "damiera" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        menuDiInizio();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("Questo comando è eseguibile solo a partita avviata"));
+        try {
+            PrintStream backupOut = System.out;
+            
+            String sequenzaDiComandi = "damiera" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
+            
+            ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            menuDiInizio();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").contains("Questo comando è eseguibile solo a partita avviata"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testMenuDiInizio_abbandona() {
-        PrintStream backupOut = System.out;
-
-        String sequenzaDiComandi = "abbandona" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        menuDiInizio();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("Questo comando è eseguibile solo a partita avviata"));
+        try {
+            PrintStream backupOut = System.out;
+            
+            String sequenzaDiComandi = "abbandona" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
+            
+            ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            menuDiInizio();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").contains("Questo comando è eseguibile solo a partita avviata"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testMenuDiInizio_tempo() {
-        PrintStream backupOut = System.out;
-
-        String sequenzaDiComandi = "tempo" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        menuDiInizio();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("Questo comando è eseguibile solo a partita avviata"));
+        try {
+            PrintStream backupOut = System.out;
+            
+            String sequenzaDiComandi = "tempo" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
+            
+            ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            menuDiInizio();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").contains("Questo comando è eseguibile solo a partita avviata"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testMenuDiInizio_prese() {
-        PrintStream backupOut = System.out;
-
-        String sequenzaDiComandi = "prese" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        menuDiInizio();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("Questo comando è eseguibile solo a partita avviata"));
+        try {
+            PrintStream backupOut = System.out;
+            
+            String sequenzaDiComandi = "prese" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
+            
+            ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            menuDiInizio();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").contains("Questo comando è eseguibile solo a partita avviata"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testMenuDiInizio_mosse() {
-        PrintStream backupOut = System.out;
-
-        String sequenzaDiComandi = "mosse" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        menuDiInizio();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("Questo comando è eseguibile solo a partita avviata"));
+        try {
+            PrintStream backupOut = System.out;
+            
+            String sequenzaDiComandi = "mosse" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
+            
+            ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            menuDiInizio();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").contains("Questo comando è eseguibile solo a partita avviata"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testMenuDiInizio_comandoErrato() {
-        PrintStream backupOut = System.out;
-
-        String sequenzaDiComandi = "comando errato" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        menuDiInizio();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("Comando inserito non valido"));
+        try {
+            PrintStream backupOut = System.out;
+            
+            String sequenzaDiComandi = "comando errato" + System.lineSeparator() + "esci" + System.lineSeparator() + "si";
+            
+            ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            menuDiInizio();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").contains("Comando inserito non valido"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testMenuDiGioco_help() {
-        PrintStream backupOut = System.out;
-
-        String sequenzaDiComandi = "help" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        Partita.nuovaPartita();
-        Partita partita = Partita.getPartita();
-
-        menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("HELP"));
-
-        Partita.azzeraPartitaCorrente();
+        try {
+            PrintStream backupOut = System.out;
+            
+            String sequenzaDiComandi = "help" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
+            
+            ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            Partita.nuovaPartita();
+            Partita partita = Partita.getPartita();
+            
+            menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").contains("HELP"));
+            
+            Partita.azzeraPartitaCorrente();
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
     void testMenuDiGioco_numeri() {
-        PrintStream backupOut = System.out;
-
-        String sequenzaDiComandi = "numeri" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        Partita.nuovaPartita();
-        Partita partita = Partita.getPartita();
-
-        menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("+---+---+---+---+---+---+---+---+"));
-
-        Partita.azzeraPartitaCorrente();
+        try {
+            PrintStream backupOut = System.out;
+            
+            String sequenzaDiComandi = "numeri" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
+            
+            ByteArrayInputStream in = new ByteArrayInputStream((sequenzaDiComandi).getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            Partita.nuovaPartita();
+            Partita partita = Partita.getPartita();
+            
+            menuDiGioco(partita.getGiocatore1(), partita.getGiocatore2());
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").contains("+---+---+---+---+---+---+---+---+"));
+            
+            Partita.azzeraPartitaCorrente();
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
