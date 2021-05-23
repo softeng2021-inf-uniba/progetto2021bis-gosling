@@ -7,10 +7,12 @@ package it.uniba.main;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  *
@@ -22,21 +24,25 @@ public class HelpTest {
     
     @BeforeAll
     static void setUpAll() {
-        help = new Help();
+        help = Help.getHelp();
     }
 
     @Test
     void testStampaHelpMenu() {
-        PrintStream backupOut = System.out;
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        Help.stampaHelpMenu();
-
-        System.setOut(backupOut);
-
-        assertTrue(outContent.toString().contains("HELP"));
+        try {
+            PrintStream backupOut = System.out;
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            Help.stampaHelpMenu();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").contains("HELP"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
 }

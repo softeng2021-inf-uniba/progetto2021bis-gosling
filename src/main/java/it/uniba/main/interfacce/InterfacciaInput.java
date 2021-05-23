@@ -10,8 +10,8 @@ import it.uniba.main.Giocatore;
 import it.uniba.main.Help;
 import it.uniba.main.Partita;
 
-import it.uniba.main.eccezioni.eccezionePresa;
-import it.uniba.main.eccezioni.eccezioneSpostamento;
+import it.uniba.main.eccezioni.EccezionePresa;
+import it.uniba.main.eccezioni.EccezioneSpostamento;
 
 import java.util.Scanner;
 import java.io.InputStream;
@@ -27,12 +27,12 @@ import java.util.Set;
  *
  */
 public final class InterfacciaInput {
-    
+
     private static Scanner sc = new Scanner(System.in, "utf-8");
-    
+
     private InterfacciaInput() {
     }
-    
+
     public static boolean chiediConferma(final String richiesta, final String casoAffermativo,
             final String casoNegativo) {
         boolean vuole = false;
@@ -173,7 +173,7 @@ public final class InterfacciaInput {
                         if (sintassiSpostamentoCorretta(answer)) {
                             try {
                                 isExiting = Damiera.getDamiera().spostamentoPedina(answer, corrente.getColore());
-                            }catch(eccezioneSpostamento exc) {
+                            } catch (EccezioneSpostamento exc) {
                                 System.out.println(exc.getMessage());
                             } finally {
                                 if (isExiting) {
@@ -181,26 +181,26 @@ public final class InterfacciaInput {
                                 }
                             }
                         } else if (sintassiPresaSempliceCorretta(answer)) {
-                            try { // Esegui 
+                            try { // Esegui
                                 isExiting = Damiera.getDamiera().effettuaPresaSemplice(answer, corrente.getColore());
-                            }catch(eccezionePresa exc){ // se ti da errore stampalo e metti a false isExiting
+                            } catch (EccezionePresa exc) { // se ti da errore stampalo e metti a false isExiting
                                 System.out.println(exc.getMessage());
-                                isExiting= false;
+                                isExiting = false;
                             } finally { // alla fine controlla
-                                if(isExiting) {
+                                if (isExiting) {
                                     Damiera.getDamiera().registraMossa(answer, corrente.getColore());
                                 }
                             }
                         } else if (sintassiPresaMultiplaCorretta(answer)) {
-                            try { // Esegui 
+                            try { // Esegui
                                 isExiting = Damiera.getDamiera().effettuaPresaMultipla(answer, corrente.getColore());
-                            }catch(eccezionePresa exc){ // se ti da errore stampalo e metti a false isExiting
+                            } catch (EccezionePresa exc) { // se ti da errore stampalo e metti a false isExiting
                                 System.out.println(exc.getMessage());
-                                isExiting= false;
+                                isExiting = false;
                             } finally { // alla fine controlla
-                                if(isExiting) {
+                                if (isExiting) {
                                     Damiera.getDamiera().registraMossa(answer, corrente.getColore());
-                                } 
+                                }
                             }
                         } else {
                             System.out.println("Comando inserito non valido.");
@@ -209,7 +209,6 @@ public final class InterfacciaInput {
                         break;
                 }
             }
-            
         } while (!isExiting);
     }
 
@@ -276,8 +275,7 @@ public final class InterfacciaInput {
 
         return sintassiCorretta;
     }
-    
-    public static void setInputStream(InputStream inputStream){
+    public static void setInputStream(final InputStream inputStream) {
         sc = new Scanner(inputStream, "utf-8");
     }
 }

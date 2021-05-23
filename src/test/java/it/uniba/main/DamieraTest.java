@@ -5,9 +5,9 @@
  */
 package it.uniba.main;
 
-import it.uniba.main.eccezioni.eccezioneSpostamento;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
@@ -89,7 +89,7 @@ public class DamieraTest {
         String mossa = "21-17";
         try {
             assertTrue(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
-        } catch (eccezioneSpostamento exc) {
+        } catch (Exception exc) {
             fail(exc.getMessage());
         }
     }
@@ -99,7 +99,7 @@ public class DamieraTest {
         String mossa = "9-13";
         try {
             assertTrue(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
-        } catch (eccezioneSpostamento exc) {
+        } catch (Exception exc) {
             fail(exc.getMessage());
         }
     }
@@ -501,13 +501,21 @@ public class DamieraTest {
         PrintStream backupOut = System.out;
         
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        try {
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
         
         damiera.stampaNumeri();
 
         System.setOut(backupOut);
         
-        assertTrue(outContent.toString().length() != 0);
+        try {
+            assertTrue(outContent.toString("utf-8").length() != 0);
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
@@ -516,13 +524,21 @@ public class DamieraTest {
         PrintStream backupOut = System.out;
         
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        try {
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
         
         damiera.stampaPedine();
 
         System.setOut(backupOut);
         
-        assertTrue(outContent.toString().length() != 0);
+        try {
+            assertTrue(outContent.toString("utf-8").length() != 0);
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
@@ -535,13 +551,13 @@ public class DamieraTest {
             PrintStream backupOut = System.out;
 
             ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-            System.setOut(new PrintStream(outContent));
+            System.setOut(new PrintStream(outContent, true, "utf-8"));
 
             damiera.stampaPedineMangiate();
 
             System.setOut(backupOut);
 
-            assertTrue(outContent.toString().length() != 0);
+            assertTrue(outContent.toString("utf-8").length() != 0);
             
         } catch (Exception exc) {
             fail(exc.getMessage());
@@ -558,13 +574,13 @@ public class DamieraTest {
             PrintStream backupOut = System.out;
 
             ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-            System.setOut(new PrintStream(outContent));
+            System.setOut(new PrintStream(outContent, true, "utf-8"));
 
             damiera.stampaPedineMangiate();
 
             System.setOut(backupOut);
 
-            assertTrue(outContent.toString().length() != 0);
+            assertTrue(outContent.toString("utf-8").length() != 0);
             
         } catch (Exception exc) {
             fail(exc.getMessage());
@@ -578,13 +594,21 @@ public class DamieraTest {
         PrintStream backupOut = System.out;
         
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        try {
+            System.setOut(new PrintStream(outContent, true, "utf-8"));
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
         
         damiera.stampaMosse();
 
         System.setOut(backupOut);
         
-        assertTrue(outContent.toString().length() != 0);
+        try {
+            assertTrue(outContent.toString("utf-8").length() != 0);
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test

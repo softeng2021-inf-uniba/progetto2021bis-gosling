@@ -12,10 +12,18 @@ package it.uniba.main;
  * 
  */
 public final class Help {
-    
-    public Help(){
+    private static Help singleIstance = null;
+
+    private Help() {
     }
-    
+
+    public static Help getHelp() {
+        if (singleIstance == null) {
+            singleIstance = new Help();
+        }
+        return singleIstance;
+    }
+
  /* ------------ Metodi ------------*/
     public static void stampaHelpMenu() {
         System.out.println("");

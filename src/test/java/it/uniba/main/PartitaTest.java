@@ -9,6 +9,7 @@ import it.uniba.main.interfacce.InterfacciaInput;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  *
@@ -56,44 +58,52 @@ public class PartitaTest {
     
     @Test
     void testStampaTempoPassato_giocatore1(){
-        PrintStream backupOut = System.out;
-
-        String commandSequence = "tempo" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        partita.giocaPartita();
-
-        System.setOut(backupOut);
-        
-        assertTrue(outContent.toString().contains("tempo"));
-
-        Partita.azzeraPartitaCorrente();
+        try {
+            PrintStream backupOut = System.out;
+            
+            String commandSequence = "tempo" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
+            
+            ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            partita.giocaPartita();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").contains("tempo"));
+            
+            Partita.azzeraPartitaCorrente();
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }    
     
     @Test
     void testStampaTempoPassato_giocatore2(){
-        PrintStream backupOut = System.out;
-
-        String commandSequence = "22-18" + System.lineSeparator() + "tempo" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        partita.giocaPartita();
-
-        System.setOut(backupOut);
-        
-        assertTrue(outContent.toString().contains("tempo"));
-
-        Partita.azzeraPartitaCorrente();
+        try {
+            PrintStream backupOut = System.out;
+            
+            String commandSequence = "22-18" + System.lineSeparator() + "tempo" + System.lineSeparator() + "abbandona" + System.lineSeparator() + "si";
+            
+            ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            partita.giocaPartita();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").contains("tempo"));
+            
+            Partita.azzeraPartitaCorrente();
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
     
     @Test
@@ -108,22 +118,26 @@ public class PartitaTest {
     
     @Test
     void testNuovoTurno(){
-        PrintStream backupOut = System.out;
-
-        String commandSequence = "abbandona" + System.lineSeparator() + "si";
-
-        ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes());
-        InterfacciaInput.setInputStream(in);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        partita.giocaPartita();
-
-        System.setOut(backupOut);
-        
-        assertTrue(outContent.toString().contains("turno di"));
-
-        Partita.azzeraPartitaCorrente();
+        try {
+            PrintStream backupOut = System.out;
+            
+            String commandSequence = "abbandona" + System.lineSeparator() + "si";
+            
+            ByteArrayInputStream in = new ByteArrayInputStream((commandSequence).getBytes("utf-8"));
+            InterfacciaInput.setInputStream(in);
+            
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outContent,true,"utf-8"));
+            
+            partita.giocaPartita();
+            
+            System.setOut(backupOut);
+            
+            assertTrue(outContent.toString("utf-8").contains("turno di"));
+            
+            Partita.azzeraPartitaCorrente();
+        } catch (UnsupportedEncodingException ex) {
+            fail(ex.getMessage());
+        }
     }
 }
