@@ -5,6 +5,8 @@
  */
 package it.uniba.main;
 
+import it.uniba.main.eccezioni.EccezionePresa;
+import it.uniba.main.eccezioni.EccezioneSpostamento;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
@@ -89,7 +91,7 @@ public class DamieraTest {
         String mossa = "21-17";
         try {
             assertTrue(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezioneSpostamento exc) {
             fail(exc.getMessage());
         }
     }
@@ -99,7 +101,7 @@ public class DamieraTest {
         String mossa = "9-13";
         try {
             assertTrue(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
-        } catch (Exception exc) {
+        } catch (EccezioneSpostamento exc) {
             fail(exc.getMessage());
         }
     }
@@ -124,7 +126,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("11-7", Pedina.Colore.bianco);
             damiera.spostamentoPedina("15-19", Pedina.Colore.nero);
             assertTrue(damiera.spostamentoPedina("7-4", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             fail(exc.getMessage());
         }
     }
@@ -150,7 +152,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("15-19", Pedina.Colore.nero);
             damiera.spostamentoPedina("7-4", Pedina.Colore.bianco);
             assertTrue(damiera.spostamentoPedina("4-7", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             fail(exc.getMessage());
         }
     }
@@ -177,7 +179,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("7-4", Pedina.Colore.bianco);
             damiera.spostamentoPedina("4-7", Pedina.Colore.bianco);
             assertTrue(damiera.spostamentoPedina("7-4", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             fail(exc.getMessage());
         }
     }
@@ -187,7 +189,7 @@ public class DamieraTest {
         String mossa = "22-17";
         try {
             assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -197,7 +199,7 @@ public class DamieraTest {
         String mossa = "22-11";
         try {
             assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -223,7 +225,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("15-19", Pedina.Colore.nero);
             damiera.spostamentoPedina("7-4", Pedina.Colore.bianco);
             assertFalse(damiera.spostamentoPedina("4-11", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             fail(exc.getMessage());
         }
     }
@@ -233,7 +235,7 @@ public class DamieraTest {
         String mossa = "9-13";
         try {
             assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -243,7 +245,7 @@ public class DamieraTest {
         String mossa = "17-13";
         try {
             assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -253,7 +255,7 @@ public class DamieraTest {
         String mossa = "29-25";
         try {
             assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -263,7 +265,7 @@ public class DamieraTest {
         String mossa = "21-13";
         try {
             assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezioneSpostamento exc) {
             fail(exc.getMessage());
         }
     }
@@ -273,7 +275,7 @@ public class DamieraTest {
         String mossa = "18-21";
         try {
             assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.nero));
-        } catch (Exception exc) {
+        } catch (EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -283,7 +285,7 @@ public class DamieraTest {
         String mossa = "29-25";
         try {
             assertFalse(damiera.spostamentoPedina(mossa, Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -294,7 +296,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("21-18", Pedina.Colore.bianco);
             damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
             assertTrue(damiera.effettuaPresaSemplice("18x9", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             fail(exc.getMessage());
         }
     }
@@ -305,7 +307,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
             damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
             assertTrue(damiera.effettuaPresaSemplice("13x22", Pedina.Colore.nero));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             fail(exc.getMessage());
         }
     }
@@ -321,7 +323,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("18-14", Pedina.Colore.bianco);
             damiera.spostamentoPedina("14-11", Pedina.Colore.bianco);
             assertTrue(damiera.effettuaPresaSemplice("11x4", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             fail(exc.getMessage());
         }
     }
@@ -332,7 +334,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("22-19", Pedina.Colore.bianco);
             damiera.spostamentoPedina("10-14", Pedina.Colore.nero);
             assertFalse(damiera.effettuaPresaSemplice("19x18", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -344,7 +346,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("10-14", Pedina.Colore.nero);
             damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
             assertFalse(damiera.effettuaPresaSemplice("19x9", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -364,7 +366,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("7-11", Pedina.Colore.bianco);
             damiera.spostamentoPedina("3-7", Pedina.Colore.nero);
             assertFalse(damiera.effettuaPresaSemplice("11x4", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -382,7 +384,7 @@ public class DamieraTest {
             damiera.effettuaPresaSemplice("11x4", Pedina.Colore.bianco);
             damiera.spostamentoPedina("3-7", Pedina.Colore.nero);
             assertFalse(damiera.effettuaPresaSemplice("4x11", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -391,7 +393,7 @@ public class DamieraTest {
     void testEffettuaPresaSemplice_presaVuota() {
         try {
             assertFalse(damiera.effettuaPresaSemplice("21x14", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -402,7 +404,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("22-18", Pedina.Colore.bianco);
             damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
             assertFalse(damiera.effettuaPresaSemplice("13x22", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -412,7 +414,7 @@ public class DamieraTest {
         try {
             damiera.spostamentoPedina("21-18", Pedina.Colore.bianco);
             assertFalse(damiera.effettuaPresaSemplice("22x13", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -421,7 +423,7 @@ public class DamieraTest {
     void testEffettuaPresaSemplice_presaDaCellaVuota() {
         try {
             assertFalse(damiera.effettuaPresaSemplice("18x11", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -432,7 +434,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("21-17", Pedina.Colore.bianco);
             damiera.spostamentoPedina("9-13", Pedina.Colore.nero);
             assertFalse(damiera.effettuaPresaSemplice("17x10", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -452,7 +454,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("12-15", Pedina.Colore.nero);
             damiera.spostamentoPedina("4-7", Pedina.Colore.bianco);
             assertFalse(damiera.effettuaPresaSemplice("3x12", Pedina.Colore.nero));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -471,7 +473,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("24-20", Pedina.Colore.bianco);
             damiera.spostamentoPedina("10-14", Pedina.Colore.nero);
             assertTrue(damiera.effettuaPresaMultipla("18x11x4", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             fail(exc.getMessage());
         }
     }
@@ -490,7 +492,7 @@ public class DamieraTest {
             damiera.spostamentoPedina("24-20", Pedina.Colore.bianco);
             damiera.spostamentoPedina("10-14", Pedina.Colore.nero);
             assertFalse(damiera.effettuaPresaMultipla("18x11x3", Pedina.Colore.bianco));
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento exc) {
             System.out.println("Test passato: " + exc.getMessage());
         }
     }
@@ -559,7 +561,7 @@ public class DamieraTest {
 
             assertTrue(outContent.toString("utf-8").length() != 0);
             
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento | UnsupportedEncodingException exc) {
             fail(exc.getMessage());
         }
     }
@@ -582,7 +584,7 @@ public class DamieraTest {
 
             assertTrue(outContent.toString("utf-8").length() != 0);
             
-        } catch (Exception exc) {
+        } catch (EccezionePresa | EccezioneSpostamento | UnsupportedEncodingException exc) {
             fail(exc.getMessage());
         }
     }
