@@ -5,8 +5,8 @@
  */
 package it.uniba.main.dati;
 
-import it.uniba.main.Damiera;
-import it.uniba.main.Pedina;
+import it.uniba.main.dati.Damiera;
+import it.uniba.main.dati.Pedina;
 import it.uniba.main.eccezioni.EccezionePresa;
 import it.uniba.main.eccezioni.EccezioneSpostamento;
 import java.io.ByteArrayOutputStream;

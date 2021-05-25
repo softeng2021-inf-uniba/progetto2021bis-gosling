@@ -5,8 +5,8 @@
  */
 package it.uniba.main.dati;
 
-import it.uniba.main.Partita;
-import it.uniba.main.Pedina;
+import it.uniba.main.dati.Partita;
+import it.uniba.main.dati.Pedina;
 import it.uniba.main.interfacce.InterfacciaInput;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

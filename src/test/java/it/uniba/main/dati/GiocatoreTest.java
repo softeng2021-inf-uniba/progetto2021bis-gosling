@@ -5,7 +5,7 @@
  */
 package it.uniba.main.dati;
 
-import it.uniba.main.Giocatore;
+import it.uniba.main.dati.Giocatore;
 import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test; 
