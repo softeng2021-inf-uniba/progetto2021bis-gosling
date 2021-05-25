@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.uniba.main;
+package it.uniba.main.dati;
 
+import it.uniba.main.Pedina;
 import it.uniba.main.Pedina.Colore;
 import it.uniba.main.Pedina.TipoPedina;
 import java.io.ByteArrayOutputStream;

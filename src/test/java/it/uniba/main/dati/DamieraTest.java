@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.uniba.main;
+package it.uniba.main.dati;
 
+import it.uniba.main.Damiera;
+import it.uniba.main.Pedina;
 import it.uniba.main.eccezioni.EccezionePresa;
 import it.uniba.main.eccezioni.EccezioneSpostamento;
 import java.io.ByteArrayOutputStream;

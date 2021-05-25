@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.uniba.main;
+package it.uniba.main.dati;
 
+import it.uniba.main.Partita;
+import it.uniba.main.Pedina;
 import it.uniba.main.interfacce.InterfacciaInput;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
