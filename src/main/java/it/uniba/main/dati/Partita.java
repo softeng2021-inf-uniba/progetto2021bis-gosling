@@ -34,6 +34,9 @@ public final class Partita {
         turnoGiocatore2
     }
     /* ------------ Costruttori ------------ */
+    /**
+     * Il costruttore di partita che inizializza tutti i suoi attributi.
+     */
     private Partita() {
 
         damiera = Damiera.getDamiera();
@@ -66,6 +69,9 @@ public final class Partita {
     }
 
     /* ------------ Metodi ------------ */
+    /**
+     * Controlla se esiste gia una partita avviata, altrimenti ne crea una nuova.
+     */
     public static void nuovaPartita() {
 
         if (partitaCorrente == null) {
@@ -77,12 +83,19 @@ public final class Partita {
         }
     }
 
+    /**
+     * Gestisce il flusso della partita chiamando ogni volta nuovoTurno, prima di inziare un nuovo turno controlla se la pertita non è finita
+     */
     public void giocaPartita() {
         while (!isFinita()) {
             nuovoTurno();
         }
     }
 
+    /**
+     * Controlla di chi è il turno e succesivamente chiama il menuDiGioco specificando chi è il giocatore del turno e chi è il suo avversario.
+     * Infine aggiorna di chi è il turno per il turno successivo.
+     */
     public void nuovoTurno() {
         Giocatore corrente;
         Giocatore avversario;
@@ -108,14 +121,23 @@ public final class Partita {
         }
     }
 
+    /**
+     * Imposta a true finita, per terminare la partita.
+     */
     public void finisciPartita() {
         finita = true;
     }
 
+    /**
+     * Imposta a null la partitaCorrente.
+     */
     public static void azzeraPartitaCorrente() {
         partitaCorrente = null;
     }
 
+    /**
+     * Stampa il tempo passato dei due giocatori. Il comando stampa per primo il tempo del giocatore in base al turno in cui è stato chiamato il comando.
+     */
     public void stampaTempoPassato() {
 
         Giocatore corrente;

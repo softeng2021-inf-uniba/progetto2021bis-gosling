@@ -59,6 +59,7 @@ public final class Damiera {
         /* ------------ Get & Set ------------ */
         /**
          * Restituisce la riga.
+         * 
          * @return è la riga dell'oggetto posizione
          */
         public int getRiga() {
