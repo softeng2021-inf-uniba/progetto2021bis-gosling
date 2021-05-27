@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.uniba.main;
+package it.uniba.main.interfacce;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

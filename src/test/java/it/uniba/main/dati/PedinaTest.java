@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.uniba.main;
+package it.uniba.main.dati;
 
-import it.uniba.main.Pedina.Colore;
-import it.uniba.main.Pedina.TipoPedina;
+import it.uniba.main.dati.Pedina;
+import it.uniba.main.dati.Pedina.Colore;
+import it.uniba.main.dati.Pedina.TipoPedina;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;

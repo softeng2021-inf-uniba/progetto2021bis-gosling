@@ -1,4 +1,4 @@
-package it.uniba.main;
+package it.uniba.main.dati;
 
 import it.uniba.main.eccezioni.EccezionePresa;
 import it.uniba.main.eccezioni.EccezioneSpostamento;

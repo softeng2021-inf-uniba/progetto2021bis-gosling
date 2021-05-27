@@ -5,10 +5,9 @@
  */
 package it.uniba.main.interfacce;
 
-import it.uniba.main.Damiera;
-import it.uniba.main.Giocatore;
-import it.uniba.main.Help;
-import it.uniba.main.Partita;
+import it.uniba.main.dati.Damiera;
+import it.uniba.main.dati.Giocatore;
+import it.uniba.main.dati.Partita;
 
 import it.uniba.main.eccezioni.EccezionePresa;
 import it.uniba.main.eccezioni.EccezioneSpostamento;

@@ -5,8 +5,8 @@
  */
 package it.uniba.main.interfacce;
 
-import it.uniba.main.Damiera;
-import it.uniba.main.Partita;
+import it.uniba.main.dati.Damiera;
+import it.uniba.main.dati.Partita;
 import static it.uniba.main.interfacce.InterfacciaInput.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

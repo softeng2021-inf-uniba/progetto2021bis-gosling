@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.uniba.main;
+package it.uniba.main.dati;
 
+import it.uniba.main.dati.Giocatore;
 import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test; 

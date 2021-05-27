@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 import it.uniba.main.interfacce.InterfacciaInput;
-
+import it.uniba.main.interfacce.Help;
 /**
  * Tipo classe: <<Control>>
  *
