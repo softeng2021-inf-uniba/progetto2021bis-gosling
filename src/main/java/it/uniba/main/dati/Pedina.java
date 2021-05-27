@@ -39,25 +39,48 @@ public final class Pedina {
         pedinaRe
     }
     /* ------------  Costruttori ------------ */
+    /**
+     * Il costruttore di pedina che inizializza il colore secondo un parametro in input e il tipo a pedina semplice.
+     * 
+     * @param coloreIn è colore che verrà assegnato a colore
+     */
      public Pedina(final Colore coloreIn) {
         this.colore = coloreIn;
         this.tipo = TipoPedina.pedinaSemplice;
     }
 
     /* ------------ Get & Set ------------*/
+     /**
+      * Restituisce il colore della pedina.
+      * 
+      * @return è il colore della pedina
+      */
     public Colore getColore() {
         return this.colore;
     }
 
+    /**
+     * Restituisce il tipo della pedina.
+     * 
+     * @return è il tipo della pedina
+     */
     public TipoPedina getTipo() {
         return this.tipo;
     }
 
+    /**
+     * Inverte il colore in base a un parametro in input.
+     * 
+     * @param invertiColoreIn indica se inverti colore deve essere abilitato oppure no
+     */
     public static void setInvertiColore(final boolean invertiColoreIn) {
         Pedina.invertiColore = invertiColoreIn;
     }
 
     /* ------------ Metodi ------------*/
+    /**
+     * Stampa la pedina in base al tipo, al colore e in base a inveritiColore se è impostato oppure no.
+     */
     public void stampaPedina() {
         if (this.colore == Colore.bianco) {
             if (this.tipo == TipoPedina.pedinaRe) {
@@ -98,6 +121,9 @@ public final class Pedina {
         }
     }
 
+    /**
+     * Cambia il tipo di una pedina a pedianRe
+     */
     public void promuoviADama() {
         this.tipo = TipoPedina.pedinaRe;
     }
