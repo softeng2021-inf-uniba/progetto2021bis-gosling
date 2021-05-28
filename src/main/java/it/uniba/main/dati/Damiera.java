@@ -16,14 +16,38 @@ import java.util.List;
 public final class Damiera {
 
     /* ------------ Stato ------------ */
+    /**
+     * Indica il numero di possibili posizioni all'interno di una damiera.
+     */
     private static final int GRANDEZZA_POSIZIONI = 32;
+    /**
+     * Indica la grandezza di una damiera con numeri e la damiera di gioco.
+     */
     private static final int DAMIERA_SIZE = 8;
+    /**
+     * Un vettore utilizzato per la traduzione da numero intero in posizione all'interno della matrice damieraGioco.
+     */
     private static final Posizione[] VETTORE_POSIZIONI = new Posizione[GRANDEZZA_POSIZIONI];
     private static Damiera singleIstance = null;  // Per rendere la classe singleton
+    /**
+     * Una matrice che viene usata per la stampa della damiera numerata.
+     */
     private final int[][] damieraNumeri;
+    /**
+     * Una matrice di pedine utilizzata per simulare una damiera per una partita a dama.
+     */
     private Pedina[][] damieraGioco;
+    /**
+     * Un contatore che viene incremento ogni qual volta che una pedina di colore nero viene mangiata.
+     */
     private int pedineNereMangiate;
+    /**
+     * Un contatore che viene incremento ogni qual volta che una pedina di colore nero viene mangiata.
+     */
     private int pedineBiancheMangiate;
+    /**
+     * Una lista in cui vengono inserite tutte le mosse inseriti dai due giocatori.
+     */
     private List<String> listaMosse;
 
     /**
