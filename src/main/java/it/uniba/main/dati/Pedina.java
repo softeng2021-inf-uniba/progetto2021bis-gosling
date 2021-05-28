@@ -15,8 +15,17 @@ package it.uniba.main.dati;
 public final class Pedina {
 
     /* ------------ Stato ------------ */
+    /**
+     * Indica se la pedina è una pedina semplice bianca o una pedina re.
+     */
     private TipoPedina tipo;
+    /**
+     * Indica il colore di una pedina (bianco o nero).
+     */
     private final Colore colore;
+    /**
+     * Una variabile booleana utilizzata per l'uso della stampa invertita.
+     */
     private static boolean invertiColore = true;
     /* ------------ Sottoclassi ------------ */
     /**
