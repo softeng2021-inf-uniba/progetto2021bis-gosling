@@ -18,10 +18,25 @@ public final class Partita {
     /* ------------ Stato ------------ */
     private static Partita partitaCorrente;
 
+    /**
+     * La damiera di gioco su cui si svolgerà la partita.
+     */
     private Damiera damiera;
+    /**
+     * Utilizzata per salvare i dati del primo giocatore.
+     */
     private Giocatore giocatore1;
+    /**
+     * Utilizzata per salvare i dati del secondo giocatore.
+     */
     private Giocatore giocatore2;
+    /**
+     * Variabile utilizzata per la gestione del flusso dei turni tra giocatore1 e giocatore2.
+     */
     private Turno turno;
+    /**
+     * Variabile booleana assume vero solo quando la partita finisce.
+     */
     private boolean finita;
     /* ------------ Sottoclassi ------------ */
     /**
