@@ -26,7 +26,6 @@ import java.util.Set;
  *
  */
 public final class InterfacciaInput {
-    
     /**
      *  Definizione dello scanner dell'input. E' statico e fisso per tutti i metodi della classe.
      */
@@ -80,7 +79,7 @@ public final class InterfacciaInput {
     }
     /**
      * Gestisce la logica del menu' di inizio in cui la paritta non è ancora iniziata.
-     * Inizia una partita se il giocatore decide di avviarne una
+     * Inizia una partita se il giocatore decide di avviarne una.
      */
     public static void menuDiInizio() {
         boolean isExiting = false;
@@ -142,9 +141,9 @@ public final class InterfacciaInput {
         sc.close();
     }
     /**
-     * Gestisce la logica dei comandi quando la partita e' avviata. 
+     * Gestisce la logica dei comandi quando la partita e' avviata.
      * 
-     * Se il comando non e' riconosciuto tra quelli del menu' allora viene interpretato come 
+     * Se il comando non e' riconosciuto tra quelli del menu' allora viene interpretato come
      * una possibile mossa.
      * @param corrente e' il giocatore che sta giocando il turno
      * @param avversario e' il giocatore avversario
@@ -274,7 +273,7 @@ public final class InterfacciaInput {
         return sintassiCorretta;
     }
     /**
-     * Controlla la sintassi per verificare se la risposta e' una presa multipla corretta. 
+     * Controlla la sintassi per verificare se la risposta e' una presa multipla corretta.
      * Divide la presa multipla in una serie di prese semplici per cuio verifica singolarmente la correttezza.
      * @param answer e' il comando inserito dall'utente
      * @return true se la sintassi e' corretta, false altrimenti

@@ -11,14 +11,14 @@ import it.uniba.main.interfacce.Help;
 public final class AppMain {
 
     /**
-     * Costruttore privato perche' la classe e' utility
+     * Costruttore privato perche' la classe e' utility.
      */
     private AppMain() {
 
     }
 
     /**
-     * E' il main dell'applicazione
+     * E' il main dell'applicazione.
      *
      * @param args Parametri di avvio
      */

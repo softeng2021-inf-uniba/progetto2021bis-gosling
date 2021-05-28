@@ -16,18 +16,16 @@ public final class Help {
      * Rende Help una classe singleton
      */
     private static Help singleIstance = null;
-    
     /**
      * Costruttore della classe Help
      * 
-     * Essendo una classe con soli metodi statici, il costruttore e' privato
+     * Essendo una classe con soli metodi statici, il costruttore e' privato.
      */
     private Help() {
     }
-    
     /**
-     * Permette di ottenere l'unica istanza di help e lo inizializza se non esiste
-     * @return l'unica istanza di help 
+     * Permette di ottenere l'unica istanza di help e lo inizializza se non esiste.
+     * @return l'unica istanza di help
      */
     public static Help getHelp() {
         if (singleIstance == null) {

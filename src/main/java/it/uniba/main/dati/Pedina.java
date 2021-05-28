@@ -51,7 +51,7 @@ public final class Pedina {
     /**
      * Il costruttore di pedina che inizializza il colore secondo un parametro in input e il tipo a pedina semplice.
      * 
-     * @param coloreIn è colore che verrà assegnato a colore
+     * @param coloreIn e' colore che verra' assegnato a colore
      */
      public Pedina(final Colore coloreIn) {
         this.colore = coloreIn;
@@ -62,7 +62,7 @@ public final class Pedina {
      /**
       * Restituisce il colore della pedina.
       * 
-      * @return è il colore della pedina
+      * @return e' il colore della pedina
       */
     public Colore getColore() {
         return this.colore;
@@ -71,7 +71,7 @@ public final class Pedina {
     /**
      * Restituisce il tipo della pedina.
      * 
-     * @return è il tipo della pedina
+     * @return e' il tipo della pedina
      */
     public TipoPedina getTipo() {
         return this.tipo;

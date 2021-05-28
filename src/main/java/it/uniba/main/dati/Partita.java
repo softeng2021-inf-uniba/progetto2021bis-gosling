@@ -22,7 +22,7 @@ public final class Partita {
     private static Partita partitaCorrente;
 
     /**
-     * La damiera di gioco su cui si svolgerà la partita.
+     * La damiera di gioco su cui si svolgerï¿½ la partita.
      */
     private Damiera damiera;
     /**
@@ -73,7 +73,7 @@ public final class Partita {
     /**
      * Restituisce la partita corrente.
      * 
-     * @return e' la partitaCorrente 
+     * @return e' la partitaCorrente
      */
     public static Partita getPartita() {
         return partitaCorrente;
@@ -122,7 +122,8 @@ public final class Partita {
     }
 
     /**
-     * Gestisce il flusso della partita chiamando ogni volta nuovoTurno, prima di inziare un nuovo turno controlla se la pertita non è finita
+     * Gestisce il flusso della partita chiamando ogni volta nuovoTurno, prima di
+     * inziare un nuovo turno controlla se la pertita non ï¿½ finita
      */
     public void giocaPartita() {
         while (!isFinita()) {
@@ -131,7 +132,8 @@ public final class Partita {
     }
 
     /**
-     * Controlla di chi e' il turno e succesivamente chiama il menuDiGioco specificando chi e' il giocatore del turno e chi è il suo avversario.
+     * Controlla di chi e' il turno e succesivamente chiama il menuDiGioco specificando chi e'
+     * il giocatore del turno e chi e' il suo avversario.
      * Infine aggiorna di chi e' il turno per il turno successivo.
      */
     public void nuovoTurno() {
@@ -174,7 +176,8 @@ public final class Partita {
     }
 
     /**
-     * Stampa il tempo passato dei due giocatori. Il comando stampa per primo il tempo del giocatore in base al turno in cui e' stato chiamato il comando.
+     * Stampa il tempo passato dei due giocatori. Il comando stampa per primo il tempo del giocatore in base
+     * al turno in cui e' stato chiamato il comando.
      */
     public void stampaTempoPassato() {
 

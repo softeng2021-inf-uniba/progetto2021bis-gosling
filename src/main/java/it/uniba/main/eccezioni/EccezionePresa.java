@@ -11,14 +11,14 @@ package it.uniba.main.eccezioni;
  */
 public final class EccezionePresa extends Exception {
     /**
-     * Sovrascrive il messaggio standard delle eccezioni
-     * @param string 
+     * Sovrascrive il messaggio standard delle eccezioni.
+     * @param string
      */
     public EccezionePresa(final String string) {
         super(string);
     }
     /**
-     * Ritorna il messaggio dell'eccezione
+     * Ritorna il messaggio dell'eccezione.
      * @return il messaggio dell'eccezione
      */
     @Override
