@@ -16,6 +16,9 @@ import it.uniba.main.interfacce.InterfacciaInput;
 public final class Partita {
 
     /* ------------ Stato ------------ */
+    /**
+     * Rende Partita una classe singleton.
+     */
     private static Partita partitaCorrente;
 
     /**
@@ -67,18 +70,38 @@ public final class Partita {
     }
 
     /* ------------ Get & Set ------------ */
+    /**
+     * Restituisce la partita corrente.
+     * 
+     * @return e' la partitaCorrente 
+     */
     public static Partita getPartita() {
         return partitaCorrente;
     }
 
+    /**
+     * Restituisce true se la partita e' finita, false altrimenti.
+     * 
+     * @return e' l'attributo finita di Partita
+     */
     public boolean isFinita() {
         return finita;
     }
 
+    /**
+     * Restituisce il giocatore bianco.
+     * 
+     * @return e' giocatore1
+     */
     public Giocatore getGiocatore1() {
         return giocatore1;
     }
 
+    /**
+     * Restituisce il giocatore nero.
+     * 
+     * @return e' giocatore2
+     */
     public Giocatore getGiocatore2() {
         return giocatore2;
     }
@@ -108,8 +131,8 @@ public final class Partita {
     }
 
     /**
-     * Controlla di chi è il turno e succesivamente chiama il menuDiGioco specificando chi è il giocatore del turno e chi è il suo avversario.
-     * Infine aggiorna di chi è il turno per il turno successivo.
+     * Controlla di chi e' il turno e succesivamente chiama il menuDiGioco specificando chi e' il giocatore del turno e chi è il suo avversario.
+     * Infine aggiorna di chi e' il turno per il turno successivo.
      */
     public void nuovoTurno() {
         Giocatore corrente;
@@ -151,7 +174,7 @@ public final class Partita {
     }
 
     /**
-     * Stampa il tempo passato dei due giocatori. Il comando stampa per primo il tempo del giocatore in base al turno in cui è stato chiamato il comando.
+     * Stampa il tempo passato dei due giocatori. Il comando stampa per primo il tempo del giocatore in base al turno in cui e' stato chiamato il comando.
      */
     public void stampaTempoPassato() {
 

@@ -16,7 +16,7 @@ public final class Pedina {
 
     /* ------------ Stato ------------ */
     /**
-     * Indica se la pedina è una pedina semplice bianca o una pedina re.
+     * Indica se la pedina e' una pedina semplice bianca o una pedina re.
      */
     private TipoPedina tipo;
     /**
@@ -88,7 +88,7 @@ public final class Pedina {
 
     /* ------------ Metodi ------------*/
     /**
-     * Stampa la pedina in base al tipo, al colore e in base a inveritiColore se è impostato oppure no.
+     * Stampa la pedina in base al tipo, al colore e in base a inveritiColore se e' abilitato o disabilitato.
      */
     public void stampaPedina() {
         if (this.colore == Colore.bianco) {
@@ -131,7 +131,7 @@ public final class Pedina {
     }
 
     /**
-     * Cambia il tipo di una pedina a pedianRe
+     * Cambia il tipo di una pedina a pedianRe.
      */
     public void promuoviADama() {
         this.tipo = TipoPedina.pedinaRe;

@@ -28,6 +28,9 @@ public final class Damiera {
      * Un vettore utilizzato per la traduzione da numero intero in posizione all'interno della matrice damieraGioco.
      */
     private static final Posizione[] VETTORE_POSIZIONI = new Posizione[GRANDEZZA_POSIZIONI];
+    /**
+     * Rende Damiera una classe singleton.
+     */
     private static Damiera singleIstance = null;  // Per rendere la classe singleton
     /**
      * Una matrice che viene usata per la stampa della damiera numerata.
@@ -72,8 +75,8 @@ public final class Damiera {
         /**
          * Il costruttore di Posizione che inizializza sia la riga che la colonna.
          * 
-         * @param rigaIn è l'intero che verra assegnato alla riga
-         * @param colonnaIn è l'intero che verra assegnato alla colonna
+         * @param rigaIn e' l'intero che verra assegnato alla riga
+         * @param colonnaIn e' l'intero che verra assegnato alla colonna
          */
         public Posizione(final int rigaIn, final int colonnaIn) {
             this.riga = rigaIn;
@@ -84,7 +87,7 @@ public final class Damiera {
         /**
          * Restituisce la riga.
          * 
-         * @return è la riga dell'oggetto posizione
+         * @return e' la riga dell'oggetto posizione
          */
         public int getRiga() {
             return riga;
@@ -93,7 +96,7 @@ public final class Damiera {
         /**
          * Restituisce la colonna.
          * 
-         * @return è la colonna dell'oggeto posizione
+         * @return e' la colonna dell'oggeto posizione
          */
         public int getColonna() {
             return colonna;
@@ -102,7 +105,7 @@ public final class Damiera {
         /**
          * Imposta la riga secondo un parametro in input.
          * 
-         * @param rigaIn è l'intero che verrà assegnato a riga 
+         * @param rigaIn e' l'intero che verrà assegnato a riga 
          */
         public void setRiga(final int rigaIn) {
             this.riga = rigaIn;
@@ -111,7 +114,7 @@ public final class Damiera {
         /**
          * Imposta un nuovo valore alla colonna secondo un parametro in input.
          * 
-         * @param colonnaIn è l'intero che verrà assegnato a colonna
+         * @param colonnaIn e' l'intero che verrà assegnato a colonna
          */
         public void setColonna(final int colonnaIn) {
             this.colonna = colonnaIn;
@@ -135,7 +138,7 @@ public final class Damiera {
 
     /* ------------ Get & Set ------------*/
     /**
-     * Controlla se esiste già un istanza di damiera, in caso negativo ne crea una nuova e la restituisce, altrimenti restituisce quella gia esistente.
+     * Controlla se esiste gia' un istanza di damiera, in caso negativo ne crea una nuova e la restituisce, altrimenti restituisce quella gia esistente.
      * 
      * @return è la damiera che restituisce il metodo
      */
@@ -300,8 +303,8 @@ public final class Damiera {
     /**
      * Converte un numero della damiera da 1 a 32 in una posizione sulla matrice damieraGioco
      * 
-     * @param num è il nuemro intero che riechiede il metodo per essere eseguito, esso servira per trovare la posizione corrispettiva a esso nella damiera
-     * @return è la posizione corrispettiva trovata nel VETTORE_POSIZIONI
+     * @param num e' il nuemro intero che riechiede il metodo per essere eseguito, esso servira per trovare la posizione corrispettiva a esso nella damiera
+     * @return e' la posizione corrispettiva trovata nel VETTORE_POSIZIONI
      */
     public static Posizione convertiNumeroInPosizione(final int num) {
         Posizione posizioneDesiderata;
@@ -403,22 +406,22 @@ public final class Damiera {
      * Il metodo trasforma la mossa dell'utente in una coppia di numeri interi che simboleggiano la posizione di arrivo e la posizione di partenza, 
      * conevertendo in seguito, grazie al metodo convertiNumeroInPosizione, i due nemri in due posizioni.
      * <p>
-     * Succesivamente controlla che la posizioni ottenute siano corrette, infatti verifica se nella cella di partenza è presente una pedina dello
-     * stesso colore del giocatore che ha inserito il comando. Se è possibile arrivare alla cella di arrivo dalla cella di partenza e 
+     * Succesivamente controlla che la posizioni ottenute siano corrette, infatti verifica se nella cella di partenza e' presente una pedina dello
+     * stesso colore del giocatore che ha inserito il comando. Se e' possibile arrivare alla cella di arrivo dalla cella di partenza e 
      * se la cella di arrivo è vuota. 
-     * Nel caso in cui una di queste condizioni è falsa la mossa non viene eseguita e viene lanciata un' eccezione.
+     * Nel caso in cui una di queste condizioni e' falsa la mossa non viene eseguita e viene lanciata un' eccezione.
      * </p>
      * <p>
      * Invece nel caso in cui tutte le condizioni sono vere viene effettuato un altro controllo, ovvero, se la cella di arrivo fa parte della base
      * avversaria e la pedina spostata è una pedina semplice, viene effettuato lo spostamento e la pedina viene promossa a dama. 
-     * Invece se la pedina spostata è una dama o la cella di arrivo non fa parte della base avversaria viene effettutao semplicemente lo spostamento.
+     * Invece se la pedina spostata e' una dama o la cella di arrivo non fa parte della base avversaria viene effettutao semplicemente lo spostamento.
      * </p>
      * 
-     * @param mossa è la stringa del comando inserito dall'utente da esaminare e da eseguire nel caso sia corretta
-     * @param coloreGiocatore è il colore del giocatore che ha inserito il comando 
+     * @param mossa e' la stringa del comando inserito dall'utente da esaminare e da eseguire nel caso sia corretta
+     * @param coloreGiocatore e' il colore del giocatore che ha inserito il comando 
      * @return il valore booleano indica la corretta esecuzione dello spostamento, restituisce true se lo spostamento è andato a buon fine, 
      * false altrimenti
-     * @throws EccezioneSpostamento è l'eccezione che viene lanciata quando metodo riceve in input una mossa non corretta
+     * @throws EccezioneSpostamento e' l'eccezione che viene lanciata quando metodo riceve in input una mossa non corretta
      */
     public boolean spostamentoPedina(final String mossa, final Pedina.Colore coloreGiocatore)
             throws EccezioneSpostamento {
@@ -503,23 +506,23 @@ public final class Damiera {
      * Il metodo trasforma la mossa dell'utente in una coppia di numeri interi che simboleggiano la posizione di arrivo e la posizione di partenza, 
      * conevertendo in seguito, grazie al metodo convertiNumeroInPosizione, i due nemri in due posizioni.
      * <p>
-     * Succesivamente controlla che le posizioni ottenute siano corrette, infatti verifica se nella cella di partenza è presente una pedina dello
-     * stesso colore del giocatore che ha inserito il comando. Se è possibile arrivare alla cella di arrivo dalla cella di partenza, se la cella 
-     * di arrivo è vuota e se la pedina che l'utente vuole mangiare è una pedina avversaria. Nel caso in cui una di queste condizioni è falsa 
+     * Succesivamente controlla che le posizioni ottenute siano corrette, infatti verifica se nella cella di partenza e' presente una pedina dello
+     * stesso colore del giocatore che ha inserito il comando. Se e' possibile arrivare alla cella di arrivo dalla cella di partenza, se la cella 
+     * di arrivo è vuota e se la pedina che l'utente vuole mangiare e' una pedina avversaria. Nel caso in cui una di queste condizioni e' falsa 
      * la mossa non viene eseguita e viene lanciata un' eccezione.
      * </p>
      * <p>
      * Invece nel caso in cui tutte le condizioni sono vere viene effettuato un altro controllo, ovvero, se la cella di arrivo fa parte della base
-     * avversaria e la pedina spostata è una pedina semplice, viene effettuata la presa e la pedina viene promossa a dama. 
-     * Invece se la pedina spostata è una dama o la cella di arrivo non fa parte della base avversaria viene effettutao semplicemente la presa.
+     * avversaria e la pedina spostata e' una pedina semplice, viene effettuata la presa e la pedina viene promossa a dama. 
+     * Invece se la pedina spostata e' una dama o la cella di arrivo non fa parte della base avversaria viene effettutao semplicemente la presa.
      * In entrambi i casi viene incrementato di uno il contatore delle pedine mangiate del colore del giocatore che ha inserito la mossa.
      * </p>
      * 
-     * @param mossa è la stringa del comando inserito dall'utente da esaminare e da eseguire nel caso sia corretta
-     * @param coloreGiocatore  è il colore del giocatore che ha inserito il comando
+     * @param mossa e' la stringa del comando inserito dall'utente da esaminare e da eseguire nel caso sia corretta
+     * @param coloreGiocatore  e' il colore del giocatore che ha inserito il comando
      * @return il valore booleano indica la corretta esecuzione della presa, restituisce true se la presa è andata a buon fine, 
      * false altrimenti
-     * @throws EccezionePresa  è l'eccezione che viene lanciata quando metodo riceve in input una mossa non corretta
+     * @throws EccezionePresa  e' l'eccezione che viene lanciata quando metodo riceve in input una mossa non corretta
      */
     public boolean effettuaPresaSemplice(final String mossa, final Pedina.Colore coloreGiocatore)
             throws EccezionePresa {
@@ -627,14 +630,14 @@ public final class Damiera {
     /**
      * Il metodo trasforma la mossa dell'utente in n prese semplici, poi salva lo stato della damieraGioco, lo stato delle pedineBiancheMangiate 
      * e lo stato delle pedineNereMangiate prima dell'inizio delle esesecuzioni delle prese.
-     * Durante l'esecuzione delle prese semolici se una delle prese semplici fallisce, falliscono automaticamente l'intero comando e quindi la damiera
+     * Durante l'esecuzione delle prese semolici se una delle prese semplici fallisce, fallisce automaticamente l'intero comando e quindi la damiera
      * torna allo stato iniziale dell'esecuzione. Nel caso in cui sono tutte corrette, la prese multipla viene eseguita.
      * 
-     * @param mossa è la stringa del comando inserito dall'utente da esaminare e da eseguire nel caso sia corretta
-     * @param coloreGiocatore è il colore del giocatore che ha inserito il comando
+     * @param mossa e' la stringa del comando inserito dall'utente da esaminare e da eseguire nel caso sia corretta
+     * @param coloreGiocatore e' il colore del giocatore che ha inserito il comando
      * @return il valore booleano indica la corretta esecuzione della presa multipla, restituisce true se la presa multipla è andata a buon fine, 
      * false altrimenti
-     * @throws EccezionePresa è l'eccezione che viene lanciata quando metodo riceve in input una mossa non corretta
+     * @throws EccezionePresa e' l'eccezione che viene lanciata quando metodo riceve in input una mossa non corretta
      */
     public boolean effettuaPresaMultipla(final String mossa, final Pedina.Colore coloreGiocatore)
             throws EccezionePresa {
@@ -701,8 +704,8 @@ public final class Damiera {
     /**
      * Inserisce la stringa mossa all'interno della lista listaMosse.
      * 
-     * @param mossa è la stringa che bisogna inserire all'interno della lista listaMosse
-     * @param coloreGiocatore è il colore del giocatore che ha inserito il comando
+     * @param mossa e' la stringa che bisogna inserire all'interno della lista listaMosse
+     * @param coloreGiocatore e' il colore del giocatore che ha inserito il comando
      */
     public void registraMossa(final String mossa, final Pedina.Colore coloreGiocatore) {
         String mossaTotale;

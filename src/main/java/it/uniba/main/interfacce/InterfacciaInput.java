@@ -39,7 +39,7 @@ public final class InterfacciaInput {
     }
 
     /**
-     * Gestisce la logica di tutte le domande in cui si chiede conferma (risposta si/no)
+     * Gestisce la logica di tutte le domande in cui si chiede conferma (risposta si/no).
      * @param richiesta e' la stringa che viene mostrata al giocatore come domanda
      * @param casoAffermativo e' la stringa di risposta alla scelta affermativa
      * @param casoNegativo e' la stringa di risposta alla scelta negativa
@@ -234,7 +234,7 @@ public final class InterfacciaInput {
         } while (!isExiting);
     }
     /**
-     * Controlla la sintassi per verificare se la risposta e' uno spostamento valido
+     * Controlla la sintassi per verificare se la risposta e' uno spostamento valido.
      * @param answer e' il comando inserito dall'utente
      * @return true se la sintassi e' corretta, false altrimenti
      */
@@ -253,7 +253,7 @@ public final class InterfacciaInput {
         return sintassiCorretta;
     }
     /**
-     * Controlla la sintassi per verificare se la risposta e' una presa semplice valida
+     * Controlla la sintassi per verificare se la risposta e' una presa semplice valida.
      * @param answer e' il comando inserito dall'utente
      * @return true se la sintassi e' corretta, false altrimenti
      */
@@ -311,7 +311,7 @@ public final class InterfacciaInput {
         return sintassiCorretta;
     }
     /**
-     * Serve a cambiare l'input stream. Cosi' facendo e' possibile testare l'input utente con InputStream differenti
+     * Serve a cambiare l'input stream. Cosi' facendo e' possibile testare l'input utente con InputStream differenti.
      * @param inputStream InputStream che sostituira' lo scanner
      */
     public static void setInputStream(final InputStream inputStream) {
