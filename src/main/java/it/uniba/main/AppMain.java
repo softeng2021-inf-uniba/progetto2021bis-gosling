@@ -11,16 +11,16 @@ import it.uniba.main.interfacce.Help;
 public final class AppMain {
 
     /**
-     * Private constructor. Change if needed.
+     * Costruttore privato perche' la classe e' utility
      */
     private AppMain() {
 
     }
 
     /**
-     * 	 * This is the main entry of the application.
+     * E' il main dell'applicazione
      *
-     * @param args The command-line arguments.
+     * @param args Parametri di avvio
      */
     public static void main(final String[] args) {
         System.out.println("Benvenuto nell'applicazione di Dama!");

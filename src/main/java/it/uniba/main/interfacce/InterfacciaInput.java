@@ -26,12 +26,25 @@ import java.util.Set;
  *
  */
 public final class InterfacciaInput {
-
+    
+    /**
+     *  Definizione dello scanner dell'input. E' statico e fisso per tutti i metodi della classe.
+     */
     private static Scanner sc = new Scanner(System.in, "utf-8");
 
+    /**
+     * Costruttore privato perche'  la classe e' un utility class e tutti i suoi metodi sono statici
+     */
     private InterfacciaInput() {
     }
 
+    /**
+     * Gestisce la logica di tutte le domande in cui si chiede conferma (risposta si/no)
+     * @param richiesta e' la stringa che viene mostrata al giocatore come domanda
+     * @param casoAffermativo e' la stringa di risposta alla scelta affermativa
+     * @param casoNegativo e' la stringa di risposta alla scelta negativa
+     * @return true se l'utente ha accettato, false altrimenti
+     */
     public static boolean chiediConferma(final String richiesta, final String casoAffermativo,
             final String casoNegativo) {
         boolean vuole = false;
@@ -65,7 +78,10 @@ public final class InterfacciaInput {
 
         return vuole;
     }
-
+    /**
+     * Gestisce la logica del menu' di inizio in cui la paritta non è ancora iniziata.
+     * Inizia una partita se il giocatore decide di avviarne una
+     */
     public static void menuDiInizio() {
         boolean isExiting = false;
         String answer;
@@ -125,7 +141,14 @@ public final class InterfacciaInput {
 
         sc.close();
     }
-
+    /**
+     * Gestisce la logica dei comandi quando la partita e' avviata. 
+     * 
+     * Se il comando non e' riconosciuto tra quelli del menu' allora viene interpretato come 
+     * una possibile mossa.
+     * @param corrente e' il giocatore che sta giocando il turno
+     * @param avversario e' il giocatore avversario
+     */
     public static void menuDiGioco(final Giocatore corrente, final Giocatore avversario) {
         boolean isExiting = false;
         String answer;
@@ -210,7 +233,11 @@ public final class InterfacciaInput {
             }
         } while (!isExiting);
     }
-
+    /**
+     * Controlla la sintassi per verificare se la risposta e' uno spostamento valido
+     * @param answer e' il comando inserito dall'utente
+     * @return true se la sintassi e' corretta, false altrimenti
+     */
     public static boolean sintassiSpostamentoCorretta(final String answer) {
         boolean sintassiCorretta = false;
         if (answer.matches("[1-9][0-9]?-[0-9][0-9]?")) {
@@ -225,7 +252,11 @@ public final class InterfacciaInput {
         }
         return sintassiCorretta;
     }
-
+    /**
+     * Controlla la sintassi per verificare se la risposta e' una presa semplice valida
+     * @param answer e' il comando inserito dall'utente
+     * @return true se la sintassi e' corretta, false altrimenti
+     */
     public static boolean sintassiPresaSempliceCorretta(final String answer) {
         boolean sintassiCorretta = false;
 
@@ -242,7 +273,12 @@ public final class InterfacciaInput {
 
         return sintassiCorretta;
     }
-
+    /**
+     * Controlla la sintassi per verificare se la risposta e' una presa multipla corretta. 
+     * Divide la presa multipla in una serie di prese semplici per cuio verifica singolarmente la correttezza.
+     * @param answer e' il comando inserito dall'utente
+     * @return true se la sintassi e' corretta, false altrimenti
+     */
     public static boolean sintassiPresaMultiplaCorretta(final String answer) {
         boolean sintassiCorretta = false;
         boolean sameNumber = false;
@@ -274,6 +310,10 @@ public final class InterfacciaInput {
 
         return sintassiCorretta;
     }
+    /**
+     * Serve a cambiare l'input stream. Cosi' facendo e' possibile testare l'input utente con InputStream differenti
+     * @param inputStream InputStream che sostituira' lo scanner
+     */
     public static void setInputStream(final InputStream inputStream) {
         sc = new Scanner(inputStream, "utf-8");
     }

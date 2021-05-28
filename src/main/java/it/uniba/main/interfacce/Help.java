@@ -12,11 +12,23 @@ package it.uniba.main.interfacce;
  * 
  */
 public final class Help {
+    /**
+     * Rende Help una classe singleton
+     */
     private static Help singleIstance = null;
-
+    
+    /**
+     * Costruttore della classe Help
+     * 
+     * Essendo una classe con soli metodi statici, il costruttore e' privato
+     */
     private Help() {
     }
-
+    
+    /**
+     * Permette di ottenere l'unica istanza di help e lo inizializza se non esiste
+     * @return l'unica istanza di help 
+     */
     public static Help getHelp() {
         if (singleIstance == null) {
             singleIstance = new Help();
@@ -25,6 +37,19 @@ public final class Help {
     }
 
  /* ------------ Metodi ------------*/
+    /**
+     * Stampa di tutti i comandi possibili.
+     * 
+     * I comandi sono:
+     * - gioca
+     * - numeri
+     * - esci
+     * - damiera
+     * - abbandona
+     * - tempo
+     * - prese
+     * - mosse
+     */
     public static void stampaHelpMenu() {
         System.out.println("");
         System.out.println("+------------------ HELP ------------------+");
