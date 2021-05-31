@@ -16,14 +16,41 @@ import java.util.List;
 public final class Damiera {
 
     /* ------------ Stato ------------ */
+    /**
+     * Indica il numero di possibili posizioni all'interno di una damiera.
+     */
     private static final int GRANDEZZA_POSIZIONI = 32;
+    /**
+     * Indica la grandezza di una damiera con numeri e la damiera di gioco.
+     */
     private static final int DAMIERA_SIZE = 8;
+    /**
+     * Un vettore utilizzato per la traduzione da numero intero in posizione all'interno della matrice damieraGioco.
+     */
     private static final Posizione[] VETTORE_POSIZIONI = new Posizione[GRANDEZZA_POSIZIONI];
+    /**
+     * Rende Damiera una classe singleton.
+     */
     private static Damiera singleIstance = null;  // Per rendere la classe singleton
+    /**
+     * Una matrice che viene usata per la stampa della damiera numerata.
+     */
     private final int[][] damieraNumeri;
+    /**
+     * Una matrice di pedine utilizzata per simulare una damiera per una partita a dama.
+     */
     private Pedina[][] damieraGioco;
+    /**
+     * Un contatore che viene incremento ogni qual volta che una pedina di colore nero viene mangiata.
+     */
     private int pedineNereMangiate;
+    /**
+     * Un contatore che viene incremento ogni qual volta che una pedina di colore nero viene mangiata.
+     */
     private int pedineBiancheMangiate;
+    /**
+     * Una lista in cui vengono inserite tutte le mosse inseriti dai due giocatori.
+     */
     private List<String> listaMosse;
 
     /**
@@ -39,33 +66,65 @@ public final class Damiera {
         private int colonna;
 
         /* ------------ Costruttori ------------ */
+        /**
+         * Il costruttore di Posizione senza parametri di input
+         */
         public Posizione() {
         }
 
+        /**
+         * Il costruttore di Posizione che inizializza sia la riga che la colonna.
+         * 
+         * @param rigaIn e' l'intero che verra assegnato alla riga
+         * @param colonnaIn e' l'intero che verra assegnato alla colonna
+         */
         public Posizione(final int rigaIn, final int colonnaIn) {
             this.riga = rigaIn;
             this.colonna = colonnaIn;
         }
 
         /* ------------ Get & Set ------------ */
+        /**
+         * Restituisce la riga.
+         * 
+         * @return e' la riga dell'oggetto posizione
+         */
         public int getRiga() {
             return riga;
         }
 
+        /**
+         * Restituisce la colonna.
+         * 
+         * @return e' la colonna dell'oggeto posizione
+         */
         public int getColonna() {
             return colonna;
         }
 
+        /**
+         * Imposta la riga secondo un parametro in input.
+         * 
+         * @param rigaIn e' l'intero che verr� assegnato a riga
+         */
         public void setRiga(final int rigaIn) {
             this.riga = rigaIn;
         }
 
+        /**
+         * Imposta un nuovo valore alla colonna secondo un parametro in input.
+         * 
+         * @param colonnaIn e' l'intero che verr� assegnato a colonna
+         */
         public void setColonna(final int colonnaIn) {
             this.colonna = colonnaIn;
         }
     }
 
     /* ------------  Costruttori ------------ */
+    /**
+     * Il costruttore di Damiera che inizializza tutti i suoi attributi.
+     */
     private Damiera() {
         Damiera.inizializzaVettorePosizioni();
         this.damieraNumeri = new int[DAMIERA_SIZE][DAMIERA_SIZE];
@@ -78,6 +137,12 @@ public final class Damiera {
     }
 
     /* ------------ Get & Set ------------*/
+    /**
+     * Controlla se esiste gia' un istanza di damiera, in caso negativo ne crea una nuova e la restituisce,
+     * altrimenti restituisce quella gia esistente.
+     * 
+     * @return e' la damiera che restituisce il metodo
+     */
     public static Damiera getDamiera() { // Serve ad ottenere damiera
         if (singleIstance == null) {
             singleIstance = new Damiera();
@@ -85,18 +150,38 @@ public final class Damiera {
         return singleIstance;
     }
 
+    /**
+     * Restituisce la lista listaMosse della Damiera.
+     * 
+     * @return e' la lista che restituisce il metodo
+     */
     public List<String> getListaMosse() {
         return listaMosse;
     }
 
+    /**
+     * Imposta un nuovo valore a listaMosse secondo un parametro di input.
+     * 
+     * @param listaMosseIn � la lista che verra assegnata a listaMosse
+     */
     public void setListaMosse(final List<String> listaMosseIn) {
         this.listaMosse = listaMosseIn;
     }
 
+    /**
+     * Restituisce il numero massimo di posizioni.
+     * 
+     * @return e' l'intero che indica il numero massimo di posizioni
+     */
     public static int getGrandezzaPosizioni() {
         return GRANDEZZA_POSIZIONI;
     }
 
+    /**
+     * Restituisce la grandezza della damiera.
+     * 
+     * @return e' l'intero che indica la grandezza della matrice damiera
+     */
     public static int getDamieraSize() {
         return DAMIERA_SIZE;
     }
@@ -104,6 +189,9 @@ public final class Damiera {
     /* ------------ Metodi ------------*/
 
     /* -- Preparazione --*/
+    /**
+     * Viene chiamato nel costruttore di Damiera e serve a inizializzare il VETTORE_POSIZIONI.
+     */
     private static void inizializzaVettorePosizioni() {
         int rigaCorrente = 0;
         int colonnaCorrente = 0;
@@ -129,6 +217,14 @@ public final class Damiera {
         }
     }
 
+    /**
+     * Viene chiamato qunado si vuole inizializzare la damieraGioco mettendo le 24 pedine semplici nelle
+     * posizioni di partenza, rispettivamente bianche da 21 a 32 e nere da 1 a 12, invece le celle vuote
+     * vengono inpostate a null.
+     * <p>
+     * Inoltre questo metodo inizializza la listaMosse, le pedineBiancheMangiate e le pedineNereMangiate.
+     * </p>
+     */
     public void preparaDamiera() {
         final int primaParte = 3;
         final int secondaParte = 5;
@@ -176,6 +272,9 @@ public final class Damiera {
         }
     }
 
+    /**
+     * Prepara la matrice damieraNumeri inserendo nelle apposite celle le posizioni corrispondenti sulla damiera.
+     */
     public void preparaNumeri() {
         int counter = 1;
         for (int i = 0; i < DAMIERA_SIZE; i++) {
@@ -201,6 +300,13 @@ public final class Damiera {
         }
     }
 
+    /**
+     * Converte un numero della damiera da 1 a 32 in una posizione sulla matrice damieraGioco
+     * 
+     * @param num e' il nuemro intero che riechiede il metodo per essere eseguito, esso servira per trovare
+     * la posizione corrispettiva a esso nella damiera
+     * @return e' la posizione corrispettiva trovata nel VETTORE_POSIZIONI
+     */
     public static Posizione convertiNumeroInPosizione(final int num) {
         Posizione posizioneDesiderata;
 
@@ -214,6 +320,9 @@ public final class Damiera {
     }
 
     /* -- Stampa --*/
+    /**
+     * Stampa la damieraNumeri, facendo visualizzare la damiera con le celle nuemerate
+     */
     public void stampaNumeri() {
         final int sogliaDoppia = 9;
         final char space = '\u0020';
@@ -242,6 +351,10 @@ public final class Damiera {
         }
     }
 
+    /**
+     * Stampa la damieraGioco, facendo visualizzare tutte le pedine, sia bianche che nere, nelle celle in cui si trovano
+     * al momento in cui avviene la chiamata del metodo.
+     */
     public void stampaPedine() {
         // System.out.println("+-──-+-──-+-──-+-──-+-──-+-──-+-──-+-──-+");
 
@@ -262,6 +375,9 @@ public final class Damiera {
         }
     }
 
+    /**
+     * Visualizza le pedine binache mangiate dal nero e le pedine nere mangiate dal bianco.
+     */
     public void stampaPedineMangiate() {
         System.out.print("Nero: ");
         for (int i = 0; i < pedineBiancheMangiate; i++) {
@@ -275,6 +391,9 @@ public final class Damiera {
         System.out.println("");
     }
 
+    /**
+     * Stampa tutte le mosse eseguite durante la partita, sia dal giocatore bianco che dal giocatore nero.
+     */
     public void stampaMosse() {
 
         System.out.println("Lista mosse:");
@@ -284,6 +403,31 @@ public final class Damiera {
     }
 
     /* -- Movimento --*/
+    /**
+     * Il metodo trasforma la mossa dell'utente in una coppia di numeri interi che simboleggiano la posizione di arrivo
+     * e la posizione di partenza, conevertendo in seguito, grazie al metodo convertiNumeroInPosizione,
+     * i due nemri in due posizioni.
+     * <p>
+     * Succesivamente controlla che la posizioni ottenute siano corrette, infatti verifica se nella cella
+     * di partenza e' presente una pedina dello stesso colore del giocatore che ha inserito il comando.
+     * Se e' possibile arrivare alla cella di arrivo dalla cella di partenza e se la cella di arrivo e' vuota.
+     * Nel caso in cui una di queste condizioni e' falsa la mossa non viene eseguita e viene lanciata un' eccezione.
+     * </p>
+     * <p>
+     * Invece nel caso in cui tutte le condizioni sono vere viene effettuato un altro controllo, ovvero,
+     * se la cella di arrivo fa parte della base avversaria e la pedina spostata e' una pedina semplice,
+     * viene effettuato lo spostamento e la pedina viene promossa a dama.
+     * Invece se la pedina spostata e' una dama o la cella di arrivo non fa parte della base avversaria viene effettuto
+     * semplicemente lo spostamento.
+     * </p>
+     * 
+     * @param mossa e' la stringa del comando inserito dall'utente da esaminare e da eseguire nel caso sia corretta
+     * @param coloreGiocatore e' il colore del giocatore che ha inserito il comando
+     * @return il valore booleano indica la corretta esecuzione dello spostamento, restituisce true
+     * se lo spostamento e' andato a buon fine, false altrimenti
+     * @throws EccezioneSpostamento e' l'eccezione che viene lanciata quando metodo riceve
+     * in input una mossa non corretta
+     */
     public boolean spostamentoPedina(final String mossa, final Pedina.Colore coloreGiocatore)
             throws EccezioneSpostamento {
 
@@ -363,6 +507,33 @@ public final class Damiera {
         return spostamentoLecito;
     }
 
+    /**
+     * Il metodo trasforma la mossa dell'utente in una coppia di numeri interi che simboleggiano la posizione di arrivo
+     * e la posizione di partenza, convertendo in seguito, grazie al metodo convertiNumeroInPosizione,
+     * i due nemri in due posizioni.
+     * <p>
+     * Succesivamente controlla che le posizioni ottenute siano corrette, infatti verifica se nella cella di partenza
+     * e' presente una pedina dello stesso colore del giocatore che ha inserito il comando.
+     * Se e' possibile arrivare alla cella di arrivo dalla cella di partenza, se la cella
+     * di arrivo e' vuota e se la pedina che l'utente vuole mangiare e' una pedina avversaria.
+     * Nel caso in cui una di queste condizioni e' falsa la mossa non viene eseguita e viene lanciata un' eccezione.
+     * </p>
+     * <p>
+     * Invece nel caso in cui tutte le condizioni sono vere viene effettuato un altro controllo, ovvero, se la
+     * cella di arrivo fa parte della base
+     * avversaria e la pedina spostata e' una pedina semplice, viene effettuata la presa e la pedina
+     * viene promossa a dama. Invece se la pedina spostata e' una dama o la cella di arrivo non fa parte
+     * della base avversaria viene effettuta semplicemente la presa.
+     * In entrambi i casi viene incrementato di uno il contatore delle pedine mangiate del colore del
+     * giocatore che ha inserito la mossa.
+     * </p>
+     * 
+     * @param mossa e' la stringa del comando inserito dall'utente da esaminare e da eseguire nel caso sia corretta
+     * @param coloreGiocatore  e' il colore del giocatore che ha inserito il comando
+     * @return il valore booleano indica la corretta esecuzione della presa, restituisce
+     * true se la presa e' andata a buon fine, false altrimenti
+     * @throws EccezionePresa  e' l'eccezione che viene lanciata quando metodo riceve in input una mossa non corretta
+     */
     public boolean effettuaPresaSemplice(final String mossa, final Pedina.Colore coloreGiocatore)
             throws EccezionePresa {
         boolean presaLecita = false;
@@ -466,6 +637,20 @@ public final class Damiera {
         return presaLecita;
     }
 
+    /**
+     * Il metodo trasforma la mossa dell'utente in n prese semplici, poi salva lo stato della damieraGioco,
+     * lo stato delle pedineBiancheMangiate e lo stato delle pedineNereMangiate prima dell'inizio
+     * delle esesecuzioni delle prese.
+     * Durante l'esecuzione delle prese semolici se una delle prese semplici fallisce, fallisce automaticamente l'intero
+     * comando e quindi la damiera
+     * torna allo stato iniziale dell'esecuzione. Nel caso in cui sono tutte corrette, la prese multipla viene eseguita.
+     * 
+     * @param mossa e' la stringa del comando inserito dall'utente da esaminare e da eseguire nel caso sia corretta
+     * @param coloreGiocatore e' il colore del giocatore che ha inserito il comando
+     * @return il valore booleano indica la corretta esecuzione della presa multipla, restituisce true
+     * se la presa multipla e' andata a buon fine, false altrimenti
+     * @throws EccezionePresa e' l'eccezione che viene lanciata quando metodo riceve in input una mossa non corretta
+     */
     public boolean effettuaPresaMultipla(final String mossa, final Pedina.Colore coloreGiocatore)
             throws EccezionePresa {
         boolean presaMultiplaLecita = false;
@@ -514,14 +699,26 @@ public final class Damiera {
     }
 
     /* -- Aggiornamento stato --*/
+    /**
+     * Incrementa di uno il valore delle pedineBiancheMnagiate
+     */
     public void incrementaPreseBianche() {
         this.pedineBiancheMangiate++;
     }
 
+    /**
+     * Incrementa di uno il valore delle pedineNereMangiate
+     */
     public void incrementaPreseNere() {
         this.pedineNereMangiate++;
     }
 
+    /**
+     * Inserisce la stringa mossa all'interno della lista listaMosse.
+     * 
+     * @param mossa e' la stringa che bisogna inserire all'interno della lista listaMosse
+     * @param coloreGiocatore e' il colore del giocatore che ha inserito il comando
+     */
     public void registraMossa(final String mossa, final Pedina.Colore coloreGiocatore) {
         String mossaTotale;
         if (coloreGiocatore == Pedina.Colore.bianco) {

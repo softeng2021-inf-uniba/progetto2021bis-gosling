@@ -16,12 +16,30 @@ import it.uniba.main.interfacce.InterfacciaInput;
 public final class Partita {
 
     /* ------------ Stato ------------ */
+    /**
+     * Rende Partita una classe singleton.
+     */
     private static Partita partitaCorrente;
 
+    /**
+     * La damiera di gioco su cui si svolger� la partita.
+     */
     private Damiera damiera;
+    /**
+     * Utilizzata per salvare i dati del primo giocatore.
+     */
     private Giocatore giocatore1;
+    /**
+     * Utilizzata per salvare i dati del secondo giocatore.
+     */
     private Giocatore giocatore2;
+    /**
+     * Variabile utilizzata per la gestione del flusso dei turni tra giocatore1 e giocatore2.
+     */
     private Turno turno;
+    /**
+     * Variabile booleana assume vero solo quando la partita finisce.
+     */
     private boolean finita;
     /* ------------ Sottoclassi ------------ */
     /**
@@ -34,6 +52,9 @@ public final class Partita {
         turnoGiocatore2
     }
     /* ------------ Costruttori ------------ */
+    /**
+     * Il costruttore di partita che inizializza tutti i suoi attributi.
+     */
     private Partita() {
 
         damiera = Damiera.getDamiera();
@@ -49,23 +70,46 @@ public final class Partita {
     }
 
     /* ------------ Get & Set ------------ */
+    /**
+     * Restituisce la partita corrente.
+     * 
+     * @return e' la partitaCorrente
+     */
     public static Partita getPartita() {
         return partitaCorrente;
     }
 
+    /**
+     * Restituisce true se la partita e' finita, false altrimenti.
+     * 
+     * @return e' l'attributo finita di Partita
+     */
     public boolean isFinita() {
         return finita;
     }
 
+    /**
+     * Restituisce il giocatore bianco.
+     * 
+     * @return e' giocatore1
+     */
     public Giocatore getGiocatore1() {
         return giocatore1;
     }
 
+    /**
+     * Restituisce il giocatore nero.
+     * 
+     * @return e' giocatore2
+     */
     public Giocatore getGiocatore2() {
         return giocatore2;
     }
 
     /* ------------ Metodi ------------ */
+    /**
+     * Controlla se esiste gia una partita avviata, altrimenti ne crea una nuova.
+     */
     public static void nuovaPartita() {
 
         if (partitaCorrente == null) {
@@ -77,12 +121,21 @@ public final class Partita {
         }
     }
 
+    /**
+     * Gestisce il flusso della partita chiamando ogni volta nuovoTurno, prima di
+     * inziare un nuovo turno controlla se la pertita non � finita
+     */
     public void giocaPartita() {
         while (!isFinita()) {
             nuovoTurno();
         }
     }
 
+    /**
+     * Controlla di chi e' il turno e succesivamente chiama il menuDiGioco specificando chi e'
+     * il giocatore del turno e chi e' il suo avversario.
+     * Infine aggiorna di chi e' il turno per il turno successivo.
+     */
     public void nuovoTurno() {
         Giocatore corrente;
         Giocatore avversario;
@@ -108,14 +161,24 @@ public final class Partita {
         }
     }
 
+    /**
+     * Imposta a true finita, per terminare la partita.
+     */
     public void finisciPartita() {
         finita = true;
     }
 
+    /**
+     * Imposta a null la partitaCorrente.
+     */
     public static void azzeraPartitaCorrente() {
         partitaCorrente = null;
     }
 
+    /**
+     * Stampa il tempo passato dei due giocatori. Il comando stampa per primo il tempo del giocatore in base
+     * al turno in cui e' stato chiamato il comando.
+     */
     public void stampaTempoPassato() {
 
         Giocatore corrente;

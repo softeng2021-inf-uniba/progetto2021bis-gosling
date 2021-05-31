@@ -15,8 +15,17 @@ package it.uniba.main.dati;
 public final class Pedina {
 
     /* ------------ Stato ------------ */
+    /**
+     * Indica se la pedina e' una pedina semplice bianca o una pedina re.
+     */
     private TipoPedina tipo;
+    /**
+     * Indica il colore di una pedina (bianco o nero).
+     */
     private final Colore colore;
+    /**
+     * Una variabile booleana utilizzata per l'uso della stampa invertita.
+     */
     private static boolean invertiColore = true;
     /* ------------ Sottoclassi ------------ */
     /**
@@ -39,25 +48,48 @@ public final class Pedina {
         pedinaRe
     }
     /* ------------  Costruttori ------------ */
+    /**
+     * Il costruttore di pedina che inizializza il colore secondo un parametro in input e il tipo a pedina semplice.
+     * 
+     * @param coloreIn e' colore che verra' assegnato a colore
+     */
      public Pedina(final Colore coloreIn) {
         this.colore = coloreIn;
         this.tipo = TipoPedina.pedinaSemplice;
     }
 
     /* ------------ Get & Set ------------*/
+     /**
+      * Restituisce il colore della pedina.
+      * 
+      * @return e' il colore della pedina
+      */
     public Colore getColore() {
         return this.colore;
     }
 
+    /**
+     * Restituisce il tipo della pedina.
+     * 
+     * @return e' il tipo della pedina
+     */
     public TipoPedina getTipo() {
         return this.tipo;
     }
 
+    /**
+     * Inverte il colore in base a un parametro in input.
+     * 
+     * @param invertiColoreIn indica se inverti colore deve essere abilitato oppure no
+     */
     public static void setInvertiColore(final boolean invertiColoreIn) {
         Pedina.invertiColore = invertiColoreIn;
     }
 
     /* ------------ Metodi ------------*/
+    /**
+     * Stampa la pedina in base al tipo, al colore e in base a inveritiColore se e' abilitato o disabilitato.
+     */
     public void stampaPedina() {
         if (this.colore == Colore.bianco) {
             if (this.tipo == TipoPedina.pedinaRe) {
@@ -98,6 +130,9 @@ public final class Pedina {
         }
     }
 
+    /**
+     * Cambia il tipo di una pedina a pedianRe.
+     */
     public void promuoviADama() {
         this.tipo = TipoPedina.pedinaRe;
     }
