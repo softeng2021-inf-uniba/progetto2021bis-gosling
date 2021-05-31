@@ -58,7 +58,7 @@ Di seguito si riporta il modello di dominio (diagramma delle classi con prospett
 
 ## **3. Requisiti specifici**
 
-Per la realizzazione di questa applicazione vengono forniti i seguenti requisiti funzionali:
+Per la realizzazione di questa applicazione vengono forniti i seguenti requisiti **funzionali**:
 - In qualità di utente si vuole visualizzare l'help con l'elenco dei comandi
 - In qualità di utente si vuole iniziare una nuova partita
 - In qualità di utente si vuole abbandonare la partita
@@ -73,10 +73,25 @@ Per la realizzazione di questa applicazione vengono forniti i seguenti requisiti
 - In qualità di utente si vuole visualizzare le prese in modo di valutare se in caso di offrire una patta o abbandonare
 - In qualità di utente si vuole visualizzare le mosse giocate in modo da poter ripercorrere mentalmente la storia della partita giocata
 
-I requisiti non funzionali sono i seguenti:
+I requisiti **non funzionali** sono i seguenti:
 - La copertura dei test automatici prodotto da Coveralls deve essere al 100%
 - Risoluzione di tutti gli errori generati da un' analisi statica del codice (uso di Spotbugs)
 - Concordare un sottoinsieme ragionevole comune di regole di codifica e quindi utilizzare uno strumento automatizzato per applicarle automaticamente (uso di Checkstyle)
+- Elenco dei terminali supportati
+  Di seguito l’elenco dei terminali su cui poter eseguire il container dell’app dama:
+  - Linux:
+    terminal
+  - Mac OS:
+    terminal
+  - Windows:
+    Powershell
+    Terminal del sottosistema Linux per Windows
+    Git Bash (in questo caso il comando Docker ha come prefisso winpty; es: winpty docker -it ....)
+  Comando per l’esecuzione del container
+  Dopo aver eseguito il comando docker pull copiandolo da GitHub Packages, Il comando Docker da usare per eseguire il container contenente l’applicazione è:
+  docker run --rm -it docker.pkg.github.com/softeng2021-inf-uniba/base2021/dama-gosling:latest
+  (Per maggiori informazioni consultare: [**7. Manuale Utente**](#**7.-Manuale-utente**))
+
 
 
 
@@ -259,37 +274,37 @@ Il processo è stato suddiviso in 4 sprint:
 
 - Al comando gioca
 
-se nessuna partita è in corso l'app si predispone a ricevere la prima mossa di gioco o altri comandi
+  se nessuna partita è in corso l'app si predispone a ricevere la prima mossa di gioco o altri comandi
 
 - Al comando abbandona
 
-l'app chiede conferma
-se la conferma è positiva, l'app comunica che il Bianco (o Nero) ha vinto per abbandono
-se la conferma è negativa, l'app si predispone a ricevere nuovi comandi
+  l'app chiede conferma
+  se la conferma è positiva, l'app comunica che il Bianco (o Nero) ha vinto per abbandono
+  se la conferma è negativa, l'app si predispone a ricevere nuovi comandi
 
 - Al comando esci
 
-L'applicazione chiede conferma
-se la conferma è psotiva l'app si chiude restituendo un zero exit code
-se la conferma è negativa, l'app si predispone a ricevere nuovi comandi
+  L'applicazione chiede conferma
+  se la conferma è psotiva l'app si chiude restituendo un zero exit code
+  se la conferma è negativa, l'app si predispone a ricevere nuovi comandi
 
 - Al comando numeri
 
-l'app mostra la damiera con i numeri sulle caselle nere.
+  l'app mostra la damiera con i numeri sulle caselle nere.
 
 - Al comando damiera
 
-se il gioco è iniziato l'app mostra la posizione di tutti i pezzi sulla damiera
-i pezzi sono mostrati in formato unicode 
-se il gioco non è iniziato l'app suggerisce il comando gioca
+  se il gioco è iniziato l'app mostra la posizione di tutti i pezzi sulla damiera
+  i pezzi sono mostrati in formato unicode 
+  se il gioco non è iniziato l'app suggerisce il comando gioca
 
 - Al comando tempo
 
-se il gioco è in corso
-l'app mostra il tempo trascorso per il Bianco dall'inizio del gioco
-l'app mostra il tempo trascorso per il Nero dall'inizio del gioco
-se il gioco non è in corso l'app suggerisce il comando gioca e si predispone a ricevere nuovi comandi
-Il valore di default è di 30 minuti a testa
+  se il gioco è in corso
+  l'app mostra il tempo trascorso per il Bianco dall'inizio del gioco
+  l'app mostra il tempo trascorso per il Nero dall'inizio del gioco
+  se il gioco non è in corso l'app suggerisce il comando gioca e si predispone a ricevere nuovi comandi
+  Il valore di default è di 30 minuti a testa
 
 
 
@@ -345,7 +360,7 @@ Lo spostamento della pedina con damatura deve rispettare le regole del gioco del
 
   **Definition of done**: 
 
-  - Le responsabilità delle classi e la classificazione ECB sono riportati come come commenti Javadoc
+  - Le responsabilità delle classi e la classificazione ECB sono riportati come commenti Javadoc
   - Sono stati creati i casi di test automatici
   - Sono stati risolti i problemi segnalati da CheckStyle
   - Sono stati risolti i problemi segnalati da Findbugs
@@ -366,7 +381,7 @@ Lo spostamento della pedina con damatura deve rispettare le regole del gioco del
 
 ### Scrum board
 
-E' stata usata una board digitale con gli stati: *To do, In progress, Review, Ready, Done* (presente sul repository GitHub). 
+E' stata usata una board digitale con gli stati: **To do, In progress, Review, Ready, Done** (presente sul repository GitHub). 
 
 ### Sprint Backlog
 
@@ -376,7 +391,7 @@ All'inizio di ogni Sprint il gruppo si è riunito per la discussione delle user 
 
 ### Daily scrum meeting
 
-Quando possibile, si sono organizzati *daily scrum meeting*  ai quali hanno partecipato tutti i membri del team. Questi meeting si sono tenuti, per necessità, attraverso un' applicazione di teleconferenza (Discord). In ogni incontro ogni componente del team ha risposto a 3 domande:
+Quando possibile, si sono organizzati **daily scrum meeting**  ai quali hanno partecipato tutti i membri del team. Questi meeting si sono tenuti, per necessità, attraverso un' applicazione di teleconferenza (Discord). In ogni incontro ogni componente del team ha risposto a 3 domande:
 
 1. Cosa hai fatto ieri?
 
